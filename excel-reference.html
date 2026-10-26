@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Excel for Accounting</title>
+<meta name="description" content="Searchable Excel reference for accounting teams: functions, shortcuts, features and ready-to-use formulas. Built by Elevate L&D Consulting.">
+<meta name="author" content="Elevate L&D Consulting">
+<style>
+:root{--bg:#f3f6f4;--card:#fff;--ink:#13211a;--mute:#5a6a61;--line:#d8e2dc;--acc:#1d6f42;--acc2:#e3f1e8;--chip:#eef3f0;--code:#f1f5f2;--mark:#fff1b8}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1410;--card:#16201a;--ink:#e6efe9;--mute:#97a69d;--line:#27352d;--acc:#4fcf86;--acc2:#163023;--chip:#1c2a22;--code:#111a15;--mark:#4a3f12}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.bar{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo .mk{background:var(--acc);color:#fff;border-radius:8px;width:34px;height:34px;display:grid;place-items:center;font-weight:900;font-size:15px}
+@media (prefers-color-scheme:dark){.logo .mk{color:#07130c}}
+.logo b{display:block;font-size:16px;line-height:1.2}.logo small{display:block;color:var(--mute);font-size:12px}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav a{color:var(--mute);text-decoration:none;padding:6px 10px;border-radius:8px;font-weight:600;font-size:15px}
+nav a.on,nav a:hover{background:var(--acc2);color:var(--acc)}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 50px}
+h1{font-size:28px;margin:4px 0 6px}h2{font-size:20px;margin:26px 0 8px}
+p{margin:6px 0 10px}.mute{color:var(--mute)}
+.search{position:relative;margin:14px 0 8px}
+.search input{width:100%;font:inherit;font-size:18px;padding:14px 16px 14px 46px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--acc)}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--mute)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.chip.on{color:#07130c}}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:6px 0}
+select{font:inherit;font-size:14px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--mute);padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.seg button.on{background:var(--acc2);color:var(--acc);font-weight:700}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
+.item>button.hd{all:unset;box-sizing:border-box;display:flex;width:100%;gap:12px;align-items:flex-start;padding:14px 16px;cursor:pointer}
+.item>button.hd:focus-visible{outline:2px solid var(--acc)}
+.tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--acc2);color:var(--acc);margin-top:3px}
+.tag.sc{background:#e8eefc;color:#2550b8}.tag.ft{background:#f6ecfb;color:#7a33a6}.tag.rc{background:#fdf0e1;color:#9a5500}
+@media (prefers-color-scheme:dark){.tag.sc{background:#1b2540;color:#8fb0ff}.tag.ft{background:#2b1b35;color:#d4a2f2}.tag.rc{background:#35270f;color:#f2b866}}
+.hd .t{flex:1;min-width:0}.hd .t b{display:block;font-size:16px}.hd .t span{color:var(--mute);font-size:14.5px}
+.keys{flex:none;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;font-weight:700;background:var(--code);border:1px solid var(--line);border-radius:7px;padding:3px 8px;margin-top:2px;white-space:nowrap}
+.star{flex:none;border:0;background:none;font-size:18px;cursor:pointer;color:var(--mute);padding:0 2px;margin-top:-2px}
+.star.on{color:#e0a100}
+.bd{padding:0 16px 14px 16px;border-top:1px solid var(--line)}
+.bd h4{margin:12px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute)}
+pre{margin:0;background:var(--code);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.cp{position:relative}.cp button{position:absolute;top:6px;right:6px;font:inherit;font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;padding:2px 8px;cursor:pointer}
+.cp pre{padding-right:60px}
+.meta{font-size:13px;color:var(--mute);margin-top:8px}
+mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink);display:block}
+.tile:hover{border-color:var(--acc)}.tile b{display:block;font-size:17px;margin-bottom:3px}
+.stat{font-size:24px;font-weight:800;color:var(--acc)}
+.empty{text-align:center;padding:30px 10px;color:var(--mute)}
+.about{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+footer{border-top:1px solid var(--line);background:var(--card)}
+footer .in{max-width:1000px;margin:0 auto;padding:18px 16px;font-size:14px;color:var(--mute);display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+footer a,.about a{color:var(--acc);font-weight:700}
+@media (max-width:560px){h1{font-size:23px}nav{margin-left:0;width:100%}nav a{padding:6px 8px;font-size:14px}.hd .keys{display:none}.search input{font-size:16px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="#search"><span class="mk">fx</span><span><b>Excel for Accounting</b><small id="byline"></small></span></a>
+  <nav id="nav">
+    <a href="#search">Search</a><a href="#fn">Functions</a><a href="#sc">Shortcuts</a><a href="#ft">Features</a><a href="#rc">Recipes</a><a href="#saved">Saved</a><a href="#about">About</a>
+  </nav>
+</div></header>
+<main id="app"></main>
+<footer><div class="in"><span id="credit"></span><span>Excel 365 reference · verify formulas against your own data</span></div></footer>
+
+<script>
+/* ===== Maker credit — change here ===== */
+const MAKER={name:"Elevate L&D Consulting",url:"./"};
+
+/* ---------- storage ---------- */
+const store={get(k,d){try{const v=localStorage.getItem("xlref_"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("xlref_"+k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- FUNCTIONS: [name, category, description, syntax, example, plain-language keywords, version] ---------- */
+const FN=[
+["XLOOKUP","Lookup",`Finds a value in one column and returns the matching value from another. Replaces VLOOKUP/HLOOKUP and works left or right.`,`=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])`,`=XLOOKUP(A2, Vendors[ID], Vendors[Name], "Not found")`,`pull bring get find match look up value from another sheet table list vendor name customer account description return matching`,"365/2021"],
+["VLOOKUP","Lookup",`Looks down the first column of a range and returns a value from a column to the right. Use FALSE for an exact match.`,`=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])`,`=VLOOKUP(A2, $F$2:$H$500, 3, FALSE)`,`pull bring get find look up value from another sheet table older version legacy`,""],
+["INDEX + MATCH","Lookup",`The classic flexible lookup: MATCH finds the row, INDEX returns the value. Works in every Excel version.`,`=INDEX(return_range, MATCH(lookup_value, lookup_range, 0))`,`=INDEX(C:C, MATCH(A2, B:B, 0))`,`pull bring get find look up left two way row column flexible`,""],
+["MATCH / XMATCH","Lookup",`Returns the position of a value in a list. XMATCH is the newer version with more options.`,`=MATCH(lookup_value, lookup_array, 0)\n=XMATCH(lookup_value, lookup_array)`,`=MATCH("Rent", A1:A100, 0)`,`position row number where is which row exists in list`,""],
+["FILTER","Lookup",`Returns every row that meets your conditions, spilling the results. Great for pulling all invoices for a vendor.`,`=FILTER(array, include, [if_empty])`,`=FILTER(A2:E500, (B2:B500="Acme")*(E2:E500>0), "None")`,`show all rows matching criteria extract list subset every invoice for vendor multiple results`,"365/2021"],
+["UNIQUE","Lookup",`Returns a list with duplicates removed (or only values that appear once).`,`=UNIQUE(array, [by_col], [exactly_once])`,`=UNIQUE(Data[Vendor])`,`distinct list remove duplicates list of vendors accounts dedupe`,"365/2021"],
+["SORT / SORTBY","Lookup",`Returns a sorted copy of a range without changing the original.`,`=SORT(array, [sort_index], [sort_order])\n=SORTBY(array, by_array, [order])`,`=SORT(A2:C100, 3, -1)`,`order sort largest smallest descending ascending ranked list`,"365/2021"],
+["VSTACK","Lookup",`Stacks ranges on top of each other into one list — useful for combining monthly sheets.`,`=VSTACK(array1, [array2], ...)`,`=VSTACK(Jan!A2:D200, Feb!A2:D200, Mar!A2:D200)`,`combine append stack merge sheets tabs months into one list`,"365"],
+["INDIRECT","Lookup",`Turns text into a reference, so you can point at a sheet whose name is in a cell. Volatile — use sparingly.`,`=INDIRECT(ref_text)`,`=INDIRECT("'"&B1&"'!C10")`,`reference sheet name in cell dynamic tab month sheet`,""],
+["GETPIVOTDATA","Lookup",`Pulls a specific number out of a PivotTable so it stays correct when the pivot changes.`,`=GETPIVOTDATA(data_field, pivot_table, [field1, item1], ...)`,`=GETPIVOTDATA("Amount", $A$3, "Account", "6100")`,`pivot table value reference number from pivot`,""],
+["SUM","Math",`Adds numbers.`,`=SUM(number1, [number2], ...)`,`=SUM(B2:B100)`,`add total add up sum column`,""],
+["SUMIFS","Math",`Adds numbers that meet one or more conditions — the workhorse of accounting reports.`,`=SUMIFS(sum_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)`,`=SUMIFS(GL[Amount], GL[Account], "6100", GL[Date], ">="&DATE(2026,1,1))`,`add total by account department vendor month condition criteria subtotal conditional sum`,""],
+["SUMIF","Math",`Adds numbers that meet one condition. SUMIFS is more flexible.`,`=SUMIF(range, criteria, [sum_range])`,`=SUMIF(A:A, "Travel", C:C)`,`add total condition single criteria`,""],
+["SUMPRODUCT","Math",`Multiplies ranges together and sums the result. Handles complex conditions and weighted totals.`,`=SUMPRODUCT(array1, [array2], ...)`,`=SUMPRODUCT(Qty, Price)`,`multiply then add weighted total quantity times price extended amount`,""],
+["SUBTOTAL","Math",`Totals that ignore other SUBTOTALs and, with 101–111, ignore hidden/filtered rows.`,`=SUBTOTAL(function_num, ref1, ...)   ' 9=SUM, 109=SUM ignoring hidden`,`=SUBTOTAL(109, C2:C500)`,`total visible filtered rows only ignore hidden`,""],
+["AGGREGATE","Math",`Like SUBTOTAL but can also ignore errors.`,`=AGGREGATE(function_num, options, ref1)   ' 9=SUM, option 6=ignore errors`,`=AGGREGATE(9, 6, C2:C500)`,`sum ignore errors #N/A total with errors in range`,""],
+["COUNTIFS","Count",`Counts rows meeting one or more conditions.`,`=COUNTIFS(criteria_range1, criteria1, [criteria_range2, criteria2], ...)`,`=COUNTIFS(AP[Vendor], A2, AP[Status], "Open")`,`how many count number of times occurrences condition duplicates exists`,""],
+["COUNTIF","Count",`Counts cells meeting one condition. =COUNTIF(range,A2)>1 flags duplicates.`,`=COUNTIF(range, criteria)`,`=COUNTIF(B:B, B2)>1`,`how many count number of times duplicate appears`,""],
+["COUNT / COUNTA / COUNTBLANK","Count",`COUNT counts numbers, COUNTA counts non-empty cells, COUNTBLANK counts empty cells.`,`=COUNT(range)  =COUNTA(range)  =COUNTBLANK(range)`,`=COUNTBLANK(D2:D500)`,`how many cells filled empty blank missing number of entries`,""],
+["AVERAGEIFS","Math",`Averages values meeting conditions.`,`=AVERAGEIFS(average_range, criteria_range1, criteria1, ...)`,`=AVERAGEIFS(Days, Customer, A2)`,`average mean by condition`,""],
+["MAXIFS / MINIFS","Math",`Largest or smallest value meeting conditions.`,`=MAXIFS(max_range, criteria_range1, criteria1, ...)`,`=MAXIFS(Pay[Date], Pay[Vendor], A2)`,`largest smallest latest earliest most recent last payment date by vendor`,"2019+"],
+["ROUND / ROUNDUP / ROUNDDOWN","Math",`Rounds to a number of digits. Round to 2 before comparing currency amounts to avoid penny differences.`,`=ROUND(number, num_digits)`,`=ROUND(A2*B2, 2)`,`round cents decimals penny rounding difference nearest dollar`,""],
+["MROUND / CEILING / FLOOR","Math",`Rounds to a multiple, e.g. the nearest 0.25 hour or nearest 5.`,`=MROUND(number, multiple)\n=CEILING.MATH(number, significance)`,`=MROUND(A2, 0.25)`,`round to nearest quarter hour multiple increment`,""],
+["ABS","Math",`Absolute value — removes the sign.`,`=ABS(number)`,`=ABS(A2-B2)<=0.01`,`absolute value positive remove negative sign difference`,""],
+["MOD / INT","Math",`MOD returns the remainder; INT drops the decimals.`,`=MOD(number, divisor)  =INT(number)`,`=MOD(ROW(),2)=0`,`remainder every other row whole number`,""],
+["RANK.EQ","Math",`Ranks a number within a list.`,`=RANK.EQ(number, ref, [order])`,`=RANK.EQ(C2, $C$2:$C$50)`,`rank top largest position biggest customers`,""],
+["LARGE / SMALL","Math",`Returns the nth largest or smallest value.`,`=LARGE(array, k)`,`=LARGE(Sales, 3)`,`top 5 largest third biggest smallest`,""],
+["IF","Logic",`Returns one value if a condition is true and another if false.`,`=IF(logical_test, value_if_true, value_if_false)`,`=IF(C2>5000, "Needs approval", "OK")`,`condition if then else when greater than flag check`,""],
+["IFS","Logic",`Checks several conditions in order — cleaner than nested IFs. Great for aging buckets.`,`=IFS(test1, value1, test2, value2, ..., TRUE, default)`,`=IFS(D2<=0,"Current",D2<=30,"1-30",D2<=60,"31-60",D2<=90,"61-90",TRUE,"90+")`,`multiple conditions nested if buckets categories tiers`,"2019+"],
+["IFERROR / IFNA","Logic",`Replaces an error with something else. IFNA only catches #N/A, so real errors still show.`,`=IFERROR(value, value_if_error)\n=IFNA(value, value_if_na)`,`=IFNA(XLOOKUP(A2, IDs, Names), "Missing")`,`hide error #N/A #DIV/0 replace error blank instead not found`,""],
+["AND / OR / NOT","Logic",`Combine conditions.`,`=AND(cond1, cond2)  =OR(cond1, cond2)`,`=IF(AND(B2="Open", C2>90), "Escalate", "")`,`both either multiple conditions all any`,""],
+["SWITCH","Logic",`Matches a value against a list of options.`,`=SWITCH(expression, value1, result1, ..., [default])`,`=SWITCH(LEFT(A2,1),"1","Asset","2","Liability","3","Equity","4","Revenue","Expense")`,`map code to category translate account type`,"2019+"],
+["ISNUMBER / ISBLANK / ISTEXT","Logic",`Tests what's in a cell. ISNUMBER(SEARCH(...)) checks if text contains a word.`,`=ISNUMBER(value)  =ISBLANK(value)`,`=ISNUMBER(SEARCH("refund", B2))`,`check if number blank text contains word stored as text`,""],
+["LET","Logic",`Names parts of a formula so long formulas are easier to read and faster.`,`=LET(name1, value1, ..., calculation)`,`=LET(d, TODAY()-C2, IF(d>90, "90+", "OK"))`,`name variable simplify long formula`,"365/2021"],
+["TRIM","Text",`Removes extra spaces (leading, trailing and doubled). Fixes lookups that fail on imported data.`,`=TRIM(text)`,`=TRIM(A2)`,`remove extra spaces clean imported data lookup not working`,""],
+["CLEAN","Text",`Removes non-printing characters. Combine with TRIM and SUBSTITUTE(A2,CHAR(160)," ") for web/ERP exports.`,`=CLEAN(text)`,`=TRIM(CLEAN(SUBSTITUTE(A2, CHAR(160), " ")))`,`remove hidden characters non breaking space line breaks clean export`,""],
+["LEFT / RIGHT / MID","Text",`Extracts characters from the start, end or middle of text.`,`=LEFT(text, n)  =RIGHT(text, n)  =MID(text, start, n)`,`=RIGHT(A2, 4)`,`first last characters extract part of text last four digits account segment`,""],
+["TEXTBEFORE / TEXTAFTER","Text",`Returns text before or after a delimiter — perfect for splitting account strings like 6100-200-10.`,`=TEXTBEFORE(text, delimiter, [instance])\n=TEXTAFTER(text, delimiter, [instance])`,`=TEXTBEFORE(A2, "-")`,`split before after dash delimiter account segment department code`,"365"],
+["TEXTSPLIT","Text",`Splits text into multiple cells by a delimiter.`,`=TEXTSPLIT(text, col_delimiter, [row_delimiter])`,`=TEXTSPLIT(A2, "-")`,`split into columns separate by comma dash`,"365"],
+["FIND / SEARCH","Text",`Returns the position of text inside text. SEARCH ignores case; FIND is case-sensitive.`,`=SEARCH(find_text, within_text)`,`=LEFT(A2, SEARCH("-", A2)-1)`,`position of character where is dash contains`,""],
+["SUBSTITUTE","Text",`Replaces specific text within a cell.`,`=SUBSTITUTE(text, old_text, new_text, [instance])`,`=SUBSTITUTE(A2, "-", "")`,`replace remove characters dashes strip`,""],
+["LEN","Text",`Counts characters.`,`=LEN(text)`,`=LEN(A2)<>9`,`length number of characters check digits`,""],
+["TEXT","Text",`Formats a number or date as text in a specific format.`,`=TEXT(value, format_text)`,`=TEXT(A2, "mmm yyyy")\n=TEXT(B2, "$#,##0.00")`,`format date as text month name label currency in sentence`,""],
+["VALUE / NUMBERVALUE","Text",`Converts numbers stored as text into real numbers.`,`=VALUE(text)  =NUMBERVALUE(text, [decimal_sep], [group_sep])`,`=VALUE(TRIM(A2))`,`number stored as text convert text to number green triangle won't sum`,""],
+["TEXTJOIN / CONCAT / &","Text",`Combines text. TEXTJOIN adds a delimiter and can skip blanks.`,`=TEXTJOIN(delimiter, ignore_empty, text1, ...)\n=A2&" "&B2`,`=TEXTJOIN(", ", TRUE, A2:A10)`,`combine join merge concatenate text cells together`,""],
+["UPPER / LOWER / PROPER","Text",`Changes text case.`,`=PROPER(text)`,`=PROPER(A2)`,`capitalize uppercase lowercase name case`,""],
+["EXACT","Text",`Checks if two text values match exactly, including case.`,`=EXACT(text1, text2)`,`=EXACT(A2, B2)`,`compare text identical case sensitive`,""],
+["TODAY / NOW","Date",`Current date (and time). Recalculates every time the workbook calculates.`,`=TODAY()  =NOW()`,`=TODAY()-C2`,`current date today now days since`,""],
+["EOMONTH","Date",`Last day of a month, n months away. The go-to for period-end dates.`,`=EOMONTH(start_date, months)`,`=EOMONTH(A2, 0)   ' month end\n=EOMONTH(A2, -1)+1   ' first of month`,`last day of month end of month period end first day of month`,""],
+["EDATE","Date",`Same day n months later or earlier.`,`=EDATE(start_date, months)`,`=EDATE(A2, 12)`,`add months next year renewal date`,""],
+["DATE / YEAR / MONTH / DAY","Date",`Build a date or pull parts out of one.`,`=DATE(year, month, day)  =YEAR(date)  =MONTH(date)`,`=DATE(YEAR(A2), MONTH(A2), 1)`,`build date get year month day from date`,""],
+["NETWORKDAYS / WORKDAY","Date",`Counts business days between dates, or finds a date n business days away. Add a holiday list.`,`=NETWORKDAYS(start, end, [holidays])\n=WORKDAY(start, days, [holidays])`,`=WORKDAY(EOMONTH(A2,0), 5, Holidays)`,`business days working days weekdays excluding weekends holidays close day due date`,""],
+["NETWORKDAYS.INTL","Date",`Business days with a custom weekend pattern.`,`=NETWORKDAYS.INTL(start, end, [weekend], [holidays])`,`=NETWORKDAYS.INTL(A2, B2, 11)`,`custom weekend sunday only working days`,""],
+["DATEDIF","Date",`Difference between dates in years, months or days. Hidden function (no autocomplete).`,`=DATEDIF(start, end, "Y"|"M"|"D")`,`=DATEDIF(HireDate, TODAY(), "Y")`,`years of service tenure months between age`,""],
+["DAYS","Date",`Days between two dates.`,`=DAYS(end_date, start_date)`,`=DAYS(TODAY(), C2)`,`days between how many days overdue past due`,""],
+["WEEKDAY / WEEKNUM","Date",`Day of week number or week of year.`,`=WEEKDAY(date, [type])  =WEEKNUM(date)`,`=TEXT(A2, "dddd")`,`day of week week number monday`,""],
+["YEARFRAC","Date",`Fraction of a year between dates.`,`=YEARFRAC(start, end, [basis])`,`=Amount*YEARFRAC(Start, End)`,`portion of year prorate interest partial year`,""],
+["PMT","Financial",`Payment per period for a loan or lease.`,`=PMT(rate, nper, pv, [fv], [type])`,`=PMT(6%/12, 60, -50000)`,`loan payment monthly payment lease mortgage`,""],
+["IPMT / PPMT","Financial",`Interest or principal portion of a specific payment — used in amortization schedules.`,`=IPMT(rate, per, nper, pv)  =PPMT(rate, per, nper, pv)`,`=IPMT(6%/12, A2, 60, -50000)`,`interest portion principal amortization schedule`,""],
+["CUMIPMT / CUMPRINC","Financial",`Total interest or principal paid between two periods.`,`=CUMIPMT(rate, nper, pv, start, end, type)`,`=CUMIPMT(6%/12, 60, 50000, 1, 12, 0)`,`total interest paid this year cumulative`,""],
+["NPV / XNPV","Financial",`Net present value. XNPV uses actual dates.`,`=NPV(rate, values)  =XNPV(rate, values, dates)`,`=XNPV(8%, B2:B10, A2:A10)`,`present value discount cash flows investment`,""],
+["IRR / XIRR","Financial",`Internal rate of return. XIRR uses actual dates.`,`=IRR(values)  =XIRR(values, dates)`,`=XIRR(B2:B10, A2:A10)`,`return rate investment yield`,""],
+["FV / PV / RATE / NPER","Financial",`Future value, present value, interest rate, and number of periods.`,`=FV(rate, nper, pmt, [pv])  =RATE(nper, pmt, pv)`,`=NPER(5%/12, -500, 20000)`,`future value how long to pay off interest rate`,""],
+["SLN","Financial",`Straight-line depreciation per period.`,`=SLN(cost, salvage, life)`,`=SLN(12000, 0, 5)/12`,`depreciation straight line fixed asset monthly`,""],
+["DDB / DB / SYD","Financial",`Accelerated depreciation methods.`,`=DDB(cost, salvage, life, period)`,`=DDB(12000, 0, 5, 1)`,`double declining balance accelerated depreciation`,""],
+["FORECAST.LINEAR","Stats",`Predicts a future value based on a linear trend.`,`=FORECAST.LINEAR(x, known_ys, known_xs)`,`=FORECAST.LINEAR(13, B2:B13, A2:A13)`,`forecast predict trend projection next month`,""],
+["MEDIAN","Stats",`Middle value — less affected by outliers than an average.`,`=MEDIAN(range)`,`=MEDIAN(DaysToPay)`,`middle value typical outliers`,""],
+["RANDARRAY","Stats",`Random numbers — useful for audit sampling.`,`=RANDARRAY([rows], [cols], [min], [max], [integer])`,`=TAKE(SORTBY(Data, RANDARRAY(ROWS(Data))), 25)`,`random sample audit pick selection`,"365"]
+];
+
+/* ---------- SHORTCUTS: [action, windows, mac, category, keywords] ---------- */
+const SC=[
+["Paste Special dialog","Ctrl+Alt+V","Ctrl+Cmd+V","Editing","paste values only formats transpose multiply"],
+["Paste values (ribbon keys)","Alt, H, V, V","—","Editing","paste values only no formulas"],
+["Undo / Redo","Ctrl+Z / Ctrl+Y","Cmd+Z / Cmd+Y","Editing","undo mistake redo"],
+["Repeat last action","F4 (or Ctrl+Y)","Cmd+Y","Editing","repeat again same formatting"],
+["AutoSum","Alt+=","Cmd+Shift+T","Formulas","total sum column quickly add up"],
+["Toggle absolute/relative reference","F4 (while editing)","Cmd+T","Formulas","dollar sign lock cell reference $A$1 anchor"],
+["Edit active cell","F2","Ctrl+U","Editing","edit cell formula"],
+["Show / hide formulas","Ctrl+`","Ctrl+`","Formulas","show formulas audit view all formulas"],
+["Fill down","Ctrl+D","Cmd+D","Editing","copy formula down fill"],
+["Fill right","Ctrl+R","Cmd+R","Editing","copy formula across right"],
+["Enter in all selected cells","Ctrl+Enter","Ctrl+Return","Editing","fill same value many cells blanks"],
+["Copy formula from cell above","Ctrl+'","Ctrl+'","Editing","duplicate above"],
+["New line inside a cell","Alt+Enter","Ctrl+Option+Return","Editing","line break wrap in cell"],
+["Insert today's date","Ctrl+;","Ctrl+;","Editing","current date stamp"],
+["Insert current time","Ctrl+Shift+;","Cmd+;","Editing","time stamp"],
+["Format Cells dialog","Ctrl+1","Cmd+1","Formatting","format number custom border alignment"],
+["Number format (comma, 2 decimals)","Ctrl+Shift+!","Ctrl+Shift+!","Formatting","number comma thousands separator"],
+["Currency format","Ctrl+Shift+$","Ctrl+Shift+$","Formatting","dollar currency"],
+["Percent format","Ctrl+Shift+%","Ctrl+Shift+%","Formatting","percentage"],
+["Date format","Ctrl+Shift+#","Ctrl+Shift+#","Formatting","date"],
+["General format","Ctrl+Shift+~","Ctrl+Shift+~","Formatting","reset format general"],
+["Bold / Italic / Underline","Ctrl+B / I / U","Cmd+B / I / U","Formatting","bold italic underline"],
+["Strikethrough","Ctrl+5","Cmd+Shift+X","Formatting","cross out strike"],
+["Outline border","Ctrl+Shift+&","Cmd+Option+0","Formatting","border box"],
+["Select entire column / row","Ctrl+Space / Shift+Space","Ctrl+Space / Shift+Space","Navigation","select column row"],
+["Jump to edge of data","Ctrl+Arrow","Cmd+Arrow","Navigation","go to bottom last row end of data jump"],
+["Select to edge of data","Ctrl+Shift+Arrow","Cmd+Shift+Arrow","Navigation","select down to bottom range"],
+["Select current region","Ctrl+A","Cmd+A","Navigation","select all data table"],
+["Go to cell A1","Ctrl+Home","Ctrl+Home (Fn+Ctrl+Left)","Navigation","top beginning first cell"],
+["Go to last used cell","Ctrl+End","Ctrl+End (Fn+Ctrl+Right)","Navigation","last cell bottom right used range"],
+["Go To / Go To Special","F5 or Ctrl+G","Ctrl+G","Navigation","go to special blanks constants formulas errors"],
+["Select visible cells only","Alt+;","Cmd+Shift+Z","Navigation","visible cells only copy filtered hidden rows skip"],
+["Next / previous sheet","Ctrl+PgDn / Ctrl+PgUp","Option+Right / Option+Left","Navigation","switch tab next sheet"],
+["Insert new sheet","Shift+F11","Shift+F11","Navigation","new tab worksheet"],
+["Find / Replace","Ctrl+F / Ctrl+H","Cmd+F / Ctrl+H","Editing","find replace search"],
+["Create Excel Table","Ctrl+T","Ctrl+T","Data","format as table structured"],
+["Toggle filters","Ctrl+Shift+L","Cmd+Shift+F","Data","filter autofilter dropdown"],
+["Flash Fill","Ctrl+E","—","Data","flash fill pattern split names"],
+["Insert row / column / cells","Ctrl+Shift++","Cmd+Shift++","Editing","insert row column"],
+["Delete row / column / cells","Ctrl+-","Cmd+-","Editing","delete row column remove"],
+["Hide row / column","Ctrl+9 / Ctrl+0","Ctrl+9 / Ctrl+0","Editing","hide rows columns"],
+["Group / ungroup rows or columns","Alt+Shift+Right / Left","Cmd+Shift+K / J","Data","group outline collapse expand"],
+["Remove Duplicates (ribbon keys)","Alt, A, M","—","Data","remove duplicates dedupe"],
+["Text to Columns (ribbon keys)","Alt, A, E","—","Data","split column delimiter"],
+["AutoFit column width","Alt, H, O, I","—","Formatting","autofit column width resize"],
+["Freeze panes (ribbon keys)","Alt, W, F, F","—","View","freeze header row panes lock top row"],
+["Insert chart of selection","Alt+F1","Fn+Option+F1","Data","chart graph quick"],
+["Calculate now","F9","Fn+F9","Formulas","recalculate manual calculation"],
+["Evaluate part of a formula","Select part in formula bar, F9","Select part, Cmd+=","Formulas","debug formula check piece"],
+["Go to precedents","Ctrl+[","Ctrl+[","Formulas","trace where formula comes from source cell jump"],
+["Insert Function dialog","Shift+F3","Fn+Shift+F3","Formulas","insert function wizard help"],
+["Name Manager","Ctrl+F3","Fn+Ctrl+F3","Formulas","named ranges names"],
+["Insert note / comment","Shift+F2","Fn+Shift+F2","Editing","comment note"],
+["Save As","F12","Cmd+Shift+S","File","save as copy"],
+["Show ribbon key tips","Alt","—","View","keyboard ribbon letters"],
+["Zoom in / out","Ctrl+Mouse wheel","Cmd+Mouse wheel","View","zoom bigger smaller"]
+];
+
+/* ---------- FEATURES: [name, where to find it, what it does, how to use / tips, keywords] ---------- */
+const FT=[
+["PivotTables","Insert › PivotTable",`Summarizes thousands of rows by account, vendor, month or department in seconds.`,`Convert your data to a Table first so the pivot grows with new rows. Drag fields to Rows/Columns/Values. Right-click a date › Group to roll up by month/quarter. Double-click any total to see the detail rows behind it.`,`summarize report totals by account department month trial balance drill down detail`],
+["Slicers & Timelines","PivotTable Analyze › Insert Slicer",`Clickable filter buttons for PivotTables and Tables. Timelines filter by date.`,`Connect one slicer to several pivots via Report Connections so a whole dashboard filters together.`,`filter buttons dashboard interactive`],
+["Power Query (Get & Transform)","Data › Get Data",`Imports, cleans and combines data with repeatable steps — then just click Refresh next month.`,`Use it for ERP/bank exports: remove junk rows, split columns, fix data types, unpivot, merge (lookup) and append (stack) queries. Point it at a folder to combine every monthly file automatically.`,`import clean combine files folder automate monthly refresh bank export erp merge append unpivot repeatable`],
+["Excel Tables","Home › Format as Table (Ctrl+T)",`Turns a range into a structured table that expands automatically and uses readable references like GL[Amount].`,`Formulas copy down automatically. Add a Total Row. Name your tables (Table Design › Table Name) so formulas read clearly.`,`structured references expand automatically named table`],
+["Conditional Formatting","Home › Conditional Formatting",`Highlights cells that meet rules — overdue invoices, variances over a threshold, duplicates.`,`Use "Use a formula to determine which cells to format", e.g. =$D2>90 to color a whole row. Highlight Cells Rules › Duplicate Values finds dupes instantly.`,`highlight color overdue variance duplicates red flag`],
+["Data Validation (dropdowns)","Data › Data Validation",`Restricts what can be entered — dropdown lists of accounts, dates within a period, amounts above zero.`,`Allow: List, Source: =Accounts (a named range or table column). Add an input message and error alert.`,`dropdown list restrict entry pick list prevent errors`],
+["Remove Duplicates","Data › Remove Duplicates",`Deletes duplicate rows based on columns you choose.`,`Work on a copy — this deletes data. To just flag dupes, use COUNTIFS instead.`,`delete duplicates dedupe`],
+["Text to Columns","Data › Text to Columns",`Splits one column into several using a delimiter or fixed width. Also converts text-numbers and text-dates.`,`Trick: select a column of numbers stored as text, run Text to Columns and click Finish — they become real numbers.`,`split column delimiter convert text to number dates stored as text`],
+["Flash Fill","Data › Flash Fill (Ctrl+E)",`Fills a pattern after you type an example or two — split names, extract IDs.`,`Not formula-based, so it won't update if the source changes.`,`pattern split extract`],
+["Goal Seek","Data › What-If Analysis › Goal Seek",`Finds the input needed to hit a target result.`,`Example: what sales volume makes net income zero (break-even)?`,`break even target what input needed reverse solve`],
+["Data Tables (what-if)","Data › What-If Analysis › Data Table",`Shows how a result changes across a range of one or two inputs.`,`Classic use: loan payment across different rates and terms.`,`sensitivity analysis scenarios grid rates`],
+["Scenario Manager","Data › What-If Analysis › Scenario Manager",`Saves sets of inputs (best/base/worst case) and compares results.`,`Create a summary report to compare scenarios side by side.`,`best case worst case budget scenarios`],
+["Solver","Data › Solver (enable add-in in File › Options › Add-ins)",`Optimization — including finding which invoices add up to a payment amount.`,`For "which amounts sum to X": binary 0/1 variables next to each amount, target =SUMPRODUCT(amounts,flags) equal to the payment.`,`which numbers add up to total match payment to invoices optimize`],
+["Named Ranges","Formulas › Name Manager / Define Name",`Gives a cell or range a readable name like TaxRate.`,`Use for assumptions and lists used in validation. Ctrl+F3 opens Name Manager.`,`name cell range readable assumptions`],
+["Freeze Panes","View › Freeze Panes",`Keeps headers or ID columns visible while scrolling.`,`Select the cell below/right of what you want frozen, then Freeze Panes.`,`lock header row column visible scrolling`],
+["Advanced Filter","Data › Advanced",`Filters with complex criteria or copies unique records to another location.`,`Criteria go in a separate range with matching headers.`,`complex filter criteria extract unique`],
+["Subtotal (Data tab)","Data › Subtotal",`Inserts subtotal rows at each change in a column, with outline buttons.`,`Sort first by the grouping column.`,`subtotal each group outline totals`],
+["Group / Outline","Data › Group",`Collapse and expand detail rows or columns.`,`Shortcut: Alt+Shift+Right Arrow.`,`collapse expand hide detail`],
+["Consolidate","Data › Consolidate",`Combines numbers from several sheets/workbooks by position or label.`,`Power Query or VSTACK is usually more flexible today.`,`combine sheets roll up entities departments`],
+["Protect Sheet / Workbook","Review › Protect Sheet",`Locks formulas and structure so others can only edit input cells.`,`Unlock input cells first (Ctrl+1 › Protection › uncheck Locked).`,`lock formulas prevent editing password protect`],
+["Trace Precedents / Dependents","Formulas › Formula Auditing",`Draws arrows showing which cells feed a formula and which depend on it.`,`Pair with Evaluate Formula to step through a calculation.`,`audit where number comes from arrows check formula`],
+["Evaluate Formula","Formulas › Evaluate Formula",`Steps through a formula one piece at a time.`,`Best way to debug a long nested formula.`,`debug step through formula`],
+["Watch Window","Formulas › Watch Window",`Keeps key cells (like a TB out-of-balance check) visible from any sheet.`,`Add your check totals and leave it open during close.`,`monitor key cells check totals`],
+["Go To Special","Home › Find & Select › Go To Special (F5)",`Selects blanks, constants, formulas, errors or visible cells only.`,`Fill blanks with the value above: select column › Go To Special › Blanks › type = and press Up › Ctrl+Enter.`,`select blanks errors constants fill down empty cells hardcoded numbers`],
+["Custom Number Formats","Ctrl+1 › Number › Custom",`Controls how numbers display without changing them.`,`Negatives in parentheses: #,##0.00_);(#,##0.00)\nThousands: #,##0,"K"\nHide zeros: #,##0;-#,##0;`,`negative parentheses thousands K format accounting display zeros dash`],
+["Paste Special operations","Ctrl+Alt+V",`Paste values, formats, transpose — or do math on a range in place.`,`Flip signs: type -1, copy it, select the range, Paste Special › Multiply. Same trick with Divide by 1000.`,`flip sign negative multiply by -1 transpose values only divide thousands`],
+["Sparklines","Insert › Sparklines",`Tiny in-cell charts showing a trend across a row.`,`Great for 12-month trend columns in a variance report.`,`mini chart trend in cell`],
+["Forecast Sheet","Data › Forecast Sheet",`Builds a forecast with confidence bounds from a time series.`,`Needs evenly spaced dates.`,`forecast projection trend`],
+["Show Changes / Version History","Review › Show Changes (OneDrive/SharePoint)",`See who changed which cells and when.`,`Workbook must be saved in OneDrive or SharePoint.`,`audit trail who changed track changes history`],
+["Record Macro","View › Macros › Record Macro",`Records repetitive steps so you can replay them.`,`Save as .xlsm. Use relative references for steps that should move with the active cell.`,`automate repetitive tasks vba`],
+["Dynamic arrays & spill","Any formula like FILTER, UNIQUE, SORT",`Formulas that return many results spill into neighboring cells.`,`Reference a whole spill with #, e.g. =SUM(F2#). #SPILL! means something is blocking the output range.`,`spill error multiple results array`]
+];
+
+/* ---------- RECIPES: [title, area, what it solves, formula, notes, keywords] ---------- */
+const RC=[
+// AP
+["Flag duplicate invoices","AP",`Catch the same vendor + invoice number + amount entered twice.`,`=IF(COUNTIFS([Vendor],[@Vendor],[InvoiceNo],[@InvoiceNo],[Amount],[@Amount])>1,"DUPLICATE","")`,`Also try matching on vendor + amount + date for invoices keyed with different numbers.`,`duplicate payment double paid same invoice twice`],
+["AP aging buckets","AP",`Put each open invoice into Current, 1–30, 31–60, 61–90, 90+.`,`=LET(d,TODAY()-[@DueDate],IFS(d<=0,"Current",d<=30,"1-30",d<=60,"31-60",d<=90,"61-90",TRUE,"90+"))`,`Swap TODAY() for a cell holding the period-end date so the report doesn't change daily. Pivot the result by vendor.`,`aging overdue past due how old buckets days outstanding`],
+["Due date from payment terms","AP",`Calculate the due date for Net 30 or similar terms.`,`=[@InvoiceDate]+30\n=WORKDAY([@InvoiceDate]-1, 30, Holidays)   ' if it must land on a business day`,`Store terms days in their own column and use it instead of 30.`,`due date net 30 terms when pay`],
+["Early-payment discount (2/10 net 30)","AP",`Amount to pay if paid within the discount window.`,`=IF([@PayDate]-[@InvoiceDate]<=10, [@Amount]*(1-2%), [@Amount])`,`Annualized cost of skipping 2/10 net 30 is about 37%.`,`discount early pay 2/10 net 30 savings`],
+["Vendor totals for 1099s","AP",`Total paid to each 1099 vendor for the year.`,`=SUMIFS(Pay[Amount], Pay[Vendor], A2, Pay[Is1099], "Y", Pay[Date], ">="&DATE(2026,1,1), Pay[Date], "<="&DATE(2026,12,31))`,`Then flag vendors over the reporting threshold with conditional formatting.`,`1099 year total paid per vendor tax reporting`],
+// AR
+["Days past due","AR",`How many days an invoice is overdue (zero if not yet due).`,`=MAX(0, AsOfDate - [@DueDate])`,`Use a fixed as-of date cell for month-end reporting.`,`days overdue late how many days past due`],
+["AR aging buckets","AR",`Classic customer aging report columns.`,`=LET(d,AsOfDate-[@DueDate],IFS(d<=0,"Current",d<=30,"1-30",d<=60,"31-60",d<=90,"61-90",TRUE,"90+"))`,`Build a PivotTable: Customer in rows, bucket in columns, open balance in values.`,`aging report customer overdue buckets collections`],
+["DSO (days sales outstanding)","AR",`How many days it takes on average to collect.`,`=AR_Balance / Revenue_for_Period * Days_in_Period`,`Example monthly: =B2/C2*30. Track the trend, not one month.`,`days sales outstanding collection speed kpi`],
+["Remaining balance after partial payments","AR",`Open amount per invoice after all payments applied.`,`=[@Amount] - SUMIFS(Pay[Amount], Pay[InvoiceNo], [@InvoiceNo])`,`Filter for <> 0 to get open items.`,`partial payment remaining open balance applied cash`],
+["Customer payment status","AR",`Show Paid / Partial / Open.`,`=LET(p,SUMIFS(Pay[Amount],Pay[InvoiceNo],[@InvoiceNo]),IFS(p>=[@Amount],"Paid",p>0,"Partial",TRUE,"Open"))`,``,`paid partial open status`],
+// GL / Close
+["Journal entry balance check","GL & Close",`Make sure debits equal credits before posting.`,`=IF(ROUND(SUM(Debits)-SUM(Credits),2)=0, "Balanced", "Out by "&TEXT(SUM(Debits)-SUM(Credits),"$#,##0.00"))`,`ROUND avoids tiny floating-point differences showing as out of balance.`,`debits equal credits balanced je out of balance check`],
+["Map GL accounts to report lines","GL & Close",`Assign each account to a financial statement line using a mapping table.`,`=XLOOKUP([@Account], Map[Account], Map[ReportLine], "UNMAPPED")`,`Filter for UNMAPPED every month to catch new accounts.`,`mapping chart of accounts report line financial statement category`],
+["Map accounts by number range","GL & Close",`Assign a category when accounts follow numbering ranges.`,`=XLOOKUP([@Account], Ranges[StartAcct], Ranges[Category], , -1)`,`match_mode -1 = exact or next smaller, so 6150 lands in the 6000 row. Sort Ranges ascending.`,`account range 1000 assets 6000 expenses approximate match`],
+["Month-end and month-start dates","GL & Close",`Get the period end or start for any date.`,`=EOMONTH(A2, 0)        ' last day\n=EOMONTH(A2, -1)+1     ' first day`,`Format as "mmm yyyy" for a period label.`,`period end month end last day of month first day`],
+["Fiscal year (non-calendar)","GL & Close",`Fiscal year for a July 1 start (FY named by the year it ends).`,`=YEAR(A2) + (MONTH(A2) >= 7)`,`Change 7 to your fiscal start month.`,`fiscal year july june start fy`],
+["Fiscal period number","GL & Close",`Period 1–12 when the fiscal year starts in July.`,`=MOD(MONTH(A2) - 7, 12) + 1`,`Change 7 to your fiscal start month.`,`fiscal period month number p1 p12`],
+["Close calendar day (business day n)","GL & Close",`Date of business day 5 after month end.`,`=WORKDAY(EOMONTH(A2,0), 5, Holidays)`,`Keep a Holidays table on a settings sheet.`,`close calendar bd5 workday deadline`],
+["Prepaid expense amortization","GL & Close",`Monthly expense from a prepaid amount.`,`=IF(AND(EOMONTH(Period,0)>=EOMONTH(Start,0), EOMONTH(Period,0)<=EOMONTH(Start,Months-1)), Total/Months, 0)`,`Build months across columns and copy right for a full schedule.`,`prepaid amortization schedule insurance monthly expense`],
+["Accrual proration by days","GL & Close",`Portion of an invoice that belongs in this month.`,`=Amount * (MIN(EndDate,PeriodEnd) - MAX(StartDate,PeriodStart) + 1) / (EndDate - StartDate + 1)`,`Wrap in MAX(0, …) if the service might fall outside the period.`,`accrual prorate partial month service period days`],
+["Account roll-forward","GL & Close",`Ending balance from beginning balance and activity.`,`=Beginning + SUMIFS(GL[Debit],GL[Account],A2) - SUMIFS(GL[Credit],GL[Account],A2)`,`Compare to the TB balance with an ABS(diff)<=0.01 check.`,`roll forward beginning ending balance activity`],
+["Split account string into segments","GL & Close",`Break 6100-200-10 into account, department, location.`,`=TEXTSPLIT(A2, "-")\n=TEXTBEFORE(A2,"-")   ' older versions: =LEFT(A2, FIND("-",A2)-1)`,`TEXTSPLIT spills across three columns.`,`segment split account department location dash`],
+// Reconciliation
+["Bank rec: find unmatched items","Reconciliation",`Flag bank transactions with no matching book entry (same amount and date).`,`=IF(COUNTIFS(Book[Amount], [@Amount], Book[Date], [@Date])=0, "Unmatched", "")`,`Loosen the date match with Book[Date],">="&[@Date]-3 and "<="&[@Date]+3.`,`bank reconciliation outstanding checks deposits in transit unmatched match bank to books`],
+["Compare two lists","Reconciliation",`Items in List A that aren't in List B.`,`=FILTER(ListA, COUNTIF(ListB, ListA)=0, "All matched")`,`Older versions: =IF(ISNA(MATCH(A2, ListB, 0)), "Missing", "").`,`compare lists missing differences what's not in other list`],
+["Within-tolerance check","Reconciliation",`Treat differences of a penny as a match.`,`=IF(ABS(A2-B2) <= 0.01, "OK", "Investigate")`,``,`rounding difference tolerance penny close enough`],
+["Which invoices add up to a payment?","Reconciliation",`Find the combination of amounts that equals a lump-sum payment.`,`Target: =SUMPRODUCT(Amounts, Flags)   ' Flags are 0/1 cells Solver changes`,`Use Solver: set Target = payment, By Changing = Flags, add constraint Flags = binary.`,`which amounts sum to total combination lump sum payment match`],
+["Intercompany match","Reconciliation",`Check entity A's receivable against entity B's payable.`,`=SUMIFS(EntB[Amount], EntB[Counterparty], "A", EntB[Account], "2100") + SUMIFS(EntA[Amount], EntA[Counterparty], "B", EntA[Account], "1300")`,`Result should be zero when signs are opposite.`,`intercompany due to due from elimination`],
+// Payroll
+["Overtime pay","Payroll",`Overtime at 1.5× for hours over 40 in a week.`,`=MAX(0, [@Hours]-40) * [@Rate] * 1.5`,`Regular pay: =MIN([@Hours],40)*[@Rate]. Check state rules for daily overtime.`,`overtime time and a half over 40 hours`],
+["Hours from clock in/out","Payroll",`Hours worked, including overnight shifts.`,`=MOD([@Out]-[@In], 1) * 24`,`MOD handles shifts crossing midnight. Subtract unpaid breaks in hours.`,`hours worked time card timesheet clock in out overnight`],
+["Round time to quarter hour","Payroll",`Round punches to the nearest 15 minutes.`,`=MROUND(A2, "0:15")`,`Follow your written rounding policy.`,`round minutes quarter hour 15 minutes`],
+["Payroll accrual at month end","Payroll",`Accrue wages for days worked after the last pay date.`,`=DailyRate * NETWORKDAYS(LastPayEnd+1, EOMONTH(LastPayEnd,0), Holidays)`,`DailyRate = biweekly gross / 10.`,`payroll accrual unpaid wages month end days worked`],
+["Headcount by department","Payroll",`Count active employees per department.`,`=COUNTIFS(Emp[Dept], A2, Emp[Status], "Active")`,``,`headcount employees count department active`],
+["Years of service","Payroll",`Tenure for PTO tiers or anniversaries.`,`=DATEDIF([@HireDate], AsOfDate, "Y")`,`Pair with XLOOKUP into a PTO tier table.`,`tenure years of service anniversary pto tier`],
+// FP&A
+["Budget vs actual variance","FP&A",`Dollar and percent variance.`,`=[@Actual]-[@Budget]\n=IFERROR(([@Actual]-[@Budget])/ABS([@Budget]), 0)`,`ABS keeps the sign meaningful when the budget is negative. Decide whether favorable is + or - for expense lines.`,`variance budget actual difference percent over under`],
+["Year-to-date total","FP&A",`YTD through the selected month.`,`=SUMIFS(Data[Amount], Data[Account], A2, Data[Date], ">="&DATE(Yr,1,1), Data[Date], "<="&EOMONTH(DATE(Yr,Mo,1),0))`,`Use fiscal start instead of Jan 1 if needed.`,`ytd year to date cumulative through month`],
+["Running total","FP&A",`Cumulative total down a column.`,`=SUM($B$2:B2)`,`In 365: =SCAN(0, B2:B13, LAMBDA(a,b,a+b)).`,`running total cumulative balance`],
+["Growth rate and CAGR","FP&A",`Period growth and compound annual growth.`,`=B2/A2-1\n=(End/Start)^(1/Years)-1`,``,`growth percent increase cagr compound`],
+["Allocate costs by percentage","FP&A",`Spread a shared cost across departments, with the rounding plug in the last row.`,`=ROUND(Total*[@Share]/SUM([Share]), 2)\n' last row: =Total - SUM(above rows)`,`The plug guarantees allocations tie to the total exactly.`,`allocation spread shared costs overhead percent rounding plug`],
+["Simple trend forecast","FP&A",`Project next month from history.`,`=FORECAST.LINEAR(13, B2:B13, A2:A13)`,`Or try Data › Forecast Sheet for seasonality.`,`forecast projection next month trend`],
+// Fixed assets & tax
+["Monthly straight-line depreciation","Fixed Assets & Tax",`Monthly depreciation expense.`,`=SLN([@Cost], [@Salvage], [@LifeYears]) / 12`,`Stop depreciating at full life: wrap in IF(months_in_service<=Life*12, …, 0).`,`depreciation straight line monthly fixed asset`],
+["Loan amortization schedule","Fixed Assets & Tax",`Payment, interest and principal by period.`,`Payment:   =PMT(Rate/12, Term, -Loan)\nInterest:  =IPMT(Rate/12, [@Period], Term, -Loan)\nPrincipal: =PPMT(Rate/12, [@Period], Term, -Loan)`,`Balance: previous balance minus principal.`,`loan amortization schedule interest principal note payable`],
+["Back sales tax out of a total","Fixed Assets & Tax",`Pre-tax amount when you only know the tax-inclusive total.`,`=Total/(1+Rate)\nTax: =Total - Total/(1+Rate)`,``,`sales tax included back out remove tax gross`],
+// Audit & reporting
+["Clean numbers from exports","Audit & Reporting",`Fix text-numbers, extra spaces and trailing minus signs (e.g. 1,250.00-).`,`=LET(t,TRIM(SUBSTITUTE(A2,CHAR(160)," ")), IF(RIGHT(t)="-", -VALUE(LEFT(t,LEN(t)-1)), VALUE(t)))`,`If a column won't sum, the numbers are probably text.`,`numbers stored as text won't sum trailing negative clean export erp`],
+["Total only visible (filtered) rows","Audit & Reporting",`A total that updates when you filter.`,`=SUBTOTAL(109, C2:C500)`,`Tables' Total Row uses this automatically.`,`filtered total visible rows`],
+["Sum a range that contains errors","Audit & Reporting",`Total even if some cells show #N/A.`,`=AGGREGATE(9, 6, C2:C500)`,`Better long-term: fix the errors with IFNA in the source column.`,`sum ignore errors na`],
+["Random audit sample","Audit & Reporting",`Pull 25 random transactions.`,`=TAKE(SORTBY(Data, RANDARRAY(ROWS(Data))), 25)`,`Copy › Paste Values to freeze the sample, and document how it was selected.`,`audit sample random selection testing`],
+["Find hardcoded numbers","Audit & Reporting",`Spot typed-in numbers where formulas should be.`,`Go To Special › Constants › Numbers   (or conditional format with =NOT(ISFORMULA(A1)))`,`Great before handing off a reconciliation or model.`,`hardcoded typed numbers overwritten formulas review`],
+["Show negatives in parentheses","Audit & Reporting",`Accounting-style display.`,`Custom format: #,##0.00_);(#,##0.00);"-"_)`,`Third section shows zeros as a dash.`,`negative parentheses accounting format zero dash`],
+["Combine monthly tabs into one list","Audit & Reporting",`Stack Jan–Dec sheets with the same layout.`,`=VSTACK(Jan:Dec!A2:F500)`,`3D reference picks up every sheet between Jan and Dec. Filter blanks: =FILTER(x, CHOOSECOLS(x,1)<>"").`,`combine sheets tabs consolidate months stack`]
+];
+
+/* ---------- build index ---------- */
+const ITEMS=[];
+FN.forEach(f=>ITEMS.push({type:"fn",title:f[0],cat:f[1],desc:f[2],syntax:f[3],ex:f[4],kw:f[5],ver:f[6]}));
+SC.forEach(s=>ITEMS.push({type:"sc",title:s[0],win:s[1],mac:s[2],cat:s[3],kw:s[4],desc:""}));
+FT.forEach(t=>ITEMS.push({type:"ft",title:t[0],where:t[1],desc:t[2],tips:t[3],kw:t[4],cat:"Feature"}));
+RC.forEach(r=>ITEMS.push({type:"rc",title:r[0],cat:r[1],desc:r[2],syntax:r[3],tips:r[4],kw:r[5]}));
+ITEMS.forEach((it,i)=>{it.id=it.type+i});
+
+const TYPE={fn:"Function",sc:"Shortcut",ft:"Feature",rc:"Recipe"};
+const STOP=new Set("a an the to of in on for and or is are be do does i my me we our how what which can with from by it that this way get make want need into as at all if each use using want excel cell cells".split(" "));
+const SYN={
+add:"sum total",total:"sum add",sum:"add total",
+lookup:"pull find match get xlookup vlookup",pull:"lookup find get bring",find:"lookup search match locate",bring:"pull lookup",match:"lookup compare reconcile",get:"pull lookup",
+count:"how many number",many:"count",number:"count",
+combine:"join merge concatenate stack append",join:"combine merge",merge:"combine join",
+remove:"delete strip clean",delete:"remove",strip:"remove clean",
+space:"trim",spaces:"trim",
+duplicate:"dupe duplicates unique double",dupe:"duplicate",double:"duplicate",
+overdue:"late aging past due",late:"overdue aging",old:"aging",aging:"overdue past due",
+split:"separate textsplit",separate:"split",
+round:"rounding",penny:"round rounding tolerance",
+error:"iferror na",errors:"iferror na",
+date:"day month year",month:"eomonth period",period:"month",
+loan:"pmt payment amortization",payment:"pmt pay",interest:"ipmt rate",
+depreciation:"sln depreciate",
+condition:"if criteria",criteria:"condition if sumifs",when:"if condition",
+filter:"filtered visible",visible:"filtered subtotal",hidden:"visible filtered",
+compare:"match difference reconcile",difference:"variance compare",variance:"difference budget",
+text:"string",negative:"parentheses sign",sign:"negative flip",
+copy:"paste fill",paste:"copy values",value:"values",values:"paste",
+lock:"absolute freeze protect",highlight:"conditional formatting color",color:"highlight conditional",
+dropdown:"validation list",list:"dropdown unique",
+summarize:"pivot summary",summary:"pivot summarize",report:"pivot summarize",
+business:"workday networkdays",weekday:"workday business",
+hours:"time overtime",time:"hours",
+largest:"top rank max",biggest:"largest top",top:"largest rank",
+};
+function stem(w){return w.length>4?w.replace(/(ings|ing|ies|ed|es|s)$/,m=>m==="ies"?"y":""):w}
+function tokens(q){return q.toLowerCase().replace(/[^a-z0-9.#$\- ]/g," ").split(/\s+/).filter(w=>w&&!STOP.has(w))}
+ITEMS.forEach(it=>{
+  it._t=it.title.toLowerCase();
+  it._h=(it.title+" "+it.kw+" "+it.cat).toLowerCase();
+  it._d=(it.desc+" "+(it.syntax||"")+" "+(it.tips||"")).toLowerCase();
+  it._w=new Set(tokens(it._h).map(stem));
+});
+function search(q){
+  const raw=q.trim().toLowerCase();if(!raw)return[];
+  const toks=tokens(raw);
+  return ITEMS.map(it=>{
+    let s=0;
+    if(it._t===raw)s+=40;else if(it._t.includes(raw))s+=18;
+    if(it._h.includes(raw)&&raw.length>3)s+=10;
+    let hits=0;
+    toks.forEach(t=>{
+      const st=stem(t);let h=0;
+      if(it._t.includes(t))h=8;else if(it._w.has(st)||it._h.includes(t))h=5;else if(it._d.includes(t))h=2;
+      if(!h&&SYN[st]){SYN[st].split(" ").forEach(sy=>{if(it._w.has(stem(sy))||it._h.includes(sy))h=Math.max(h,3);else if(it._d.includes(sy))h=Math.max(h,1)})}
+      if(h)hits++;s+=h;
+    });
+    if(toks.length>1)s*=0.5+hits/toks.length;
+    return {it,s};
+  }).filter(r=>r.s>=3).sort((a,b)=>b.s-a.s).slice(0,40).map(r=>r.it);
+}
+
+/* ---------- rendering ---------- */
+const $=s=>document.querySelector(s);
+const app=$("#app");
+const esc=s=>String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+let plat=store.get("plat","win"),saved=new Set(store.get("saved",[])),open=new Set(),typeFilter="all",areaFilter="all",lastQ="";
+function hl(text,q){
+  let h=esc(text);if(!q)return h;
+  const ws=tokens(q).filter(w=>w.length>2).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+  if(!ws.length)return h;
+  return h.replace(new RegExp("("+ws.join("|")+")","gi"),"<mark>$1</mark>");
+}
+function card(it,q){
+  const isOpen=open.has(it.id),keys=it.type==="sc"?(plat==="mac"?it.mac:it.win):"";
+  const sub=it.type==="sc"?`${it.cat} · Windows: ${it.win} · Mac: ${it.mac}`:it.desc;
+  let body="";
+  if(isOpen){
+    if(it.type==="fn")body=`<h4>Syntax</h4>${code(it.syntax)}<h4>Example</h4>${code(it.ex)}<div class="meta">${esc(it.cat)}${it.ver?` · Requires Excel ${esc(it.ver)}`:""}</div>`;
+    if(it.type==="rc")body=`<h4>Formula</h4>${code(it.syntax)}${it.tips?`<h4>Notes</h4><p>${esc(it.tips)}</p>`:""}<div class="meta">Area: ${esc(it.cat)} · Column names in [brackets] assume an Excel Table — swap in your own ranges.</div>`;
+    if(it.type==="ft")body=`<h4>Where</h4><p>${esc(it.where)}</p><h4>How to use it</h4><p style="white-space:pre-line">${esc(it.tips)}</p>`;
+    if(it.type==="sc")body=`<h4>Windows</h4>${code(it.win)}<h4>Mac</h4>${code(it.mac)}<div class="meta">"Alt, H, V, V" means press each key in order, not together. "—" means no standard Mac shortcut; use the menu.</div>`;
+    body=`<div class="bd">${body}</div>`;
+  }
+  return `<div class="item"><button class="hd" onclick="toggle('${it.id}')" aria-expanded="${isOpen}">
+    <span class="tag ${it.type}">${TYPE[it.type]}</span>
+    <span class="t"><b>${hl(it.title,q)}</b><span>${hl(sub,q)}</span></span>
+    ${keys?`<span class="keys">${esc(keys)}</span>`:""}
+    <span class="star ${saved.has(it.id)?"on":""}" role="button" aria-label="Save" onclick="event.stopPropagation();star('${it.id}')">${saved.has(it.id)?"★":"☆"}</span>
+  </button>${body}</div>`;
+}
+function code(t){return `<div class="cp"><pre>${esc(t)}</pre><button onclick="copy(this)">Copy</button></div>`}
+function copy(b){const t=b.previousElementSibling.textContent;try{navigator.clipboard.writeText(t).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1200)},()=>{b.textContent="Select & copy"})}catch(e){b.textContent="Select & copy"}}
+function toggle(id){open.has(id)?open.delete(id):open.add(id);refresh()}
+function star(id){saved.has(id)?saved.delete(id):saved.add(id);store.set("saved",[...saved]);refresh()}
+function setPlat(p){plat=p;store.set("plat",p);refresh()}
+function platToggle(){return `<span class="seg"><button class="${plat==="win"?"on":""}" onclick="setPlat('win')">Windows</button><button class="${plat==="mac"?"on":""}" onclick="setPlat('mac')">Mac</button></span>`}
+let refresh=()=>{};
+
+const EXAMPLES=["pull vendor name from another sheet","how many days overdue","remove extra spaces","add up by account and month","last day of the month","paste only values","numbers won't add up","find duplicate invoices","debits equal credits","loan payment","negative numbers in parentheses","which invoices add up to a payment","copy only visible rows","lock a cell reference"];
+
+function viewSearch(){
+  app.innerHTML=`<h1>What do you need to do in Excel?</h1>
+  <p class="mute">Describe it in plain words — you don't need to know the function name.</p>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+  <input id="q" type="search" placeholder="e.g. pull the account name from the chart of accounts" autocomplete="off" value="${esc(lastQ)}"></div>
+  <div class="toolbar"><div class="chips" id="tf">${["all","fn","sc","ft","rc"].map(t=>`<button class="chip ${typeFilter===t?"on":""}" data-t="${t}">${t==="all"?"Everything":TYPE[t]+"s"}</button>`).join("")}</div>${platToggle()}</div>
+  <div id="res"></div>`;
+  const inp=$("#q");
+  const draw=()=>{
+    lastQ=inp.value;const q=lastQ.trim();
+    let list=q?search(q):[];
+    if(typeFilter!=="all")list=list.filter(i=>i.type===typeFilter);
+    $("#res").innerHTML=q?(list.length?`<p class="mute">${list.length} result${list.length>1?"s":""}</p>`+list.map(i=>card(i,q)).join(""):`<div class="empty">No matches. Try other words — e.g. "total", "lookup", "date", "duplicate".</div>`)
+      :`<h2>Try asking</h2><div class="chips">${EXAMPLES.map(e=>`<button class="chip" onclick="document.getElementById('q').value=this.textContent;document.getElementById('q').dispatchEvent(new Event('input'))">${esc(e)}</button>`).join("")}</div>
+      <h2>Browse</h2><div class="grid">
+      <a class="tile" href="#fn"><b>Functions</b><span class="stat">${FN.length}</span><br><span class="mute">Lookup, math, text, dates, financial</span></a>
+      <a class="tile" href="#sc"><b>Shortcuts</b><span class="stat">${SC.length}</span><br><span class="mute">Windows and Mac</span></a>
+      <a class="tile" href="#ft"><b>Features</b><span class="stat">${FT.length}</span><br><span class="mute">PivotTables, Power Query, what-if tools</span></a>
+      <a class="tile" href="#rc"><b>Accounting recipes</b><span class="stat">${RC.length}</span><br><span class="mute">AP, AR, close, recs, payroll, FP&amp;A</span></a></div>`;
+  };
+  inp.addEventListener("input",draw);
+  $("#tf").addEventListener("click",e=>{const t=e.target.dataset.t;if(!t)return;typeFilter=t;document.querySelectorAll("#tf .chip").forEach(c=>c.classList.toggle("on",c.dataset.t===t));draw()});
+  refresh=draw;draw();
+  if(!matchMedia("(max-width:560px)").matches)inp.focus();
+}
+
+function viewList(type){
+  const titles={fn:"Functions",sc:"Keyboard Shortcuts",ft:"Excel Features",rc:"Accounting Recipes"};
+  const intro={fn:"Grouped by category. Tap any function for syntax and a copy-ready example.",sc:"Toggle Windows or Mac. Ribbon key sequences (Alt, H, V…) are Windows only.",ft:"The tools that save accounting teams the most time.",rc:"Ready-to-adapt formulas for every part of the department."};
+  const all=ITEMS.filter(i=>i.type===type);
+  const cats=[...new Set(all.map(i=>i.cat))];
+  app.innerHTML=`<h1>${titles[type]}</h1><p class="mute">${intro[type]}</p>
+  <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="lq" type="search" placeholder="Filter this list…" autocomplete="off"></div>
+  <div class="toolbar">${cats.length>1?`<select id="cf"><option value="all">All ${type==="rc"?"areas":"categories"}</option>${cats.map(c=>`<option ${areaFilter===c?"selected":""}>${esc(c)}</option>`).join("")}</select>`:"<span></span>"}${type==="sc"?platToggle():""}</div>
+  <div id="res"></div>`;
+  if(!cats.includes(areaFilter))areaFilter="all";
+  const draw=()=>{
+    const q=$("#lq").value.trim();
+    let list=q?search(q).filter(i=>i.type===type):all;
+    if(areaFilter!=="all")list=list.filter(i=>i.cat===areaFilter);
+    if(q){$("#res").innerHTML=list.length?list.map(i=>card(i,q)).join(""):`<div class="empty">No matches.</div>`;return}
+    const groups=[...new Set(list.map(i=>i.cat))];
+    $("#res").innerHTML=groups.map(g=>`<h2>${esc(g)}</h2>`+list.filter(i=>i.cat===g).map(i=>card(i,"")).join("")).join("");
+  };
+  $("#lq").addEventListener("input",draw);
+  const cf=$("#cf");if(cf)cf.addEventListener("change",()=>{areaFilter=cf.value;draw()});
+  refresh=draw;draw();
+}
+
+function viewSaved(){
+  app.innerHTML=`<h1>Saved</h1><p class="mute">Tap ☆ on anything to keep it here. Saved items stay in this browser.</p><div id="res"></div>`;
+  const draw=()=>{const list=ITEMS.filter(i=>saved.has(i.id));$("#res").innerHTML=list.length?list.map(i=>card(i,"")).join(""):`<div class="empty">Nothing saved yet.</div>`};
+  refresh=draw;draw();
+}
+
+function viewAbout(){
+  app.innerHTML=`<h1>About</h1>
+  <div class="about"><p><b>Excel for Accounting</b> is a quick-reference tool for finance and accounting teams — AP, AR, general ledger and close, reconciliations, payroll, FP&amp;A, fixed assets and audit.</p>
+  <p>Search in plain language and it finds the function, shortcut, feature or ready-made formula you need, even when you don't know what it's called.</p>
+  <p>Designed and built by <a href="${MAKER.url}" target="_blank" rel="noopener">${esc(MAKER.name)}</a>, which creates job aids, tutorials and eLearning that make workplace processes simple, measurable and repeatable.</p></div>
+  <div class="about"><h2 style="margin-top:0">Notes</h2><ul>
+  <li>Written for Microsoft Excel 365. Functions marked "365" or "2021" won't work in older versions — use the alternatives listed.</li>
+  <li>Recipe formulas use Excel Table column names like [Amount]. Replace them with your own ranges if you aren't using Tables.</li>
+  <li>Always test formulas on your own data before relying on them for reporting.</li></ul></div>`;
+  refresh=()=>{};
+}
+
+/* ---------- router ---------- */
+function setNav(r){document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+r))}
+function route(){
+  const r=location.hash.slice(1)||"search";open.clear();
+  setNav(r);
+  if(["fn","sc","ft","rc"].includes(r))viewList(r);else if(r==="saved")viewSaved();else if(r==="about")viewAbout();else viewSearch();
+  window.scrollTo(0,0);
+}
+document.getElementById("byline").innerHTML=`by ${esc(MAKER.name)}`;
+document.getElementById("credit").innerHTML=`© ${new Date().getFullYear()} · Designed &amp; built by <a href="${MAKER.url}" target="_blank" rel="noopener">${esc(MAKER.name)}</a>`;
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part 107 Prep</title>
+<meta name="description" content="Interactive FAA Part 107 Remote Pilot study guide, chart lab, flashcards and practice tests.">
+<meta name="author" content="Elevate L&D Consulting">
+<style>
+.logo .nm small{display:block;font-size:12px;font-weight:500;color:var(--mute);line-height:1.1}.logo .nm{line-height:1.2}
+:root{--bg:#f4f6f9;--card:#fff;--ink:#142030;--mute:#5a6675;--line:#dce2ea;--acc:#1f5fbf;--acc2:#e6eefb;--ok:#18804a;--okbg:#e3f4ea;--bad:#bf3326;--badbg:#fbe8e5;--warn:#a35f00;--warnbg:#fff3df}
+@media (prefers-color-scheme:dark){:root{--bg:#0e131a;--card:#17202b;--ink:#e7edf4;--mute:#97a3b2;--line:#283443;--acc:#6ea6ff;--acc2:#1b2a41;--ok:#4cc985;--okbg:#12301f;--bad:#ff7d6e;--badbg:#3a1916;--warn:#f2b24c;--warnbg:#36280f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.bar{max-width:960px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-weight:800;letter-spacing:.2px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo>span:first-child{background:var(--acc);color:#fff;border-radius:8px;padding:2px 8px;font-size:14px}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav a{color:var(--mute);text-decoration:none;padding:6px 10px;border-radius:8px;font-weight:600;font-size:15px}
+nav a.on,nav a:hover{background:var(--acc2);color:var(--acc)}
+main{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:28px;margin:4px 0 8px}h2{font-size:21px;margin:24px 0 8px}h3{font-size:17px;margin:18px 0 6px}
+p{margin:6px 0 10px}.mute{color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink);display:block}
+.tile:hover{border-color:var(--acc)}
+.tile b{display:block;font-size:17px;margin-bottom:4px}
+.stat{font-size:26px;font-weight:800;color:var(--acc)}
+.btn{appearance:none;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select{font:inherit;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+label.chk{display:flex;gap:8px;align-items:center}
+ul.facts{padding-left:20px;margin:6px 0}ul.facts li{margin:4px 0}
+.note{background:var(--warnbg);border-left:4px solid var(--warn);padding:12px 14px;border-radius:10px;margin:12px 0}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.toc a{font-size:14px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}th{background:var(--acc2)}
+.tbl{overflow-x:auto}
+svg.chart{width:100%;max-width:300px;height:auto;display:block;margin:8px auto;border-radius:10px}
+.lab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.lab .card{margin:0;text-align:center}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--acc2);color:var(--acc)}
+.q{font-size:18px;font-weight:600;margin:12px 0}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--acc)}
+.opt.sel{border-color:var(--acc);background:var(--acc2)}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt b{display:inline-block;width:26px}
+.exp{border-radius:10px;padding:12px 14px;margin:10px 0;background:var(--acc2)}
+.prog{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0}.prog i{display:block;height:100%;background:var(--acc)}
+.navgrid{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.navgrid button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+.navgrid button.done{background:var(--acc2);border-color:var(--acc)}.navgrid button.cur{outline:2px solid var(--acc)}
+.timer{font-variant-numeric:tabular-nums;font-weight:800}
+.flip{perspective:1000px;cursor:pointer;min-height:230px}
+.flip .in{position:relative;min-height:230px;transition:transform .45s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:16px;border:1px solid var(--line);background:var(--card);font-size:20px;font-weight:600}
+.face.back{transform:rotateY(180deg);background:var(--acc2);font-size:18px;font-weight:500}
+.big{font-size:44px;font-weight:900}
+.pass{color:var(--ok)}.fail{color:var(--bad)}
+.review{border-top:1px solid var(--line);padding:12px 0}
+footer{max-width:960px;margin:0 auto;padding:0 16px 30px;font-size:13px;color:var(--mute)}
+a{color:var(--acc)}
+@media (max-width:560px){h1{font-size:23px}.q{font-size:17px}nav{margin-left:0;width:100%}nav a{padding:6px 8px;font-size:14px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="#home"><span>107</span><span class="nm">Remote Pilot Prep<small>by Elevate L&amp;D Consulting</small></span></a>
+  <nav id="nav">
+    <a href="#home">Home</a><a href="#study">Study</a><a href="#charts">Chart Lab</a><a href="#cards">Flashcards</a><a href="#test">Practice Tests</a>
+  </nav>
+</div></header>
+<main id="app"></main>
+<footer><div style="margin-bottom:6px">© 2026 · Designed &amp; built by <a href="./" target="_blank" rel="noopener" style="font-weight:700">Elevate L&amp;D Consulting</a></div>Independent study aid — not affiliated with the FAA. Always confirm with official FAA sources (14 CFR Part 107, the Remote Pilot Study Guide, and the Airman Certification Standards). Chart images here are simplified drawings, not real sectionals.</footer>
+
+<script>
+/* ---------- storage (safe) ---------- */
+const store={get(k,d){try{const v=localStorage.getItem("p107_"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("p107_"+k,JSON.stringify(v))}catch(e){}}};
+
+const TOPICS={regs:"Regulations",air:"Airspace & Charts",wx:"Weather",perf:"Loading & Performance",ops:"Operations & ADM"};
+
+/* ---------- simplified sectional symbols ---------- */
+let gid=0;
+function chart(k){
+  const id="g"+(gid++),B="#1f5fbf",M="#a8247a",P="#f3efe0";
+  const apt=c=>`<circle cx="120" cy="85" r="10" fill="${c}"/><rect x="117.5" y="73" width="5" height="24" fill="${P}" transform="rotate(35 120 85)"/>`;
+  const lbl=(x,y,t,b,c)=>`<text x="${x}" y="${y}" fill="${c}" font-size="16" font-weight="700" text-anchor="middle" font-family="Arial">${t}</text><line x1="${x-14}" y1="${y+5}" x2="${x+14}" y2="${y+5}" stroke="${c}" stroke-width="1.5"/><text x="${x}" y="${y+22}" fill="${c}" font-size="16" font-weight="700" text-anchor="middle" font-family="Arial">${b}</text>`;
+  const txt=(x,y,t,c,s=14,w=700)=>`<text x="${x}" y="${y}" fill="${c}" font-size="${s}" font-weight="${w}" text-anchor="middle" font-family="Arial">${t}</text>`;
+  let s=`<svg class="chart" viewBox="0 0 240 170" role="img" aria-label="Simplified sectional chart excerpt"><rect width="240" height="170" rx="10" fill="${P}"/>`;
+  switch(k){
+    case "B": s+=`<circle cx="120" cy="85" r="64" fill="none" stroke="${B}" stroke-width="4.5"/>`+apt(B)+lbl(120,42,"70","SFC",B);break;
+    case "bshelf": s+=`<circle cx="120" cy="85" r="36" fill="none" stroke="${B}" stroke-width="4"/><circle cx="120" cy="85" r="74" fill="none" stroke="${B}" stroke-width="4"/>`+apt(B)+lbl(185,48,"70","30",B);break;
+    case "C": s+=`<circle cx="120" cy="85" r="62" fill="none" stroke="${M}" stroke-width="4.5"/>`+apt(B)+lbl(120,42,"40","SFC",M);break;
+    case "D": s+=`<circle cx="120" cy="85" r="58" fill="none" stroke="${B}" stroke-width="2.5" stroke-dasharray="9 6"/>`+apt(B)+txt(120,52,"[25]",B,17);break;
+    case "Dminus": s+=`<circle cx="120" cy="85" r="58" fill="none" stroke="${B}" stroke-width="2.5" stroke-dasharray="9 6"/>`+apt(B)+txt(120,52,"[-30]",B,17);break;
+    case "Esurf": s+=`<circle cx="120" cy="85" r="58" fill="none" stroke="${M}" stroke-width="2.5" stroke-dasharray="9 6"/>`+apt(M);break;
+    case "E700": s+=`<defs><radialGradient id="${id}"><stop offset="0.72" stop-color="${M}" stop-opacity="0"/><stop offset="1" stop-color="${M}" stop-opacity="0.6"/></radialGradient></defs><circle cx="120" cy="85" r="66" fill="url(#${id})"/>`+apt(M);break;
+    case "obst": s+=`<path d="M108 128 L120 70 L132 128" fill="none" stroke="${B}" stroke-width="3"/><circle cx="120" cy="66" r="3.5" fill="${B}"/>`+txt(170,95,"1549",B,20,800)+txt(170,118,"(549)",B,16);break;
+    case "star": s+=apt(B)+txt(120,30,"RIVERTON (RVT)",B,14,800)+txt(120,128,"CT – 119.0 ★ ATIS 124.5",B,13)+txt(120,148,"263  L  72  122.95",B,13);break;
+    case "ctaf": s+=apt(M)+txt(120,30,"MILLBROOK (1B9)",M,14,800)+txt(110,128,"122.8",M,14)+`<circle cx="146" cy="123" r="8" fill="${M}"/>`+txt(146,128,"C",P,12,800)+txt(120,148,"410  L  38",M,13);break;
+    case "mef": s+=`<line x1="0" y1="85" x2="240" y2="85" stroke="#b9b29a" stroke-dasharray="2 4"/><line x1="120" y1="0" x2="120" y2="170" stroke="#b9b29a" stroke-dasharray="2 4"/>`+`<text x="58" y="70" fill="${B}" font-size="52" font-weight="800" font-family="Arial">3</text><text x="88" y="46" fill="${B}" font-size="28" font-weight="800" font-family="Arial">2</text>`;break;
+  }
+  return s+"</svg>";
+}
+
+/* ---------- study guide ---------- */
+const STUDY=[
+{id:"exam",title:"The exam itself",html:`
+<ul class="facts">
+<li>Official name: <b>Unmanned Aircraft General – Small (UAG)</b> knowledge test, taken at an FAA-approved PSI testing center.</li>
+<li><b>60 multiple-choice questions, 2 hours, 70% to pass</b> (42 correct). Three answer choices per question.</li>
+<li>You get the <b>FAA-CT-8080-2 testing supplement</b> (charts &amp; figures) at the test.</li>
+<li><b>New as of Oct 26, 2026:</b> some questions show sectional chart images embedded in the question that are <i>not</i> in the supplement. Format and passing score are unchanged — you just have to actually read charts, not memorize supplement figures. Practice on real FAA sectionals and the PSI sample test.</li>
+<li>After passing: apply in <b>IACRA</b> → TSA security background check → temporary then permanent certificate.</li>
+<li>Stay current: free online <b>recurrent training every 24 calendar months</b> on FAASafety.gov.</li>
+</ul>`},
+{id:"cert",title:"Getting & keeping the certificate",html:`
+<ul class="facts">
+<li>Eligibility: at least <b>16 years old</b>; read, speak, write and understand English; physically and mentally able to fly safely; pass the knowledge test.</li>
+<li>Carry your certificate when flying and show it on request to the <b>FAA, NTSB, TSA, or any federal, state or local law enforcement officer</b>.</li>
+<li>Change of permanent mailing address: notify FAA within <b>30 days</b> or you can't exercise certificate privileges.</li>
+<li>A non-certificated person may fly the controls only under <b>direct supervision of a Remote PIC</b> who can immediately take over.</li>
+</ul>`},
+{id:"reg",title:"Registration & Remote ID",html:`
+<ul class="facts">
+<li>Under Part 107, <b>every</b> drone must be registered (no weight exemption), in FAADroneZone. <b>$5, valid 3 years</b>.</li>
+<li>Registration number must be marked on an <b>external surface</b>.</li>
+<li>Part 107 small UA: <b>under 55 lb</b> at takeoff including everything onboard.</li>
+<li><b>Remote ID</b> — comply one of three ways: a <b>Standard Remote ID</b> drone, a <b>Remote ID broadcast module</b>, or fly inside a <b>FAA-Recognized Identification Area (FRIA)</b>.</li>
+</ul>`},
+{id:"limits",title:"Operating limits (memorize these)",html:`
+<div class="tbl"><table>
+<tr><th>Rule</th><th>Limit</th></tr>
+<tr><td>Max altitude</td><td>400 ft AGL — or higher if within a 400-ft radius of a structure, but no more than 400 ft above its top</td></tr>
+<tr><td>Max groundspeed</td><td>87 knots (100 mph)</td></tr>
+<tr><td>Min visibility</td><td>3 statute miles from the control station</td></tr>
+<tr><td>Cloud clearance</td><td>500 ft below, 2,000 ft horizontally</td></tr>
+<tr><td>Line of sight</td><td>Remote PIC, person on controls, or VO must see the drone unaided (glasses/contacts OK, binoculars/FPV not)</td></tr>
+<tr><td>Civil twilight</td><td>30 min before sunrise / after sunset — anti-collision lights visible 3 SM required</td></tr>
+<tr><td>Night</td><td>Allowed with anti-collision lights visible 3 SM + current initial test or recurrent training</td></tr>
+<tr><td>Right of way</td><td>Yield to all manned aircraft</td></tr>
+<tr><td>Aircraft per pilot</td><td>One at a time (unless waived)</td></tr>
+<tr><td>Moving vehicle</td><td>Not from a moving aircraft; from a moving land/water vehicle only over sparsely populated areas</td></tr>
+<tr><td>Hazardous materials</td><td>Prohibited</td></tr>
+<tr><td>Dropping objects</td><td>Allowed if it creates no undue hazard</td></tr>
+</table></div>`},
+{id:"people",title:"Operations over people",html:`
+<div class="tbl"><table>
+<tr><th>Category</th><th>Key requirement</th></tr>
+<tr><td>1</td><td>0.55 lb or less (everything attached), no exposed rotating parts that could lacerate skin</td></tr>
+<tr><td>2</td><td>FAA-accepted Declaration of Compliance; injury no worse than 11 ft-lb of kinetic energy transfer</td></tr>
+<tr><td>3</td><td>Declaration of Compliance; 25 ft-lb limit; <b>no flight over open-air assemblies</b>; only over people in a restricted site who are notified, or briefly transiting</td></tr>
+<tr><td>4</td><td>Has an FAA airworthiness certificate</td></tr>
+</table></div>
+<p class="mute">Sustained flight over open-air assemblies also requires Remote ID compliance.</p>`},
+{id:"alcohol",title:"Alcohol, drugs & fitness",html:`
+<ul class="facts">
+<li><b>8 hours</b> "bottle to throttle" and BAC <b>below 0.04%</b>. Not while under the influence of anything that affects your faculties.</li>
+<li>Don't fly if you know or suspect a physical or mental condition that would interfere with safe flight.</li>
+<li><b>IMSAFE</b> self-check: Illness, Medication, Stress, Alcohol, Fatigue, Emotion/Eating.</li>
+</ul>`},
+{id:"accident",title:"Accidents, emergencies & waivers",html:`
+<ul class="facts">
+<li>Report to FAA within <b>10 calendar days</b> if: serious injury or loss of consciousness, <b>or</b> damage to property (other than the drone) over <b>$500</b> to repair or replace.</li>
+<li>In-flight emergency: you may deviate from Part 107 as needed; send a written report to FAA if asked.</li>
+<li>Remote PIC is responsible for the <b>preflight</b>: assess the area, brief everyone, check control link, power, secure payload, confirm the drone is in condition for safe operation.</li>
+<li><b>Waivable</b> (§107.205): moving vehicle/aircraft ops, anti-collision light/night rules, VLOS, visual observer, multiple drones, yielding right of way, ops over people, controlled airspace, and the 107.51 limits (altitude, speed, visibility, clouds).</li>
+<li><b>Not waivable</b>: alcohol/drug rules, carrying hazardous materials.</li>
+</ul>`},
+{id:"airspace",title:"Airspace",html:`
+<div class="tbl"><table>
+<tr><th>Class</th><th>Chart symbol</th><th>Drone needs ATC authorization?</th></tr>
+<tr><td>A</td><td>Not charted on sectionals (18,000 MSL – FL600)</td><td>N/A</td></tr>
+<tr><td>B</td><td>Solid blue lines, "upside-down wedding cake"</td><td>Yes</td></tr>
+<tr><td>C</td><td>Solid magenta lines; ~5 NM core, ~10 NM shelf, ~4,000 ft above airport</td><td>Yes</td></tr>
+<tr><td>D</td><td>Dashed blue; ceiling in brackets in hundreds of ft MSL, e.g. [25] = 2,500 MSL</td><td>Yes</td></tr>
+<tr><td>E (surface)</td><td>Dashed magenta</td><td>Yes</td></tr>
+<tr><td>E (700 AGL floor)</td><td>Shaded magenta band — fuzzy side is where E starts at 700 AGL</td><td>No (below 700 you're in G)</td></tr>
+<tr><td>G</td><td>Everything not otherwise controlled</td><td>No</td></tr>
+</table></div>
+<ul class="facts">
+<li>Get authorization through <b>LAANC</b> (near-instant apps) or <b>FAADroneZone</b>.</li>
+<li>Bracket with minus, <b>[-30]</b>: up to but <i>not including</i> 3,000 MSL.</li>
+<li>Class B/C shelf labels: top number = ceiling, bottom = floor, in hundreds of ft MSL. <b>70/30</b> = 3,000–7,000 MSL; <b>SFC</b> = surface.</li>
+<li><b>Part-time towers</b>: ★ after CT frequency. When the tower closes, the airspace reverts as listed in the Chart Supplement (often E or G).</li>
+<li>Special use: <b>Prohibited (P-)</b> no flight; <b>Restricted (R-)</b> need controlling agency permission when active; <b>MOA</b> military training — no permission needed, use caution; <b>Warning</b> similar hazards over international waters; <b>Alert</b> high volume of training.</li>
+<li><b>TFRs</b> are issued by NOTAM — always check before flight.</li>
+<li>Stadium NOTAM: <b>3 NM, 3,000 ft AGL</b>, 1 hour before to 1 hour after major sporting events.</li>
+</ul>`},
+{id:"reading",title:"Reading sectional charts",html:`
+<ul class="facts">
+<li>Airport symbols: <b>blue</b> = towered, <b>magenta</b> = non-towered.</li>
+<li><b>Ⓒ</b> next to a frequency = <b>CTAF</b>, used by pilots to self-announce at non-towered airports. Monitor it.</li>
+<li>Airport data line e.g. <b>263 L 72 122.95</b>: elevation 263 ft MSL, lighting, longest runway 7,200 ft, UNICOM.</li>
+<li>Obstacles: <b>1549 (549)</b> = top at 1,549 ft MSL, <b>549 ft AGL</b> (number in parentheses).</li>
+<li><b>Maximum Elevation Figure (MEF)</b>: big number = thousands, small = hundreds, ft MSL. Large 3 small 2 = 3,200 MSL.</li>
+<li>Latitude lines run east–west (measure N/S of the equator); longitude lines run north–south. 1 minute of latitude ≈ 1 NM.</li>
+<li>Runway numbers = magnetic heading ÷ 10 (Runway 27 ≈ 270° magnetic).</li>
+<li>Traffic pattern: upwind → crosswind → <b>downwind</b> (parallel, opposite direction of landing) → base → final. Standard turns are <b>left</b>.</li>
+<li>Windsock: wind blows <b>from the big open end</b>.</li>
+</ul>`},
+{id:"wx",title:"Weather",html:`
+<ul class="facts">
+<li>Standard atmosphere at sea level: <b>15°C, 29.92 inHg</b>; lapse rate ~<b>2°C per 1,000 ft</b>.</li>
+<li><b>Density altitude</b> goes up with <b>high, hot, humid</b> → worse lift and prop efficiency, shorter flight time.</li>
+<li>Small temperature/dew point spread → fog or low clouds likely.</li>
+<li><b>Stable</b> air: smooth, stratiform clouds, poor visibility. <b>Unstable</b>: cumuliform clouds, turbulence, good visibility, showery rain.</li>
+<li>Inversion: temperature <i>increases</i> with altitude — smooth air but haze/poor visibility.</li>
+<li>Thunderstorm stages: <b>cumulus</b> (updrafts) → <b>mature</b> (precipitation begins, up and downdrafts, most dangerous) → <b>dissipating</b> (downdrafts).</li>
+<li><b>Microburst</b>: downdrafts up to ~6,000 ft/min, usually lasting ~15 minutes.</li>
+<li>Fog: <b>radiation</b> — clear, calm, humid nights; <b>advection</b> — warm moist air over a cold surface (coastal); <b>upslope</b> — moist air pushed up terrain.</li>
+<li>Frost disrupts airflow and reduces lift — remove before flight.</li>
+</ul>
+<h3>METAR / TAF decoding</h3>
+<p><code>KORH 251853Z 27012G20KT 10SM FEW015 BKN030 OVC060 12/04 A3004</code></p>
+<ul class="facts">
+<li><b>251853Z</b>: 25th day, 18:53 UTC (Zulu).</li>
+<li><b>27012G20KT</b>: wind from 270° <b>true</b>, 12 knots, gusts 20.</li>
+<li><b>10SM</b>: visibility 10 statute miles.</li>
+<li>Clouds in hundreds of ft <b>AGL</b>: FEW (1–2/8), SCT (3–4/8), BKN (5–7/8), OVC (8/8). <b>Ceiling = lowest BKN or OVC</b> → 3,000 ft here.</li>
+<li><b>12/04</b>: temp 12°C, dew point 4°C. <b>A3004</b>: altimeter 30.04 inHg.</li>
+<li>TAF terms: <b>FM</b> (from — rapid change at that time), <b>TEMPO</b> (temporary changes under an hour at a time), <b>BECMG</b> (gradual change), <b>PROB30</b> (30% chance).</li>
+</ul>`},
+{id:"perf",title:"Loading & performance",html:`
+<ul class="facts">
+<li>Load factor rises in turns: <b>60° bank = 2 G</b>. Higher load factor → <b>higher stall speed</b>.</li>
+<li>A stall happens when the <b>critical angle of attack</b> is exceeded — at any speed.</li>
+<li>Heavier payload → shorter flight time, slower climb, less maneuverability.</li>
+<li>CG too far aft → less stable, harder to recover. Off-center payloads shift CG and hurt control.</li>
+<li>Remote PIC is responsible for staying within the manufacturer's weight and balance limits.</li>
+</ul>`},
+{id:"adm",title:"Decision-making, CRM & human factors",html:`
+<div class="tbl"><table>
+<tr><th>Hazardous attitude</th><th>Sounds like</th><th>Antidote</th></tr>
+<tr><td>Anti-authority</td><td>"Don't tell me."</td><td>Follow the rules — they're usually right.</td></tr>
+<tr><td>Impulsivity</td><td>"Do something — quickly!"</td><td>Not so fast. Think first.</td></tr>
+<tr><td>Invulnerability</td><td>"It won't happen to me."</td><td>It could happen to me.</td></tr>
+<tr><td>Macho</td><td>"I can do it."</td><td>Taking chances is foolish.</td></tr>
+<tr><td>Resignation</td><td>"What's the use?"</td><td>I'm not helpless. I can make a difference.</td></tr>
+</table></div>
+<ul class="facts">
+<li><b>PAVE</b> risk checklist: Pilot, Aircraft, enVironment, External pressures.</li>
+<li><b>CRM</b>: using all available resources — crew, VO, equipment, information.</li>
+<li>Scan the sky in short, regularly spaced eye movements of about <b>10°</b>.</li>
+<li>Hyperventilation → slow your breathing. Dehydration → headache, fatigue, dizziness. Fatigue → poor judgment.</li>
+<li>Swollen or damaged lithium battery: don't use it — dispose of it properly.</li>
+<li>Know your drone's <b>lost-link</b> behavior (return-to-home altitude, etc.) before flight.</li>
+<li>Radio: "traffic 9 o'clock" = directly left; say altitudes like "four thousand five hundred."</li>
+</ul>`}
+];
+
+/* ---------- flashcards ---------- */
+const CARDS=[
+["Max altitude","400 ft AGL (or within 400 ft of a structure, no more than 400 ft above its top)"],
+["Max groundspeed","87 knots / 100 mph"],["Min visibility","3 statute miles from the control station"],
+["Cloud clearance","500 ft below, 2,000 ft horizontal"],["Minimum age","16"],
+["Recurrent training","Every 24 calendar months (free online)"],["Accident report deadline","10 calendar days"],
+["Report-worthy accident","Serious injury / loss of consciousness, or >$500 property damage (not the drone)"],
+["Alcohol rule","8 hours and BAC below 0.04%"],["Registration","Required for all Part 107 drones; $5, 3 years"],
+["Max takeoff weight","Under 55 lb"],["Civil twilight","30 min before sunrise / after sunset — anti-collision lights 3 SM"],
+["3 ways to meet Remote ID","Standard RID drone, broadcast module, or fly in a FRIA"],
+["Category 1 over people","≤ 0.55 lb, no exposed lacerating parts"],["Who can ask for your certificate?","FAA, NTSB, TSA, any federal/state/local law enforcement"],
+["Address change notice","30 days"],["Solid blue lines","Class B"],["Solid magenta lines","Class C"],["Dashed blue lines","Class D"],
+["Dashed magenta lines","Class E to the surface"],["Shaded magenta band","Class E begins 700 ft AGL (G below)"],
+["[25] in a Class D","Ceiling 2,500 ft MSL"],["[-30]","Up to but not including 3,000 ft MSL"],["70 / 30 on a shelf","Ceiling 7,000 MSL, floor 3,000 MSL"],
+["1549 (549)","Obstacle 1,549 ft MSL, 549 ft AGL"],["★ after CT frequency","Part-time control tower"],["Ⓒ","CTAF"],
+["MEF big 3, small 2","3,200 ft MSL"],["Getting airspace authorization","LAANC or FAADroneZone"],["Stadium NOTAM","3 NM, 3,000 ft AGL, 1 hr before to 1 hr after"],
+["Standard atmosphere","15°C, 29.92 inHg"],["High density altitude","High, hot, humid — worse performance"],
+["Most dangerous thunderstorm stage","Mature"],["Ceiling definition","Lowest BKN or OVC layer (or vertical visibility)"],
+["Wind direction in METAR","True north"],["60° bank load factor","2 G"],["PAVE","Pilot, Aircraft, enVironment, External pressures"],
+["IMSAFE","Illness, Medication, Stress, Alcohol, Fatigue, Emotion"],["Invulnerability antidote","It could happen to me"],
+["Anti-authority antidote","Follow the rules. They're usually right."],["Downwind leg","Parallel to runway, opposite landing direction"],
+["Not waivable","Alcohol/drug rules, hazardous materials"]
+];
+
+/* ---------- question bank (first answer is correct; shuffled on display) ---------- */
+const Q=[
+// Regulations
+{t:"regs",q:"What is the maximum altitude for a small UA under Part 107?",a:["400 ft AGL, unless within a 400-ft radius of a structure and no higher than 400 ft above its top","400 ft MSL","500 ft AGL"],e:"§107.51(b): 400 ft AGL, with the structure exception."},
+{t:"regs",q:"What is the maximum groundspeed allowed?",a:["87 knots (100 mph)","100 knots (115 mph)","70 knots (80 mph)"],e:"§107.51(a): 87 knots / 100 mph."},
+{t:"regs",q:"Minimum flight visibility, as observed from the control station, is",a:["3 statute miles","1 statute mile","5 statute miles"],e:"§107.51(c): 3 SM."},
+{t:"regs",q:"Required distance from clouds is",a:["500 ft below and 2,000 ft horizontally","1,000 ft below and 2,000 ft horizontally","500 ft below and 1,000 ft horizontally"],e:"§107.51(d)."},
+{t:"regs",q:"Minimum age to get a remote pilot certificate is",a:["16","14","18"],e:"§107.61."},
+{t:"regs",q:"To keep exercising certificate privileges, a remote pilot must complete recurrent training every",a:["24 calendar months","12 calendar months","36 calendar months"],e:"Recurrent training is free and online, every 24 calendar months."},
+{t:"regs",q:"A reportable sUAS accident must be reported to the FAA within",a:["10 calendar days","30 days","48 hours"],e:"§107.9: 10 calendar days."},
+{t:"regs",q:"Which accident must be reported to the FAA?",a:["Damage to property other than the drone costing more than $500 to repair or replace","Any damage over $500 to the drone itself","Any flyaway, even with no injury or damage"],e:"Reportable: serious injury, loss of consciousness, or >$500 damage to property other than the UA."},
+{t:"regs",q:"The alcohol rule for remote pilots is",a:["At least 8 hours since the last drink and BAC below 0.04%","At least 12 hours and BAC below 0.08%","At least 4 hours and BAC below 0.04%"],e:"§107.27 references §91.17: 8 hours, 0.04%."},
+{t:"regs",q:"A drone flown under Part 107 must be registered",a:["Always, regardless of weight","Only if it weighs more than 0.55 lb","Only if it weighs more than 2 lb"],e:"Part 107 drones have no weight exemption from registration."},
+{t:"regs",q:"A drone registration is valid for",a:["3 years","1 year","5 years"],e:"$5 for 3 years in FAADroneZone."},
+{t:"regs",q:"To fly during civil twilight, the drone must have",a:["Anti-collision lighting visible for at least 3 statute miles","No special equipment","Navigation lights visible for 1 statute mile"],e:"§107.29: anti-collision lights visible 3 SM."},
+{t:"regs",q:"In the contiguous U.S., evening civil twilight ends",a:["30 minutes after official sunset","1 hour after official sunset","15 minutes after official sunset"],e:"Civil twilight: 30 min before sunrise and 30 min after sunset."},
+{t:"regs",q:"To fly at night under Part 107 without a waiver, a remote pilot needs",a:["Current initial test or recurrent training that covers night ops, plus anti-collision lights visible 3 SM","A night waiver and a visual observer","A spotlight on the aircraft"],e:"Night ops became allowed in 2021 with training and lighting."},
+{t:"regs",q:"May a sUAS be operated from a moving car?",a:["Yes, but only over a sparsely populated area","Never","Yes, anywhere if a visual observer is present"],e:"§107.25: not from a moving aircraft; from a moving vehicle only over sparsely populated areas."},
+{t:"regs",q:"Which rule can be waived by the FAA?",a:["The visual line-of-sight requirement","The prohibition on carrying hazardous materials","Alcohol and drug restrictions"],e:"§107.31 VLOS is on the §107.205 waivable list."},
+{t:"regs",q:"Carrying hazardous materials on a small UA under Part 107 is",a:["Prohibited","Allowed if under 5 lb","Allowed with a visual observer"],e:"§107.36."},
+{t:"regs",q:"Who may request to see your remote pilot certificate?",a:["The FAA, NTSB, TSA, or any federal, state or local law enforcement officer","Only an FAA inspector","Any member of the public"],e:"§107.7."},
+{t:"regs",q:"When a drone and a manned aircraft are converging,",a:["The drone must yield to the manned aircraft","The manned aircraft must yield","Whoever is on the right has right of way"],e:"§107.37: yield right of way to all aircraft."},
+{t:"regs",q:"Which is a way to comply with Remote ID?",a:["Fly within an FAA-Recognized Identification Area (FRIA)","Install an ADS-B Out transponder","Keep the drone below 200 ft AGL"],e:"Standard RID drone, broadcast module, or a FRIA. Drones may not use ADS-B Out under Part 107."},
+{t:"regs",q:"A Category 1 drone for operations over people must",a:["Weigh 0.55 lb or less and have no exposed rotating parts that could lacerate skin","Weigh 2 lb or less","Have an airworthiness certificate"],e:"Category 1 limits."},
+{t:"regs",q:"A Category 3 drone may NOT be flown",a:["Over open-air assemblies of people","In Class G airspace","During daylight"],e:"Category 3 has the most restrictions on where it may fly over people."},
+{t:"regs",q:"A person without a remote pilot certificate may manipulate the controls",a:["Only under direct supervision of a Remote PIC who can immediately take control","Never","If they passed the test but haven't received the certificate"],e:"§107.12."},
+{t:"regs",q:"Without a waiver, one remote pilot may operate how many drones at a time?",a:["One","Two with a visual observer","As many as stay within VLOS"],e:"§107.35."},
+{t:"regs",q:"Dropping an object from a small UA is",a:["Allowed if it does not create an undue hazard to people or property","Never allowed","Allowed only with a waiver"],e:"§107.23(b)."},
+{t:"regs",q:"After changing your permanent mailing address, you must notify the FAA within",a:["30 days","60 days","10 days"],e:"§107.77."},
+{t:"regs",q:"Who is responsible for the preflight inspection?",a:["The Remote Pilot in Command","The visual observer","The drone's owner"],e:"§107.49 and §107.15."},
+{t:"regs",q:"During an in-flight emergency, the Remote PIC",a:["May deviate from Part 107 as needed and must send a report if the FAA requests one","May never deviate from the rules","Must land immediately in every case"],e:"§107.21."},
+{t:"regs",q:"A visual observer is",a:["Optional, but must be able to communicate effectively with the Remote PIC","Required for every flight","Required to hold a remote pilot certificate"],e:"§107.33."},
+{t:"regs",q:"Which satisfies visual line of sight?",a:["Seeing the drone with eyeglasses","Seeing it through binoculars","Watching the FPV video feed"],e:"Vision must be unaided except corrective lenses."},
+{t:"regs",q:"After passing the knowledge test, you apply for your certificate",a:["Through IACRA, followed by a TSA security check","At the testing center, which issues it on the spot","By mailing your score to your local FSDO"],e:"IACRA application, TSA vetting, then the certificate."},
+{t:"regs",q:"The Part 107 knowledge test requires a passing score of",a:["70%","80%","75%"],e:"60 questions, 2 hours, 70%."},
+// Airspace & charts
+{t:"air",svg:"B",q:"What class of airspace is shown by the solid blue boundary?",a:["Class B","Class C","Class D"],e:"Solid blue = Class B."},
+{t:"air",svg:"C",q:"What class of airspace is shown by the solid magenta boundary?",a:["Class C","Class B","Class E to the surface"],e:"Solid magenta = Class C."},
+{t:"air",svg:"D",q:"What airspace surrounds this airport, and does a drone need authorization?",a:["Class D — ATC authorization required","Class E — no authorization needed","Class G — no authorization needed"],e:"Dashed blue = Class D."},
+{t:"air",svg:"Esurf",q:"What does the dashed magenta ring mark, and does a drone need ATC authorization inside it?",a:["Class E to the surface — authorization required","Class G — no authorization needed","Class D — no authorization needed"],e:"Dashed magenta = Class E extending to the surface; authorization needed."},
+{t:"air",svg:"E700",q:"Inside the shaded magenta band, where does Class E airspace begin?",a:["700 ft AGL","1,200 ft AGL","The surface"],e:"Fuzzy magenta side = Class E floor at 700 AGL."},
+{t:"air",svg:"E700",q:"You'll fly at 350 ft AGL inside this shaded magenta area, away from any other boundaries. What airspace are you in?",a:["Class G — no authorization needed","Class E — authorization required","Class D — authorization required"],e:"Below the 700-ft floor is Class G."},
+{t:"air",svg:"D",q:"What does [25] mean for this Class D airspace?",a:["Ceiling of 2,500 ft MSL","Ceiling of 2,500 ft AGL","Floor of 2,500 ft MSL"],e:"Bracketed numbers are hundreds of feet MSL."},
+{t:"air",svg:"Dminus",q:"What does [-30] indicate?",a:["Class D up to but not including 3,000 ft MSL","Class D up to 3,000 ft AGL","Class D floor at 3,000 ft MSL"],e:"A minus means up to but not including that altitude."},
+{t:"air",svg:"bshelf",q:"The outer Class B shelf is labeled 70 over 30. This means",a:["Floor 3,000 ft MSL, ceiling 7,000 ft MSL","Floor 3,000 ft AGL, ceiling 7,000 ft AGL","Ceiling 3,000 ft MSL, floor 7,000 ft MSL"],e:"Top number is the ceiling, bottom the floor, in hundreds of ft MSL."},
+{t:"air",svg:"obst",q:"How tall is this obstacle above the ground?",a:["549 ft","1,549 ft","1,000 ft"],e:"The number in parentheses is AGL; the bold number is MSL."},
+{t:"air",svg:"star",q:"What does the star next to the CT frequency mean?",a:["The control tower operates part-time","The airport has a rotating beacon","The tower is military"],e:"★ = part-time tower. Check the Chart Supplement for hours and what the airspace becomes when closed."},
+{t:"air",svg:"ctaf",q:"What does the circled C next to 122.8 indicate?",a:["Common Traffic Advisory Frequency (CTAF)","Control tower frequency","Clearance delivery frequency"],e:"Ⓒ = CTAF."},
+{t:"air",svg:"ctaf",q:"Based on this airport label, the airport elevation is",a:["410 ft MSL","3,800 ft MSL","122 ft MSL"],e:"First number on the data line is elevation; 38 is the longest runway in hundreds of feet."},
+{t:"air",svg:"mef",q:"What is the Maximum Elevation Figure for this quadrangle?",a:["3,200 ft MSL","32,000 ft MSL","3,200 ft AGL"],e:"Large figure = thousands, small = hundreds, MSL."},
+{t:"air",q:"On a sectional, a blue airport symbol means the airport",a:["Has an operating control tower","Is private","Is military only"],e:"Blue = towered, magenta = non-towered."},
+{t:"air",q:"How does a remote pilot get permission to fly in Class D airspace?",a:["Through LAANC or FAADroneZone","By calling the tower on the day of flight","It isn't possible under Part 107"],e:"LAANC is near-instant; DroneZone handles other requests."},
+{t:"air",q:"Which airspace requires no ATC authorization for a drone?",a:["Class G","Class D","Class C"],e:"Class B, C, D and surface E require authorization."},
+{t:"air",q:"A Military Operations Area (MOA)",a:["Requires no permission to enter, but pilots should use caution","Is closed to all civil aircraft","Requires permission from the controlling agency"],e:"MOAs separate military training; civilians may enter with caution."},
+{t:"air",q:"Flight in a restricted area (R-) while it's active requires",a:["Permission from the controlling agency","Nothing below 400 ft AGL","A visual observer"],e:"Restricted areas contain hazards like artillery fire."},
+{t:"air",q:"Within a prohibited area (P-), flight is",a:["Prohibited","Allowed with ATC permission","Allowed below 400 ft"],e:"Prohibited areas are no-fly for everyone without special permission from the using agency."},
+{t:"air",q:"The standard stadium flight restriction covers",a:["3 NM and 3,000 ft AGL from 1 hour before to 1 hour after the event","1 NM and 1,000 ft AGL during the event only","5 NM and 400 ft AGL all day"],e:"FAA NOTAM for major sporting events."},
+{t:"air",q:"Temporary flight restrictions (TFRs) are found in",a:["NOTAMs","METARs","The sectional legend"],e:"TFRs are issued by NOTAM; LAANC/B4UFLY apps also show them."},
+{t:"air",q:"Runway 27 is aligned approximately",a:["270° magnetic","027° magnetic","270° true"],e:"Runway numbers are magnetic heading ÷ 10."},
+{t:"air",q:"The traffic pattern leg flown parallel to the landing runway, opposite the landing direction, is the",a:["Downwind leg","Base leg","Crosswind leg"],e:"Upwind → crosswind → downwind → base → final."},
+{t:"air",q:"Unless otherwise marked, traffic pattern turns are made to the",a:["Left","Right","Pilot's choice"],e:"Standard traffic is left."},
+{t:"air",q:"Lines of latitude",a:["Run east–west and measure distance north or south of the equator","Run north–south between the poles","Measure distance east or west of Greenwich"],e:"Latitude = parallels."},
+{t:"air",q:"One minute of latitude is approximately",a:["1 nautical mile","1 statute mile","10 nautical miles"],e:"60 minutes per degree, ~60 NM per degree."},
+{t:"air",q:"When a part-time tower closes, the Class D airspace",a:["Reverts to what the Chart Supplement lists, often Class E or G","Stays Class D","Becomes Class B"],e:"Check the Chart Supplement entry."},
+{t:"air",q:"Class C airspace typically has a surface area radius of",a:["5 NM, with a 10 NM shelf","10 NM, with a 20 NM shelf","3 NM, with a 5 NM shelf"],e:"Typical Class C dimensions; top usually ~4,000 ft above the airport."},
+{t:"air",q:"Class A airspace begins at",a:["18,000 ft MSL","10,000 ft MSL","14,500 ft MSL"],e:"Class A: 18,000 MSL to FL600."},
+{t:"air",q:"A windsock shows the wind is blowing",a:["From the large open end toward the small end","From the small end toward the large end","Upward"],e:"The sock streams downwind."},
+// Weather
+{t:"wx",q:"Standard sea-level temperature and pressure are",a:["15°C and 29.92 inHg","59°C and 29.92 inHg","0°C and 30.00 inHg"],e:"15°C (59°F), 29.92 inHg."},
+{t:"wx",q:"Which combination increases density altitude?",a:["High temperature, high elevation, high humidity","Low temperature, low humidity","High pressure at sea level"],e:"High, hot and humid."},
+{t:"wx",q:"Increased density altitude causes",a:["Reduced propeller efficiency and climb performance","Increased lift","No change for small drones"],e:"Thinner air means less lift and thrust."},
+{t:"wx",q:"The most hazardous stage of a thunderstorm is the",a:["Mature stage","Cumulus stage","Dissipating stage"],e:"Precipitation begins; strong updrafts and downdrafts."},
+{t:"wx",q:"The cumulus stage of a thunderstorm is characterized by",a:["Continuous updrafts","Mostly downdrafts","The start of rain at the surface"],e:"Updrafts build the cloud."},
+{t:"wx",q:"A typical microburst",a:["Has downdrafts up to about 6,000 ft/min and lasts about 15 minutes","Has gentle updrafts lasting hours","Only occurs in winter"],e:"Short-lived, extremely dangerous downdrafts."},
+{t:"wx",q:"When temperature and dew point are close together,",a:["Fog or low clouds are likely","Thunderstorms are certain","Clear skies will continue"],e:"Air is near saturation."},
+{t:"wx",q:"Stable air is characterized by",a:["Smooth air, stratiform clouds and poor visibility","Turbulence, cumulus clouds and good visibility","Showery precipitation"],e:"Stable air resists vertical movement."},
+{t:"wx",q:"Unstable air is characterized by",a:["Cumuliform clouds, turbulence and good visibility","Stratus clouds and fog","Steady drizzle and smooth air"],e:"Rising air builds cumulus."},
+{t:"wx",q:"In a METAR, 18010G18KT means wind",a:["From 180° true at 10 knots, gusting to 18","From 180° magnetic at 18 knots, gusting to 10","Blowing toward 180° at 10 knots"],e:"METAR winds are from the direction, referenced to true north."},
+{t:"wx",q:"METAR: KORH 251853Z 27012KT 10SM FEW015 BKN030 OVC060 12/04 A3004. What is the ceiling?",a:["3,000 ft AGL","1,500 ft AGL","6,000 ft AGL"],e:"Ceiling = lowest broken or overcast layer."},
+{t:"wx",q:"In that same METAR, A3004 means",a:["Altimeter setting 30.04 inHg","Pressure 1004 mb","Field elevation 3,004 ft"],e:"A = altimeter in inches of mercury."},
+{t:"wx",q:"In a METAR, 251853Z means",a:["The 25th day of the month at 18:53 UTC","October 25 at 6:53 PM local","Visibility 25 miles"],e:"Day + time in Zulu (UTC)."},
+{t:"wx",q:"In a TAF, TEMPO indicates",a:["Temporary fluctuations, each expected to last less than an hour","A permanent change","A 30% probability"],e:"BECMG = gradual change, PROB30 = 30% chance."},
+{t:"wx",q:"In a TAF, FM1600 means",a:["A rapid change in conditions beginning at 1600Z","Forecast valid until 1600 local","A 16% probability"],e:"FM = from."},
+{t:"wx",q:"Advection fog forms when",a:["Warm, moist air moves over a colder surface","The ground cools on a clear, calm night","Moist air is pushed up a slope"],e:"Common along coasts."},
+{t:"wx",q:"Radiation fog is most likely on",a:["Clear, calm, humid nights","Windy afternoons","Days with heavy rain"],e:"Ground cools by radiation."},
+{t:"wx",q:"A temperature inversion is a layer where",a:["Temperature increases with altitude","Temperature drops at the standard rate","Pressure increases with altitude"],e:"Often smooth air with haze below."},
+{t:"wx",q:"The standard temperature lapse rate is about",a:["2°C per 1,000 ft","3°C per 1,000 ft","1°C per 1,000 ft"],e:"About 3.5°F per 1,000 ft."},
+{t:"wx",q:"Frost on the propellers or airframe",a:["Should be removed — it disrupts airflow and reduces lift","Is harmless on small drones","Increases lift"],e:"Even light frost hurts performance."},
+// Loading & performance
+{t:"perf",q:"In a level 60° banked turn, the load factor is",a:["2 G","1.5 G","3 G"],e:"Load factor rises sharply past 45°."},
+{t:"perf",q:"As load factor increases, stall speed",a:["Increases","Decreases","Stays the same"],e:"More G = more lift needed."},
+{t:"perf",q:"A center of gravity too far aft makes the aircraft",a:["Less stable and harder to recover from a stall","More stable","Unaffected"],e:"Aft CG reduces stability."},
+{t:"perf",q:"Adding a heavier payload generally results in",a:["Shorter flight time and less maneuverability","Longer flight time","Higher top speed"],e:"More weight = more power needed."},
+{t:"perf",q:"An aircraft stalls when",a:["It exceeds the critical angle of attack","Its speed drops below 20 knots","It climbs above 400 ft"],e:"Stalls can occur at any airspeed or attitude."},
+{t:"perf",q:"Who is responsible for staying within weight and balance limits?",a:["The Remote PIC, using manufacturer data","The manufacturer","No one, for small UA"],e:"Part of the preflight responsibility."},
+{t:"perf",q:"A payload mounted off-center will most likely",a:["Shift the CG and reduce stability and control","Improve stability","Have no effect"],e:"Keep loads balanced and secure."},
+// Operations & ADM
+{t:"ops",q:"\u201cIt won't happen to me\u201d is which hazardous attitude?",a:["Invulnerability","Macho","Resignation"],e:"Antidote: it could happen to me."},
+{t:"ops",q:"The antidote for the anti-authority attitude is",a:["Follow the rules. They're usually right.","Not so fast. Think first.","Taking chances is foolish."],e:"Anti-authority: don't tell me."},
+{t:"ops",q:"A pilot who feels they must do something immediately shows which attitude?",a:["Impulsivity","Invulnerability","Anti-authority"],e:"Antidote: not so fast, think first."},
+{t:"ops",q:"A pilot trying to prove they can pull off a risky shot shows",a:["Macho","Resignation","Impulsivity"],e:"Antidote: taking chances is foolish."},
+{t:"ops",q:"\u201cWhat's the use?\u201d reflects which attitude?",a:["Resignation","Anti-authority","Macho"],e:"Antidote: I'm not helpless."},
+{t:"ops",q:"In the IMSAFE checklist, the S stands for",a:["Stress","Sleep","Speed"],e:"Illness, Medication, Stress, Alcohol, Fatigue, Emotion."},
+{t:"ops",q:"The PAVE checklist stands for",a:["Pilot, Aircraft, enVironment, External pressures","Plan, Approach, Verify, Execute","Power, Altitude, Visibility, Equipment"],e:"A risk-assessment tool."},
+{t:"ops",q:"Before a flight you notice a swollen lithium battery. You should",a:["Not use it and dispose of it properly","Use it for a short flight","Puncture it to release gas"],e:"Swelling signals internal damage and fire risk."},
+{t:"ops",q:"The most effective way to scan for traffic is",a:["A series of short, regularly spaced eye movements covering about 10° each","Staring in one direction","One continuous sweep"],e:"Eyes need to stop to detect objects."},
+{t:"ops",q:"The best treatment for hyperventilation is to",a:["Slow your breathing rate","Breathe faster","Hold your breath for a minute"],e:"Restores CO2 balance."},
+{t:"ops",q:"Common symptoms of dehydration include",a:["Headache, fatigue and dizziness","Sharper vision","Euphoria"],e:"Drink water, especially in heat."},
+{t:"ops",q:"Regarding over-the-counter medications, a remote pilot should",a:["Not fly if the medication could impair their ability","Fly normally because OTC drugs are always fine","Only fly below 200 ft"],e:"Many antihistamines cause drowsiness."},
+{t:"ops",q:"Crew Resource Management (CRM) means",a:["Effectively using all available resources — people, equipment and information","A maintenance regulation","Something only airline crews need"],e:"Includes your visual observer and briefings."},
+{t:"ops",q:"\u201cTraffic, 9 o'clock\u201d means the traffic is",a:["Directly to your left","Directly ahead","Directly to your right"],e:"12 o'clock is straight ahead."},
+{t:"ops",q:"Near a non-towered airport, a remote pilot should",a:["Monitor CTAF to learn what manned traffic is doing","Call ground control for clearance","Ignore radio traffic"],e:"Self-announce frequency for manned aircraft."},
+{t:"ops",q:"Before flight, regarding loss of control link, the Remote PIC should",a:["Know and brief the drone's lost-link behavior, such as return-to-home altitude","Assume it will hover in place","Ignore it; it's rare"],e:"Set RTH above obstacles."},
+{t:"ops",q:"Before each flight, the drone's condition must be verified safe by",a:["The Remote PIC","An FAA inspector","A certified mechanic"],e:"§107.15."},
+{t:"ops",q:"On the radio, 4,500 ft should be stated as",a:["Four thousand five hundred","Forty-five hundred","Four point five"],e:"Standard aviation phraseology."},
+{t:"ops",q:"Fatigue most affects a pilot by",a:["Degrading judgment and slowing reactions","Improving focus","Only affecting vision"],e:"Don't fly tired."}
+];
+Q.forEach((q,i)=>q.id=i);
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const app=$("#app");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let timerHandle=null;
+function setNav(r){document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+r))}
+
+/* ---------- views ---------- */
+function home(){
+  const hist=store.get("hist",[]),missed=store.get("missed",[]);
+  const best=hist.filter(h=>h.mode==="exam").reduce((m,h)=>Math.max(m,Math.round(h.score/h.total*100)),0);
+  app.innerHTML=`
+  <h1>FAA Part 107 Study Guide</h1>
+  <p class="mute">Everything you need for the Remote Pilot knowledge test: study notes, a sectional chart lab, flashcards, and timed practice exams.</p>
+  <div class="note"><b>Test update (Oct 26, 2026):</b> the FAA now embeds sectional chart images in some questions that aren't in the testing supplement. Same 60 questions, 2 hours, 70% to pass — but chart-reading matters more. Spend time in the Chart Lab.</div>
+  <div class="grid">
+    <div class="card"><div class="mute">Questions in bank</div><div class="stat">${Q.length}</div></div>
+    <div class="card"><div class="mute">Best exam score</div><div class="stat">${best?best+"%":"—"}</div></div>
+    <div class="card"><div class="mute">Questions to review</div><div class="stat">${missed.length}</div></div>
+  </div>
+  <div class="grid">
+    <a class="tile" href="#study"><b>📘 Study guide</b><span class="mute">Rules, airspace, weather, ADM — condensed.</span></a>
+    <a class="tile" href="#charts"><b>🗺️ Chart Lab</b><span class="mute">Learn every sectional symbol you'll be tested on.</span></a>
+    <a class="tile" href="#cards"><b>🃏 Flashcards</b><span class="mute">${CARDS.length} quick-recall cards.</span></a>
+    <a class="tile" href="#test"><b>📝 Practice tests</b><span class="mute">Full 60-question timed exam or topic drills.</span></a>
+  </div>
+  ${hist.length?`<h2>Recent attempts</h2><div class="card tbl"><table><tr><th>Date</th><th>Mode</th><th>Score</th></tr>${hist.slice(-8).reverse().map(h=>`<tr><td>${new Date(h.date).toLocaleDateString()}</td><td>${h.mode==="exam"?"Full exam":"Practice"}</td><td>${h.score}/${h.total} (${Math.round(h.score/h.total*100)}%)</td></tr>`).join("")}</table></div>`:""}
+  <h2>Official resources</h2>
+  <div class="card"><ul class="facts">
+    <li>14 CFR Part 107 (eCFR) — the actual regulations</li>
+    <li>FAA Remote Pilot – Small UAS Study Guide (FAA-G-8082-22)</li>
+    <li>FAA-CT-8080-2 Airman Knowledge Testing Supplement</li>
+    <li>PSI sample test (shows the new image-question format)</li>
+    <li>FAA VFR sectional charts (free downloads) — practice on your local chart</li>
+    <li>FAADroneZone (registration, authorizations) and FAASafety.gov (recurrent training)</li>
+  </ul></div>`;
+}
+
+function study(){
+  app.innerHTML=`<h1>Study Guide</h1><p class="mute">Condensed from Part 107 and the FAA study materials. Bold items show up on the test often.</p>
+  <div class="toc">${STUDY.map(s=>`<a href="#study/${s.id}">${s.title}</a>`).join("")}</div>
+  ${STUDY.map(s=>`<div class="card" id="sec-${s.id}"><h2 style="margin-top:0">${s.title}</h2>${s.html}</div>`).join("")}`;
+}
+
+const LAB=[["B","Class B","Solid blue. Authorization required. Labels: ceiling over floor, hundreds of ft MSL."],
+["bshelf","Class B shelves","Each ring has its own floor/ceiling. 70/30 = 3,000–7,000 MSL. Under the shelf (below 3,000 MSL here) is usually E or G."],
+["C","Class C","Solid magenta. Authorization required. 40/SFC = surface to 4,000 MSL."],
+["D","Class D","Dashed blue. Authorization required. [25] = ceiling 2,500 MSL."],
+["Dminus","Class D with minus","[-30] = up to but not including 3,000 MSL (Class C or B above)."],
+["Esurf","Class E to the surface","Dashed magenta. Authorization required."],
+["E700","Class E at 700 AGL","Shaded magenta: on the fuzzy side, E starts at 700 AGL. Below that is G — no authorization."],
+["obst","Obstacle","Bold = MSL top; (parentheses) = height AGL."],
+["star","Towered airport info","Blue label = tower. ★ = part-time tower. Data line: elevation, lighting, longest runway (hundreds ft), UNICOM."],
+["ctaf","Non-towered airport info","Magenta label. Ⓒ = CTAF frequency for self-announcing."],
+["mef","Maximum Elevation Figure","Large = thousands, small = hundreds. 3,200 ft MSL."]];
+function charts(){
+  app.innerHTML=`<h1>Chart Lab</h1><p class="mute">Simplified drawings of the sectional symbols the test asks about. Real charts are busier — once you know these, open an FAA sectional for your area (Boston or New York) and find each one.</p>
+  <div class="lab">${LAB.map(l=>`<div class="card">${chart(l[0])}<b>${l[1]}</b><p class="mute" style="font-size:14px">${l[2]}</p></div>`).join("")}</div>
+  <div class="card"><b>Chart-reading drill:</b> take a topic drill on Airspace &amp; Charts — most questions there use these images.<div class="row" style="margin-top:10px"><button class="btn" onclick="startQuiz({mode:'practice',topic:'air',count:20})">Start airspace drill</button></div></div>`;
+}
+
+let deck=[],di=0;
+function cards(){
+  deck=shuffle(CARDS);di=0;drawCard();
+}
+function drawCard(){
+  const c=deck[di];
+  app.innerHTML=`<h1>Flashcards</h1><p class="mute">Tap the card to flip. Card ${di+1} of ${deck.length}.</p>
+  <div class="flip" id="fc" onclick="this.classList.toggle('on')"><div class="in"><div class="face">${esc(c[0])}</div><div class="face back">${esc(c[1])}</div></div></div>
+  <div class="row" style="margin-top:14px;justify-content:space-between">
+    <button class="btn ghost" ${di===0?"disabled":""} onclick="di--;drawCard()">← Prev</button>
+    <button class="btn ghost" onclick="cards()">Shuffle</button>
+    <button class="btn" onclick="di=(di+1)%deck.length;drawCard()">Next →</button>
+  </div>`;
+}
+
+function testMenu(){
+  const missed=store.get("missed",[]);
+  app.innerHTML=`<h1>Practice Tests</h1>
+  <div class="card"><h2 style="margin-top:0">Full exam simulation</h2>
+  <p>60 random questions from all topics, 2-hour timer, no feedback until you submit. 70% to pass — just like the real UAG test.</p>
+  <button class="btn" onclick="startQuiz({mode:'exam'})">Start full exam</button></div>
+  <div class="card"><h2 style="margin-top:0">Topic drill</h2>
+  <p>Instant feedback and an explanation after every question.</p>
+  <div class="row">
+    <select id="tp"><option value="all">All topics</option>${Object.entries(TOPICS).map(([k,v])=>`<option value="${k}">${v} (${Q.filter(q=>q.t===k).length})</option>`).join("")}</select>
+    <select id="ct"><option>10</option><option selected>20</option><option>30</option><option value="999">All</option></select>
+    <button class="btn" onclick="startQuiz({mode:'practice',topic:$('#tp').value,count:+$('#ct').value})">Start drill</button>
+  </div></div>
+  <div class="card"><h2 style="margin-top:0">Review missed questions</h2>
+  <p>${missed.length?`${missed.length} question${missed.length>1?"s":""} you've gotten wrong. Get one right here and it drops off the list.`:"Nothing yet — questions you miss will collect here."}</p>
+  <button class="btn" ${missed.length?"":"disabled"} onclick="startQuiz({mode:'review'})">Review missed</button></div>`;
+}
+
+/* ---------- quiz engine ---------- */
+let S=null;
+function startQuiz(o){
+  clearInterval(timerHandle);
+  let pool=Q;
+  if(o.mode==="review"){const m=store.get("missed",[]);pool=Q.filter(q=>m.includes(q.id))}
+  else if(o.topic&&o.topic!=="all")pool=Q.filter(q=>q.t===o.topic);
+  let qs=shuffle(pool);
+  if(o.mode==="exam")qs=qs.slice(0,60);else if(o.count)qs=qs.slice(0,o.count);
+  S={mode:o.mode,i:0,qs:qs.map(q=>({...q,order:shuffle([0,1,2])})),ans:new Array(qs.length).fill(null),locked:new Array(qs.length).fill(false),end:o.mode==="exam"?Date.now()+120*60000:null};
+  location.hash="quiz";
+}
+function drawQuiz(){
+  if(!S){location.hash="test";return}
+  const q=S.qs[S.i],a=S.ans[S.i],lock=S.locked[S.i],exam=S.mode==="exam";
+  const answered=S.ans.filter(x=>x!==null).length;
+  app.innerHTML=`<div class="card">
+  <div class="qhead"><span class="pill">${TOPICS[q.t]}</span><span class="mute">Question ${S.i+1} of ${S.qs.length}</span>${exam?`<span class="timer" id="tm"></span>`:""}</div>
+  <div class="prog"><i style="width:${(exam?answered:S.i)/S.qs.length*100}%"></i></div>
+  ${q.svg?chart(q.svg):""}
+  <div class="q">${esc(q.q)}</div>
+  ${q.order.map((oi,k)=>{let cls="opt";if(a===oi)cls+=" sel";if(!exam&&lock){if(oi===0)cls+=" right";else if(a===oi)cls+=" wrong"}return `<button class="${cls}" onclick="pick(${oi})" ${!exam&&lock?"disabled":""}><b>${"ABC"[k]}.</b>${esc(q.a[oi])}</button>`}).join("")}
+  ${!exam&&lock?`<div class="exp"><b>${a===0?"✅ Correct.":"❌ Not quite."}</b> ${esc(q.e)}</div>`:""}
+  <div class="row" style="justify-content:space-between;margin-top:12px">
+    ${exam?`<button class="btn ghost" ${S.i===0?"disabled":""} onclick="go(-1)">← Prev</button>`:`<button class="btn ghost" onclick="if(confirm('Quit this drill?')){S=null;location.hash='test'}">Quit</button>`}
+    ${exam?`<button class="btn ghost" onclick="finish(true)">Submit exam</button>`:""}
+    ${S.i<S.qs.length-1?`<button class="btn" ${!exam&&!lock?"disabled":""} onclick="go(1)">Next →</button>`:`<button class="btn" ${!exam&&!lock?"disabled":""} onclick="finish(${exam})">Finish</button>`}
+  </div>
+  ${exam?`<div class="navgrid">${S.qs.map((_,k)=>`<button class="${S.ans[k]!==null?"done":""} ${k===S.i?"cur":""}" onclick="S.i=${k};drawQuiz()">${k+1}</button>`).join("")}</div>`:""}
+  </div>`;
+  if(exam)tick();
+}
+function tick(){
+  clearInterval(timerHandle);
+  const f=()=>{const el=$("#tm");if(!S||!S.end)return;const left=Math.max(0,S.end-Date.now());if(el){const m=Math.floor(left/60000),s=Math.floor(left%60000/1000);el.textContent=`⏱ ${m}:${String(s).padStart(2,"0")}`}if(left<=0){clearInterval(timerHandle);alert("Time's up!");finish(false)}};
+  f();timerHandle=setInterval(f,1000);
+}
+function pick(oi){
+  if(S.mode!=="exam"&&S.locked[S.i])return;
+  S.ans[S.i]=oi;
+  if(S.mode!=="exam")S.locked[S.i]=true;
+  updateMissed(S.qs[S.i].id,oi===0);
+  drawQuiz();
+}
+function go(d){S.i=Math.max(0,Math.min(S.qs.length-1,S.i+d));drawQuiz()}
+function updateMissed(id,right){let m=store.get("missed",[]);if(right)m=m.filter(x=>x!==id);else if(!m.includes(id))m.push(id);store.set("missed",m)}
+function finish(confirmIt){
+  if(!S)return;
+  const blank=S.ans.filter(x=>x===null).length;
+  if(confirmIt&&S.mode==="exam"&&blank&&!confirm(`${blank} question(s) unanswered. Submit anyway?`))return;
+  clearInterval(timerHandle);
+  const score=S.ans.filter(x=>x===0).length,total=S.qs.length;
+  if(S.mode==="exam")S.qs.forEach((q,k)=>{if(S.ans[k]!==null)return;updateMissed(q.id,false)});
+  const hist=store.get("hist",[]);hist.push({date:Date.now(),mode:S.mode==="exam"?"exam":"practice",score,total});store.set("hist",hist.slice(-50));
+  S.done={score,total};location.hash="results";
+}
+function results(){
+  if(!S||!S.done){location.hash="test";return}
+  const {score,total}=S.done,pct=Math.round(score/total*100),pass=pct>=70;
+  const by={};S.qs.forEach((q,k)=>{by[q.t]=by[q.t]||[0,0];by[q.t][1]++;if(S.ans[k]===0)by[q.t][0]++});
+  const wrong=S.qs.map((q,k)=>({q,a:S.ans[k]})).filter(x=>x.a!==0);
+  app.innerHTML=`<div class="card" style="text-align:center">
+  <div class="big ${pass?"pass":"fail"}">${pct}%</div>
+  <div><b>${score} of ${total} correct</b> — ${pass?"✅ Passing (70% needed)":"❌ Below the 70% passing mark"}</div></div>
+  <div class="card tbl"><table><tr><th>Topic</th><th>Score</th></tr>${Object.entries(by).map(([t,v])=>`<tr><td>${TOPICS[t]}</td><td>${v[0]}/${v[1]} (${Math.round(v[0]/v[1]*100)}%)</td></tr>`).join("")}</table></div>
+  <div class="row"><a class="btn" href="#test" style="text-decoration:none">Back to tests</a><button class="btn ghost" onclick="startQuiz({mode:'review'})">Review missed</button></div>
+  ${wrong.length?`<h2>Questions to review</h2><div class="card">${wrong.map(({q,a})=>`<div class="review">${q.svg?chart(q.svg):""}<b>${esc(q.q)}</b><p>${a===null?"<span class='mute'>Not answered</span>":`Your answer: <span class="fail">${esc(q.a[a])}</span>`}<br>Correct: <span class="pass">${esc(q.a[0])}</span></p><p class="mute">${esc(q.e)}</p></div>`).join("")}</div>`:`<p>Perfect run — nothing to review.</p>`}`;
+}
+
+/* ---------- router ---------- */
+function route(){
+  const [r,sub]=(location.hash.slice(1)||"home").split("/");
+  if(r!=="quiz")clearInterval(timerHandle);
+  const top=r==="quiz"||r==="results"?"test":r;
+  setNav(top);
+  ({home,study,charts,cards,test:testMenu,quiz:drawQuiz,results}[r]||home)();
+  if(r==="study"&&sub){const el=document.getElementById("sec-"+sub);if(el)el.scrollIntoView({behavior:"smooth"})}else window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
