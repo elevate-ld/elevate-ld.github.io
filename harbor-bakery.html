@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Harbor Street Bakery | Demo site by Elevate L&amp;D Consulting</title>
+<meta name="description" content="Demo small-business website designed by Elevate L&D Consulting. Harbor Street Bakery is a fictional business.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%237a3e2b'/%3E%3Cpath d='M9 19c0-5 3-8 7-8s7 3 7 8z' fill='%23f2c48a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--rust:#7a3e2b;--rust2:#5e2c1d;--crust:#f2c48a;--cream:#fbf5ec;--flour:#fffdf9;--ink:#2b1a12;--mute:#7a6355;--line:#eadcca;--sage:#5f7a5a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#1d1410;--flour:#271b15;--ink:#f6ebe0;--mute:#c4ab98;--line:#3d2c22}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:17px/1.6 "Work Sans",system-ui,sans-serif}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;line-height:1.1;margin:0}
+h2{font-size:clamp(32px,5vw,46px)}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.crust{background:var(--crust);color:var(--rust2)}
+.btn.line{border:2px solid currentColor}
+
+/* demo ribbon */
+.demo{background:#142a4a;color:#dfe6f0;font-size:13px;text-align:center;padding:7px 16px}
+.demo a{color:#f2a93b;font-weight:700;text-decoration:none}
+
+/* nav */
+header{background:var(--rust);color:#fff}
+.nav{display:flex;align-items:center;gap:20px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:38px;height:38px}
+.logo span{font-family:"DM Serif Display",serif;font-size:22px;line-height:1}
+.logo small{display:block;font-family:"Work Sans",sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#f1dccf;margin-top:3px}
+.nav nav{margin-left:auto;display:flex;gap:4px}
+.nav nav a{text-decoration:none;color:#f6e6da;font-weight:600;font-size:15px;padding:8px 12px;border-radius:8px}
+.nav nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+.nav .btn{padding:9px 18px;font-size:15px}
+@media (max-width:760px){.nav nav{display:none}.nav .btn{margin-left:auto}}
+
+/* hero */
+.hero{background:var(--rust);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:56px;padding-bottom:80px}
+.hero h1{font-size:clamp(44px,7vw,76px)}
+.hero h1 em{color:var(--crust)}
+.hero p{color:#f1dccf;font-size:clamp(17px,2vw,20px);max-width:500px;margin:18px 0 28px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .open{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:15px;color:#f1dccf}
+.hero .open i{width:9px;height:9px;border-radius:50%;background:#9fd49a;box-shadow:0 0 0 4px rgba(159,212,154,.25)}
+.art{position:relative;aspect-ratio:1;max-width:440px;justify-self:center;width:100%}
+.art svg{width:100%;height:100%}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr;padding-top:40px;padding-bottom:56px}.art{max-width:300px}}
+
+/* sections */
+section{padding:84px 0}
+@media (max-width:760px){section{padding:60px 0}}
+.center{text-align:center;max-width:620px;margin:0 auto 44px}
+.center p{color:var(--mute);margin:12px 0 0}
+
+/* menu */
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:860px){.menu{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.menu{grid-template-columns:1fr}}
+.item{background:var(--flour);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.item .pic{aspect-ratio:16/10;display:grid;place-items:center}
+.item .pic svg{width:58%;height:auto}
+.item .txt{padding:18px 20px 22px}
+.item .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.item h3{font-size:24px}
+.item .price{font-weight:700;color:var(--rust)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item .price{color:var(--crust)}}
+.item p{margin:6px 0 0;color:var(--mute);font-size:15px}
+.tag{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);background:color-mix(in srgb,var(--sage) 14%,transparent);padding:3px 9px;border-radius:999px}
+.p1{background:#f6dfc0}.p2{background:#ead7c8}.p3{background:#f3e3b5}.p4{background:#e2d4c0}.p5{background:#f1d2c4}.p6{background:#dfe3cf}
+
+/* story */
+.story{background:var(--flour);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.story p{color:var(--mute)}
+.stats{display:flex;gap:36px;margin-top:24px;flex-wrap:wrap}
+.stats b{display:block;font-family:"DM Serif Display",serif;font-size:40px;font-weight:400;color:var(--rust);line-height:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stats b{color:var(--crust)}}
+.stats span{font-size:14px;color:var(--mute)}
+.oven{border-radius:24px;background:var(--rust);aspect-ratio:4/3;display:grid;place-items:center}
+.oven svg{width:70%}
+@media (max-width:760px){.story .wrap{grid-template-columns:1fr;gap:28px}}
+
+/* order steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:n}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{background:var(--flour);border:1px solid var(--line);border-radius:20px;padding:26px}
+.step::before{counter-increment:n;content:counter(n);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--crust);color:var(--rust2);font-weight:700;margin-bottom:14px}
+.step h3{font-size:24px;margin-bottom:6px}
+.step p{margin:0;color:var(--mute);font-size:15px}
+.order-cta{text-align:center;margin-top:32px}
+.order-cta .btn{background:var(--rust);color:#fff}
+
+/* visit */
+.visit{background:var(--rust2);color:#fff}
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.visit h2{margin-bottom:18px}
+.hours{width:100%;border-collapse:collapse;font-size:16px}
+.hours td{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.hours td:last-child{text-align:right;color:#f1dccf}
+.hours tr.today td{color:var(--crust);font-weight:700}
+.info p{color:#f1dccf;margin:0 0 14px}
+.info b{color:#fff}
+.map{margin-top:18px;border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#e9dccb}
+.map svg{width:100%;height:100%;display:block}
+@media (max-width:760px){.visit .wrap{grid-template-columns:1fr}}
+
+footer{padding:32px 0;font-size:14px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{font-weight:700;text-decoration:none;color:var(--rust)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) footer a{color:var(--crust)}}
+</style>
+</head>
+<body>
+
+<div class="demo">Demo website designed by <a href="index.html#digital" target="_top">Elevate L&amp;D Consulting</a>. Harbor Street Bakery is a fictional business.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Harbor Street Bakery home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#f2c48a"/><path d="M9 25c0-7.5 4.9-12 11-12s11 4.5 11 12z" fill="#7a3e2b"/><path d="M15 17l2 6M20 15.5v7M25 17l-2 6" stroke="#f2c48a" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Harbor Street<small>Bakery &amp; Café</small></span>
+    </a>
+    <nav><a href="#menu">Menu</a><a href="#story">Our story</a><a href="#order">Order ahead</a><a href="#visit">Visit</a></nav>
+    <a class="btn crust" href="#order">Order ahead</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <span class="kicker" style="color:var(--crust)">Baked fresh every morning</span>
+      <h1>Real bread, <em>right down</em> the street.</h1>
+      <p>Sourdough, pastries and coffee made from scratch in small batches. Stop in, or order ahead and skip the line.</p>
+      <div class="ctas"><a class="btn crust" href="#order">Order for pickup</a><a class="btn line" href="#menu">See today's menu</a></div>
+      <div class="open"><i></i><span id="openNow">Open today 6:30am – 3pm</span></div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="190" fill="#8f4a33"/>
+        <circle cx="200" cy="200" r="150" fill="#9c5640" opacity=".6"/>
+        <ellipse cx="200" cy="300" rx="150" ry="22" fill="#5e2c1d" opacity=".5"/>
+        <path d="M70 290c0-90 58-150 130-150s130 60 130 150z" fill="#f2c48a"/>
+        <path d="M70 290c0-90 58-150 130-150s130 60 130 150" fill="none" stroke="#d99b5a" stroke-width="6"/>
+        <path d="M130 200q20 30 18 70M200 170q8 40 0 100M270 200q-20 30-18 70" stroke="#c98146" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <circle cx="120" cy="120" r="5" fill="#f2c48a" opacity=".6"/><circle cx="300" cy="100" r="7" fill="#f2c48a" opacity=".5"/><circle cx="320" cy="170" r="4" fill="#f2c48a" opacity=".6"/>
+        <path d="M180 110c-6-14 6-22 0-36M210 105c-6-14 6-22 0-36M240 110c-6-14 6-22 0-36" stroke="#f6e6da" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="center"><span class="kicker">The menu</span><h2>Today's favorites</h2><p>Everything is baked on site. When it's gone, it's gone.</p></div>
+    <div class="menu">
+      <article class="item"><div class="pic p1"><svg viewBox="0 0 100 70"><ellipse cx="50" cy="42" rx="44" ry="24" fill="#c98146"/><path d="M22 36q8 8 10 20M50 22q4 14 0 30M78 36q-8 8-10 20" stroke="#f2c48a" stroke-width="4" stroke-linecap="round" fill="none"/></svg></div>
+        <div class="txt"><div class="row"><h3>Country Sourdough</h3><span class="price">$9</span></div><p>Two-day ferment, crackly crust, open crumb.</p><span class="tag">Daily</span></div></article>
+      <article class="item"><div class="pic p2"><svg viewBox="0 0 100 70"><path d="M10 50q40-60 80 0q-40 14-80 0z" fill="#d99b5a"/><path d="M28 40q4-10 10-16M50 32v-14M72 40q-4-10-10-16" stroke="#b5703a" stroke-width="4" stroke-linecap="round" fill="none"/></svg></div>
+        <div class="txt"><div class="row"><h3>Butter Croissant</h3><span class="price">$4.25</span></div><p>81 layers of cultured butter and patience.</p><span class="tag">Morning</span></div></article>
+      <article class="item"><div class="pic p3"><svg viewBox="0 0 100 70"><circle cx="50" cy="38" r="26" fill="#c98146"/><circle cx="50" cy="38" r="17" fill="#e8b46c"/><path d="M38 30l4 3M58 28l-3 4M56 46l4 2M42 46l-3 3" stroke="#7a3e2b" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="txt"><div class="row"><h3>Cinnamon Morning Bun</h3><span class="price">$4.75</span></div><p>Orange zest, brown sugar, flaky laminated dough.</p><span class="tag">Fan favorite</span></div></article>
+      <article class="item"><div class="pic p4"><svg viewBox="0 0 100 70"><rect x="20" y="20" width="60" height="40" rx="12" fill="#a8683f"/><path d="M28 26c8-8 36-8 44 0" stroke="#d99b5a" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="40" cy="42" r="3" fill="#5e2c1d"/><circle cx="58" cy="38" r="3" fill="#5e2c1d"/><circle cx="52" cy="50" r="3" fill="#5e2c1d"/></svg></div>
+        <div class="txt"><div class="row"><h3>Seeded Rye</h3><span class="price">$10</span></div><p>Dense, nutty and made for good butter.</p><span class="tag">Thu – Sat</span></div></article>
+      <article class="item"><div class="pic p5"><svg viewBox="0 0 100 70"><path d="M22 54l28-40 28 40z" fill="#e8b46c"/><path d="M30 46l20-28 20 28z" fill="#c2453a"/><circle cx="44" cy="40" r="3" fill="#8e2c24"/><circle cx="55" cy="36" r="3" fill="#8e2c24"/></svg></div>
+        <div class="txt"><div class="row"><h3>Seasonal Galette</h3><span class="price">$5.50</span></div><p>Rustic fruit tart with whatever the farm stand has.</p><span class="tag">Seasonal</span></div></article>
+      <article class="item"><div class="pic p6"><svg viewBox="0 0 100 70"><path d="M30 22h40l-5 40H35z" fill="#fffdf9"/><path d="M28 22h44" stroke="#5f7a5a" stroke-width="5" stroke-linecap="round"/><path d="M70 32q12 2 8 14t-11 6" stroke="#fffdf9" stroke-width="5" fill="none"/><path d="M44 14c-3-5 3-7 0-12M56 14c-3-5 3-7 0-12" stroke="#a8683f" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div>
+        <div class="txt"><div class="row"><h3>House Drip Coffee</h3><span class="price">$3</span></div><p>Roasted locally, free refills while you stay.</p><span class="tag">All day</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="oven" aria-hidden="true">
+      <svg viewBox="0 0 200 150"><rect x="30" y="30" width="140" height="100" rx="16" fill="#5e2c1d"/><path d="M50 110V80a50 50 0 0 1 100 0v30z" fill="#2b1a12"/><path d="M60 110c6-20 18-24 22-10 4-18 16-22 18-4 4-14 14-12 20 14z" fill="#f2a93b"/><path d="M72 110c4-10 10-12 12-4 4-8 10-8 12 0 4-6 8-6 10 4z" fill="#f2c48a"/><rect x="40" y="126" width="120" height="8" rx="4" fill="#2b1a12"/></svg>
+    </div>
+    <div>
+      <span class="kicker">Our story</span>
+      <h2>A neighborhood oven since day one.</h2>
+      <p>We started with one oven, one sourdough starter and a simple idea: the street deserved bread worth walking to. Every loaf is still shaped by hand before sunrise, with flour from regional mills and nothing you can't pronounce.</p>
+      <div class="stats"><div><b>4am</b><span>First loaves in</span></div><div><b>48 hr</b><span>Sourdough ferment</span></div><div><b>0</b><span>Preservatives</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <div class="center"><span class="kicker">Order ahead</span><h2>Skip the line</h2><p>Order by 8pm for next-morning pickup. Whole cakes and large orders need 48 hours.</p></div>
+    <div class="steps">
+      <div class="step"><h3>Pick your bake</h3><p>Choose loaves, pastries and coffee from the online menu.</p></div>
+      <div class="step"><h3>Choose a time</h3><p>Pickup windows every 30 minutes, starting at 6:30am.</p></div>
+      <div class="step"><h3>Grab and go</h3><p>Your order waits on the pickup shelf with your name on it.</p></div>
+    </div>
+    <div class="order-cta"><a class="btn" href="#order">Start an order</a></div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div>
+      <span class="kicker" style="color:var(--crust)">Visit us</span>
+      <h2>Come say hi.</h2>
+      <table class="hours" id="hours">
+        <tr><td>Monday</td><td>Closed</td></tr>
+        <tr><td>Tuesday – Friday</td><td>6:30am – 3pm</td></tr>
+        <tr><td>Saturday</td><td>7am – 2pm</td></tr>
+        <tr><td>Sunday</td><td>7am – 12pm</td></tr>
+      </table>
+    </div>
+    <div class="info">
+      <p><b>Address</b><br>123 Harbor Street, Your Town</p>
+      <p><b>Phone</b><br>(555) 010-0123</p>
+      <p><b>Parking</b><br>Free street parking, plus bike racks out front.</p>
+      <div class="map" aria-hidden="true">
+        <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><rect width="320" height="180" fill="#e9dccb"/><path d="M0 120h320M0 50h320M90 0v180M220 0v180" stroke="#fffdf9" stroke-width="12"/><path d="M0 160c80-20 160 10 320-14v34H0z" fill="#a9c4cf"/><rect x="104" y="64" width="40" height="26" rx="4" fill="#d8c7b2"/><rect x="236" y="70" width="50" height="34" rx="4" fill="#d8c7b2"/><path d="M160 78a14 14 0 1 1 28 0c0 12-14 24-14 24s-14-12-14-24z" fill="#7a3e2b"/><circle cx="174" cy="78" r="5" fill="#f2c48a"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Harbor Street Bakery (demo)</span>
+    <span>Site design by <a href="index.html#digital" target="_top">Elevate L&amp;D Consulting</a></span>
+  </div>
+</footer>
+
+<script>
+/* highlight today's hours and show open/closed status */
+(function(){
+  const d=new Date().getDay(); // 0 Sun ... 6 Sat
+  const row=d===1?0:d===0?3:d===6?2:1;
+  const rows=document.querySelectorAll("#hours tr");
+  if(rows[row])rows[row].classList.add("today");
+  const text=["Open today 7am – 12pm","Closed today · Back Tuesday at 6:30am","Open today 6:30am – 3pm","Open today 6:30am – 3pm","Open today 6:30am – 3pm","Open today 6:30am – 3pm","Open today 7am – 2pm"][d];
+  document.getElementById("openNow").textContent=text;
+})();
+</script>
+</body>
+</html>
