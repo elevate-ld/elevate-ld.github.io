@@ -316,7 +316,6 @@ function render(){
       ${R.cats.map(c=>barRow(c.name,c.v)).join("")}
       ${barRow("Online presence",R.self)}
     </div>
-    ${state.scanErr?`<p class="err" style="margin-top:16px">${esc(state.scanErr)}</p><div class="actions noprint" style="margin-top:6px"><button class="btn ghost" id="rescan">Try the scan again</button></div>`:""}
     ${lcpLine?`<div class="sec">${lcpLine}</div>`:""}
 
     ${R.issues.length?`<div class="sec"><h3>What we found on your site</h3><p>From a live scan of your homepage on a simulated phone, the way most customers see it.</p>${issueHtml(top)}${rest.length?`<details class="more"><summary>Show ${rest.length} more</summary>${issueHtml(rest)}</details>`:""}</div>`:(state.scan?`<div class="sec"><h3>What we found on your site</h3><div class="issue"><span class="dot good"></span><div><b>No major technical problems</b><span>Your site passed the core speed, Google and accessibility checks. Nice work.</span></div></div></div>`:"")}
@@ -345,21 +344,20 @@ function render(){
         <div class="msg" id="lmsg"></div>
       </form>
     </div>
-    <p class="fine">Scan powered by Google PageSpeed Insights (mobile test) at ${new Date().toLocaleString()}. Scores can vary a few points between runs. This is an automated check, not a full audit. <a href="website-check.html" class="noprint">Check another site</a> · <a href="training-check.html" class="noprint">Free training needs assessment</a></p>`;
+    <p class="fine">${state.scan?`Scan powered by Google PageSpeed Insights (mobile test) at ${new Date().toLocaleString()}. Scores can vary a few points between runs. `:""}This is an automated check, not a full audit. <a href="website-check.html" class="noprint">Check another site</a> · <a href="training-check.html" class="noprint">Free training needs assessment</a></p>`;
 
   requestAnimationFrame(()=>setTimeout(()=>{
     document.querySelectorAll("#s3 [data-off]").forEach(c=>c.style.strokeDashoffset=c.dataset.off);
     document.querySelectorAll("#s3 [data-w]").forEach(b=>b.style.width=b.dataset.w);
   },60));
   $("print").onclick=()=>window.print();
-  if($("rescan"))$("rescan").onclick=async()=>{startScan(state.url);show("sl");await scanPromise;render();show("s3")};
   $("lead").addEventListener("submit",e=>{
     e.preventDefault();const f=new FormData(e.target);
     const lines=[
       `Website Health Check results`,`Site: ${state.url}`,`Business type: ${state.btype||"-"}`,`Location: ${state.city||"-"}`,``,
       `Overall score: ${R.overall}/100 (${gradeTxt(R.overall)})`,
       ...R.cats.map(c=>`  ${c.name}: ${c.v}`),`  Online presence (answers): ${R.self}`,
-      R.lcp?`  Mobile load time: ${R.lcp.toFixed(1)}s`:"",state.scanErr?`  Scan note: ${state.scanErr}`:"",``,
+      R.lcp?`  Mobile load time: ${R.lcp.toFixed(1)}s`:"",state.scanErr?`  NOTE (only you see this): the live scan did not run (${state.scanErr}) — score is from their answers only. Run their site at pagespeed.web.dev before the call.`:"",``,
       `Top findings:`,...R.issues.slice(0,8).map(x=>`  - [${x.sev==="bad"?"Urgent":"Fix"}] ${x.t}${x.val?" ("+x.val+")":""}`),
       ...R.gaps.map(x=>`  - [${x.sev==="bad"?"Urgent":"Fix"}] ${x.label}`),``,
       `Recommended: ${R.recs.map(r=>r.name).join(", ")}`,``,
