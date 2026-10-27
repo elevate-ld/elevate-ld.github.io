@@ -207,7 +207,7 @@ footer a:hover{color:var(--ink)}
       <span>Elevate<small>L&amp;D Consulting</small></span>
     </a>
     <nav class="links" id="links">
-      <a href="#services">Services</a><a href="#digital">Web &amp; Brand</a><a href="#work">Portfolio</a><a href="#process">How it works</a><a href="#contact">Contact</a>
+      <a href="#services">Services</a><a href="#digital">Web &amp; Brand</a><a href="#tools">Free checkups</a><a href="#work">Portfolio</a><a href="#process">How it works</a><a href="#contact">Contact</a>
     </nav>
     <a class="btn primary" href="#contact">Book a free consult</a>
     <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
@@ -377,7 +377,7 @@ footer a:hover{color:var(--ink)}
       </article>
       <article class="pkg cta">
         <h3>Not sure where to start?</h3>
-        <p>Book a free 30-minute discovery call. We'll look at your current site and search presence and recommend what makes sense for your budget.</p>
+        <p>Run our free <a href="website-check.html" style="color:#fff;font-weight:700">Website Health Check</a>, or book a free 30-minute discovery call. We'll look at your current site and search presence and recommend what makes sense for your budget.</p>
         <a class="btn primary" href="#contact" data-need="Not sure yet">Book a free call</a>
       </article>
     </div>
@@ -389,6 +389,32 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
+<!-- FREE TOOLS -->
+<section class="alt" id="tools">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Free checkups</span>
+      <h2>Not sure what you need? Find out in minutes.</h2>
+      <p class="lead">Two free self-checks that show where you stand and what to fix first. No sign-up required.</p>
+    </div>
+    <div class="grid3">
+      <article class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg></span>
+        <h3>Website Health Check</h3>
+        <p>We scan your site the way Google and a customer on their phone see it, then score speed, Google visibility, ease of use and your online presence.</p>
+        <dl><dt>Takes</dt><dd>About 1 minute</dd><dt>You get</dt><dd>A score, plain-English problems and what to fix first</dd></dl>
+        <a class="btn dark" href="website-check.html" style="align-self:flex-start;margin-top:auto">Check my website →</a>
+      </article>
+      <article class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span>
+        <h3>Training Needs Assessment</h3>
+        <p>18 quick statements score your team across onboarding, processes, systems, compliance, leadership and results, with an estimate of what the gaps cost.</p>
+        <dl><dt>Takes</dt><dd>About 3 minutes</dd><dt>You get</dt><dd>Scores for six areas and your top training priorities</dd></dl>
+        <a class="btn dark" href="training-check.html" style="align-self:flex-start;margin-top:auto">Assess my team →</a>
+      </article>
+    </div>
+  </div>
+</section>
 <!-- PORTFOLIO -->
 <section id="work" style="border-top:1px solid var(--line)">
   <div class="wrap">
@@ -482,7 +508,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <span>© <span id="yr"></span> Elevate L&amp;D Consulting</span>
-    <span class="fl"><a href="#services">Services</a><a href="#digital">Web &amp; Brand</a><a href="#work">Portfolio</a><a href="#contact">Contact</a></span>
+    <span class="fl"><a href="#services">Services</a><a href="website-check.html">Website check</a><a href="training-check.html">Training assessment</a><a href="#digital">Web &amp; Brand</a><a href="#work">Portfolio</a><a href="#contact">Contact</a></span>
   </div>
 </footer>
 
@@ -531,6 +557,9 @@ if(SETTINGS.FORM_URL){
   });
 }
 
+/* ?need=… (from the free checkups) pre-checks the matching box */
+const pNeed=new URLSearchParams(location.search).get("need");
+if(pNeed){const b=document.querySelector(`#cf input[name="need"][value="${CSS.escape(pNeed)}"]`);if(b)b.checked=true}
 /* package buttons pre-check the matching need in the contact form */
 document.querySelectorAll("[data-need]").forEach(a=>a.addEventListener("click",()=>{
   const box=document.querySelector(`#cf input[name="need"][value="${a.dataset.need}"]`);

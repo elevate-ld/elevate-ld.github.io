@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Training Needs Assessment | Elevate L&amp;D Consulting</title>
+<meta name="description" content="A free 3-minute training needs assessment for businesses and organizations. See where your team's training gaps are, what they may be costing you, and what to fix first.">
+<meta property="og:title" content="Free Training Needs Assessment — Elevate L&D Consulting">
+<meta property="og:description" content="Find your team's biggest training gaps in 3 minutes, and what they may be costing you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23142a4a'/%3E%3Cpath d='M8 21l8-8 8 8' fill='none' stroke='%23f2a93b' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Elevate L&D Consulting home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#142a4a"/><path d="M8 21l8-8 8 8" fill="none" stroke="#f2a93b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Elevate<small>L&amp;D Consulting</small></span>
+    </a>
+    <a class="back" href="index.html#services">← Training services</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Free tool</span>
+    <h1>Where is your team <em>getting stuck?</em></h1>
+    <p>Answer 18 quick statements about how your team learns and works. You'll get a score for six training areas, an estimate of what the gaps may be costing you, and a clear list of what to fix first.</p>
+    <div class="meta"><span>Free, no sign-up</span><span>About 3 minutes</span><span>Built by a learning designer</span></div>
+  </div>
+</section>
+
+<main>
+<div class="wrap">
+
+  <!-- STEP 1 -->
+  <div class="card" id="s1">
+    <div class="stepper"><i class="on"></i><i></i><i></i></div>
+    <span class="steplabel">Step 1 of 3</span>
+    <h2>About your team</h2>
+    <p class="sub">This tailors your results and the cost estimate. Rough numbers are fine.</p>
+    <form id="f1" novalidate>
+      <div class="two">
+        <label class="f">Type of organization
+          <select id="ind">
+            <option value="">Choose…</option>
+            <option>Healthcare or human services</option>
+            <option>School or education</option>
+            <option>Nonprofit</option>
+            <option>Retail, restaurant or hospitality</option>
+            <option>Office or professional services</option>
+            <option>Trades, manufacturing or field services</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label class="f">People on your team
+          <input id="staff" type="number" min="1" max="100000" inputmode="numeric" placeholder="e.g. 25">
+        </label>
+      </div>
+      <div class="two">
+        <label class="f">Average hourly pay <small>(roughly, incl. benefits is fine)</small>
+          <input id="pay" type="number" min="1" max="1000" step="0.5" inputmode="decimal" value="28">
+        </label>
+        <label class="f">New hires in a typical year <small>(optional)</small>
+          <input id="hires" type="number" min="0" max="100000" inputmode="numeric" placeholder="e.g. 6">
+        </label>
+      </div>
+      <label class="f">Hours a week the average person loses to hunting for answers, waiting on help or fixing mistakes</label>
+      <div class="opts" role="radiogroup" aria-label="Hours lost per week">
+        <label><input type="radio" name="lost" value="0.5"><span>Under 1</span></label>
+        <label><input type="radio" name="lost" value="1.5"><span>1–2</span></label>
+        <label><input type="radio" name="lost" value="4"><span>3–5</span></label>
+        <label><input type="radio" name="lost" value="6"><span>More than 5</span></label>
+      </div>
+      <div class="actions"><button class="btn primary" type="submit">Next →</button></div>
+      <div class="err" id="e1" role="alert"></div>
+    </form>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card hide" id="s2">
+    <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
+    <span class="steplabel">Step 2 of 3</span>
+    <h2>How much do you agree?</h2>
+    <p class="sub">Answer for your organization as it is today, not how you'd like it to be.</p>
+    <form id="f2"><div id="qs"></div>
+      <div class="actions"><button class="btn primary" type="submit">See my results →</button><button class="btn ghost" type="button" id="back2">← Back</button></div>
+      <div class="err" id="e2" role="alert"></div>
+    </form>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card hide" id="s3"></div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Elevate L&amp;D Consulting</span>
+    <span><a href="website-check.html">Free Website Health Check →</a></span>
+  </div>
+</footer>
+
+<script>
+/* ===== SETTINGS ===== EMAIL: where "Send my results" goes. */
+const SETTINGS={EMAIL:"elevateldc@gmail.com"};
+
+/* Six training areas. need = matching checkbox in the homepage contact form. */
+const AREAS=[
+  {k:"onboard",name:"Onboarding",svc:"Instructional Design & eLearning",need:"eLearning module",
+   get:"A structured onboarding path with short interactive modules, checklists and knowledge checks, so every new hire gets the same start.",
+   risk:"New hires learn differently depending on who trains them, and take longer to become productive.",
+   q:["New hires follow the same structured onboarding, no matter who trains them.","New hires can work on their own within their first 30 days.","Our onboarding materials are written down and up to date."]},
+  {k:"process",name:"Processes & know-how",svc:"Job Aids & Reference Tools",need:"Job aid or reference tool",ex:["excel-reference.html","Excel for Accounting"],
+   get:"Searchable job aids and step-by-step guides your team can pull up in seconds, right when they need them.",
+   risk:"Know-how lives in a few people's heads, so questions interrupt your best people and mistakes repeat.",
+   q:["When someone isn't sure how to do a task, they can find the answer without asking a coworker.","Our key processes are documented in steps anyone could follow.","Mistakes caused by people doing a task differently are rare."]},
+  {k:"systems",name:"Software & systems",svc:"Software Rollout Training & Job Aids",need:"Job aid or reference tool",ex:["excel-reference.html","Excel for Accounting"],
+   get:"Role-based tutorials and quick-reference guides for your systems, ready before go-live, plus refreshers for the tools you already have.",
+   risk:"People work around your systems, so you pay for software that's half-used and data you can't trust.",
+   q:["When we roll out new software, people are trained before it goes live.","Staff use our systems the right way, without workarounds or side spreadsheets.","If our go-to person for a system were out for a week, work would continue normally."]},
+  {k:"comply",name:"Compliance & certification",svc:"Compliance & Certification eLearning",need:"Certification or exam prep",ex:["secplus.html","Security+ Prep"],
+   get:"Engaging compliance modules and certification prep with practice questions, instant feedback and completion tracking.",
+   risk:"Missed or check-the-box training exposes you in audits, inspections and incidents.",
+   q:["Required trainings (safety, HIPAA, harassment, etc.) are completed on time and tracked.","Our staff could pass an audit or inspection on our policies today.","Employees who need a certification or license get structured prep to pass it."]},
+  {k:"people",name:"People & leadership",svc:"Workplace Training",need:"Workplace training session",
+   get:"Facilitated or self-paced sessions on customer service, conflict and leadership, with practice scenarios and follow-up materials.",
+   risk:"New supervisors learn by trial and error, and tough customer or team situations are handled inconsistently.",
+   q:["New supervisors get training before or soon after they start managing people.","Staff handle difficult customers or conflicts confidently and consistently.","People rarely leave because they felt unsupported or unprepared."]},
+  {k:"measure",name:"Training strategy & results",svc:"Curriculum & Program Design",need:"Not sure yet",
+   get:"A training plan by role, with clear learning goals, assessments and a simple dashboard showing what's working.",
+   risk:"Training happens, but nobody can say whether it changed anything, so it's the first thing cut.",
+   q:["We have a plan for what training each role needs.","Training is engaging enough that people finish it and actually use it.","We can tell whether a training actually changed how people work."]}
+];
+const SCALE=[["0","Strongly disagree"],["1","Disagree"],["2","Agree"],["3","Strongly agree"]];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tone=v=>v>=75?"good":v>=50?"warn":"bad";
+const grade=v=>v>=75?"Strong":v>=50?"Gaps to close":"High need";
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+$("yr").textContent=new Date().getFullYear();
+const ctx={};
+
+/* STEP 1 */
+$("f1").addEventListener("submit",e=>{
+  e.preventDefault();
+  const staff=+$("staff").value,pay=+$("pay").value,lost=document.querySelector('input[name="lost"]:checked');
+  if(!staff||staff<1){$("e1").textContent="Please enter how many people are on your team.";return}
+  if(!pay||pay<=0){$("e1").textContent="Please enter an approximate hourly pay.";return}
+  if(!lost){$("e1").textContent="Please choose how many hours a week are lost.";return}
+  $("e1").textContent="";
+  Object.assign(ctx,{ind:$("ind").value,staff,pay,hires:+$("hires").value||0,lost:+lost.value,lostLabel:lost.nextElementSibling.textContent});
+  show("s2");
+});
+
+/* STEP 2 — questions grouped by area, numbered continuously */
+let n=0;
+$("qs").innerHTML=AREAS.map(a=>`<div style="margin-top:${n?18:0}px"><span class="steplabel" style="color:var(--amber)">${esc(a.name)}</span>${a.q.map((q,i)=>`<div class="q"><p>${++n}. ${esc(q)}</p><div class="opts" role="radiogroup" aria-label="${esc(q)}">
+  ${SCALE.map(([v,l])=>`<label><input type="radio" name="${a.k}${i}" value="${v}"><span>${l}</span></label>`).join("")}</div></div>`).join("")}</div>`).join("");
+$("back2").onclick=()=>show("s1");
+$("f2").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);let miss=0;
+  AREAS.forEach(a=>a.q.forEach((_,i)=>{if(f.get(a.k+i)==null)miss++}));
+  if(miss){$("e2").textContent=`Please answer all statements (${miss} left).`;return}
+  $("e2").textContent="";
+  AREAS.forEach(a=>{a.ans=a.q.map((_,i)=>+f.get(a.k+i));a.v=Math.round(a.ans.reduce((s,x)=>s+x,0)/(a.q.length*3)*100)});
+  render();show("s3");
+});
+
+function show(id){["s1","s2","s3"].forEach(x=>$(x).classList.toggle("hide",x!==id));scrollTo({top:document.querySelector("main").offsetTop-10,behavior:"smooth"})}
+function ring(v){
+  const C=2*Math.PI*64;
+  return `<div class="ring" role="img" aria-label="Training readiness ${v} out of 100"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--soft)" stroke-width="14"/><circle cx="75" cy="75" r="64" fill="none" stroke="var(--${tone(v)})" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${C*(1-v/100)}" style="transition:stroke-dashoffset 1.2s ease"/></svg><div class="num"><div><b>${v}</b><small>out of 100</small></div></div></div>`;
+}
+function needLink(n){return `index.html?need=${encodeURIComponent(n)}#contact`}
+
+function render(){
+  const overall=Math.round(AREAS.reduce((s,a)=>s+a.v,0)/AREAS.length);
+  const sorted=[...AREAS].sort((a,b)=>a.v-b.v);
+  const gaps=sorted.filter(a=>a.v<75);
+  const edu=/school|education/i.test(ctx.ind);
+
+  /* cost estimate: lost hours × people × 48 working weeks × pay */
+  const yearly=ctx.staff*ctx.lost*48*ctx.pay;
+  const half=yearly/2;
+  /* onboarding drag: weaker onboarding → more weeks at partial productivity (2–8 extra weeks at ~50%) */
+  const onb=AREAS.find(a=>a.k==="onboard").v;
+  const extraWeeks=Math.round(2+6*(1-onb/100));
+  const hireCost=ctx.hires*extraWeeks*40*ctx.pay*0.5;
+
+  let headline;
+  if(overall>=75)headline="Your training foundation is strong. A few targeted improvements could make it even more effective.";
+  else if(overall>=50)headline=`You have some good pieces in place, but ${gaps.length} area${gaps.length===1?" is":"s are"} likely slowing your team down.`;
+  else headline=`Your team is likely working harder than it needs to. ${gaps.length} of 6 areas need attention.`;
+
+  const recs=(gaps.length?gaps:sorted.slice(0,1)).slice(0,3);
+  const weakQ=a=>a.q.filter((_,i)=>a.ans[i]<=1);
+
+  $("s3").innerHTML=`
+    <div class="stepper noprint"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <span class="steplabel">Your results${ctx.ind?" · "+esc(ctx.ind):""}</span>
+    <div class="scorehead" style="margin-top:12px">
+      ${ring(overall)}
+      <div><span class="grade g-${tone(overall)}">${grade(overall)}</span>
+        <h2 style="margin-top:10px">Training Readiness Score</h2>
+        <p style="margin:6px 0 0;color:var(--mute)">${headline}</p></div>
+    </div>
+    <div class="bars">${AREAS.map(a=>`<div class="bar"><span>${esc(a.name)}</span><div class="track"><i style="width:0;background:var(--${tone(a.v)})" data-w="${a.v}%"></i></div><b>${a.v}</b></div>`).join("")}</div>
+
+    <div class="sec"><h3>What the gaps may be costing you</h3>
+      <p>A rough estimate from your numbers: ${ctx.staff} ${ctx.staff===1?"person":"people"} × ${esc(ctx.lostLabel.toLowerCase())} hours a week × ${money(ctx.pay)}/hour × 48 working weeks.</p>
+      <div class="stat">
+        <div><b>${money(yearly)}</b><span>Yearly cost of time lost to searching, waiting and rework</span></div>
+        <div><b>${money(half)}</b><span>Back each year if better training and job aids cut that in half</span></div>
+        ${ctx.hires?`<div><b>${money(hireCost)}</b><span>Yearly cost of slower onboarding (${ctx.hires} hires × ~${extraWeeks} extra weeks to full speed)</span></div>`:`<div><b>${Math.round(ctx.staff*ctx.lost*48).toLocaleString()} hrs</b><span>Hours a year your team spends stuck instead of working</span></div>`}
+      </div>
+      <p class="fine" style="margin-top:10px">Estimates only, meant to show scale, not a quote or guarantee.</p>
+    </div>
+
+    <div class="sec"><h3>Where to focus first</h3><p>Your lowest-scoring areas, and what we'd build to fix them.</p>
+      <div class="recs">${recs.map((a,i)=>{
+        const w=weakQ(a);
+        const svc=edu&&a.k==="people"?"Professional Development & Workplace Training":a.svc;
+        return `<div class="rec ${i===0?"top":""}">
+          <div>${i===0?`<span class="badge">Top priority</span>`:""}<h4>${esc(a.name)} · ${a.v}/100</h4><p>${esc(a.risk)}</p></div>
+          ${w.length?`<div class="why"><em>Your answers:</em> ${w.map(q=>"you disagreed that "+esc(q.charAt(0).toLowerCase()+q.slice(1).replace(/\.$/,""))).join("; ")}.</div>`:""}
+          <div class="why"><em>What we'd build — ${esc(svc)}:</em> ${esc(a.get)}</div>
+          <div class="acts noprint"><a class="btn ${i===0?"primary":"dark"}" href="${needLink(a.need)}">Talk about this</a>${a.ex?`<a class="btn ghost" href="${a.ex[0]}" target="_blank" rel="noopener">See an example: ${esc(a.ex[1])} ↗</a>`:""}</div>
+        </div>`}).join("")}</div>
+      ${sorted.filter(a=>a.v>=75).length?`<p style="margin-top:16px;color:var(--mute)"><b style="color:var(--ink)">Already strong:</b> ${sorted.filter(a=>a.v>=75).map(a=>esc(a.name)).join(", ")}. Keep doing what you're doing there.</p>`:""}
+    </div>
+
+    <div class="cta noprint">
+      <h3>Get a free 30-minute training plan call</h3>
+      <p>Send these results to Elevate. Within two business days we'll reply to set up a free call where we walk through your gaps, suggest quick wins you can do yourself, and give you a fixed-price proposal if you'd like help.</p>
+      <form id="lead">
+        <div class="two"><label class="f">Your name<input name="name" required autocomplete="name"></label>
+        <label class="f">Email<input name="email" type="email" required autocomplete="email"></label></div>
+        <div class="two"><label class="f">Organization<input name="org" autocomplete="organization"></label>
+        <label class="f">Your role <small>(optional)</small><input name="role" autocomplete="organization-title"></label></div>
+        <label class="f">What prompted you to take this? <small>(optional)</small><textarea name="note" rows="3"></textarea></label>
+        <div class="actions" style="margin-top:6px"><button class="btn primary" type="submit">Send my results &amp; book a free call</button><button class="btn ghost" type="button" id="print" style="color:#fff;border-color:rgba(255,255,255,.4)">Save as PDF</button></div>
+        <div class="msg" id="lmsg"></div>
+      </form>
+    </div>
+    <p class="fine">This self-assessment reflects your answers and is a starting point, not a full training needs analysis. <a href="training-check.html" class="noprint">Start over</a> · <a href="website-check.html" class="noprint">Free website health check</a></p>`;
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll("#s3 [data-off]").forEach(c=>c.style.strokeDashoffset=c.dataset.off);
+    document.querySelectorAll("#s3 [data-w]").forEach(b=>b.style.width=b.dataset.w);
+  },60));
+  $("print").onclick=()=>window.print();
+  $("lead").addEventListener("submit",e=>{
+    e.preventDefault();const f=new FormData(e.target);
+    const body=[
+      "Training Needs Assessment results",`Organization type: ${ctx.ind||"-"}`,`Team size: ${ctx.staff}`,`New hires/year: ${ctx.hires||"-"}`,`Hours lost per person/week: ${ctx.lostLabel}`,"",
+      `Training Readiness: ${overall}/100 (${grade(overall)})`,...AREAS.map(a=>`  ${a.name}: ${a.v}`),"",
+      `Estimated yearly cost of lost time: ${money(yearly)}`,ctx.hires?`Estimated yearly onboarding drag: ${money(hireCost)}`:"","",
+      `Top priorities: ${recs.map(a=>a.name).join(", ")}`,"",
+      `Name: ${f.get("name")}`,`Email: ${f.get("email")}`,`Organization: ${f.get("org")||"-"}`,`Role: ${f.get("role")||"-"}`,"",f.get("note")||""
+    ].join("\n");
+    location.href=`mailto:${SETTINGS.EMAIL}?subject=${encodeURIComponent("Training Needs Assessment: "+(f.get("org")||f.get("name"))+" ("+overall+"/100)")}&body=${encodeURIComponent(body)}`;
+    $("lmsg").textContent="Your email app should open with your results ready to send. Just hit Send.";
+  });
+}
+</script>
+</body>
+</html>

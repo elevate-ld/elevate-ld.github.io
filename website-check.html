@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Website Health Check | Elevate L&amp;D Consulting</title>
+<meta name="description" content="Free website health check for small businesses. Scan your site for speed, Google visibility, mobile and accessibility problems and get a plain-English report in about a minute.">
+<meta property="og:title" content="Free Website Health Check — Elevate L&D Consulting">
+<meta property="og:description" content="See how your website looks to Google and to customers on their phones. Free, about a minute, plain English.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23142a4a'/%3E%3Cpath d='M8 21l8-8 8 8' fill='none' stroke='%23f2a93b' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Elevate L&D Consulting home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#142a4a"/><path d="M8 21l8-8 8 8" fill="none" stroke="#f2a93b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Elevate<small>L&amp;D Consulting</small></span>
+    </a>
+    <a class="back" href="index.html#digital">← Web &amp; Brand services</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Free tool</span>
+    <h1>Is your website <em>costing you customers?</em></h1>
+    <p>Enter your website and answer 8 quick questions. We'll scan it the way Google and a customer on their phone see it, then tell you in plain English what's working, what isn't, and what to fix first.</p>
+    <div class="meta"><span>Free, no sign-up</span><span>About 1 minute</span><span>Real scan, not a guess</span></div>
+  </div>
+</section>
+
+<main>
+<div class="wrap">
+
+  <!-- STEP 1 -->
+  <div class="card" id="s1">
+    <div class="stepper"><i class="on"></i><i></i><i></i></div>
+    <span class="steplabel">Step 1 of 3</span>
+    <h2>Which website should we check?</h2>
+    <p class="sub">Your homepage works best.</p>
+    <form id="f1" novalidate>
+      <label class="f">Website address
+        <input id="url" name="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
+      </label>
+      <div class="two">
+        <label class="f">Type of business
+          <select id="btype">
+            <option value="">Choose…</option>
+            <option>Restaurant, café or bakery</option>
+            <option>Retail shop or boutique</option>
+            <option>Health, wellness or beauty</option>
+            <option>Home services or trades</option>
+            <option>Professional services</option>
+            <option>Nonprofit, school or agency</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label class="f">Town or city <small>(optional)</small>
+          <input id="city" autocomplete="address-level2" placeholder="Fall River, MA">
+        </label>
+      </div>
+      <div class="actions"><button class="btn primary" type="submit">Start my free check →</button></div>
+      <div class="err" id="e1" role="alert"></div>
+    </form>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card hide" id="s2">
+    <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
+    <span class="steplabel">Step 2 of 3 · Your scan is running</span>
+    <h2>While we scan, a few quick questions</h2>
+    <p class="sub">These cover what a scan can't see. Be honest — nobody else sees your answers unless you send them.</p>
+    <form id="f2"><div id="qs"></div>
+      <div class="actions"><button class="btn primary" type="submit" id="go2">See my results →</button><button class="btn ghost" type="button" id="back2">← Back</button></div>
+      <div class="err" id="e2" role="alert"></div>
+    </form>
+  </div>
+
+  <!-- LOADING -->
+  <div class="card hide" id="sl">
+    <div class="loading">
+      <div class="spin" aria-hidden="true"></div>
+      <h2>Finishing your scan…</h2>
+      <p class="sub" style="margin:6px 0 0">Testing your site on a simulated phone. This can take up to a minute.</p>
+      <ul id="ticks"><li>Loading your homepage</li><li>Measuring speed on mobile</li><li>Checking what Google can read</li><li>Checking accessibility</li><li>Checking security basics</li></ul>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card hide" id="s3"></div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Elevate L&amp;D Consulting</span>
+    <span><a href="training-check.html">Free Training Needs Assessment →</a></span>
+  </div>
+</footer>
+
+<script>
+/* ===== SETTINGS =====
+   EMAIL: where "Send my results" goes.
+   PSI_KEY: optional free Google PageSpeed Insights API key. The scan works without one,
+   but Google limits keyless use. Get a key: https://developers.google.com/speed/docs/insights/v5/get-started */
+const SETTINGS={EMAIL:"elevateldc@gmail.com",PSI_KEY:""};
+
+/* Packages — keep in sync with index.html#digital */
+const PKG={
+  launch:{name:"Launch Website",price:"$1,500",unit:"starting at",need:"Website design",desc:"A clean, fast, mobile-friendly site that tells people who you are and how to reach you."},
+  growth:{name:"Growth Website",price:"$3,000",unit:"starting at",need:"Website design",desc:"A custom site built to bring in leads, with booking or payment links and full SEO setup."},
+  brand:{name:"Brand Kit",price:"$600",unit:"starting at",need:"Branding or logo",desc:"Logo, colors and fonts so you look consistent everywhere customers see you."},
+  seo:{name:"Local SEO Setup",price:"$500",unit:"one-time",need:"Local SEO",desc:"Google Business Profile, local keywords and on-page fixes so nearby customers find you."},
+  care:{name:"Care & Grow Plan",price:"$250/mo",unit:"starting at",need:"Local SEO",desc:"Monthly updates, ongoing local SEO and a simple report on traffic, rankings and calls."}
+};
+
+/* Self-check questions: k=id, svc=package it points to, label=short finding name */
+const QS=[
+  {k:"gbp",q:"Have you claimed and filled out your Google Business Profile (the box that shows on Google Maps)?",svc:"seo",label:"Google Business Profile not claimed or incomplete",why:"It's often the first thing local customers see — before your website."},
+  {k:"found",q:"Do new customers find you through Google search most months?",svc:"seo",label:"Not getting customers from Google",why:"If people searching for what you do can't find you, they find a competitor."},
+  {k:"reviews",q:"Have you gotten new Google reviews in the last 3 months?",svc:"seo",label:"Few recent reviews",why:"Recent reviews are one of the strongest local ranking and trust signals."},
+  {k:"brand",q:"Do you have a professional logo and the same colors and look across your site, signage and social media?",svc:"brand",label:"Inconsistent or missing branding",why:"A consistent look makes a small business seem established and trustworthy."},
+  {k:"convert",q:"Can a visitor call, book, order or request a quote from your homepage in one tap?",svc:"growth",label:"No one-tap way to call, book or order",why:"Every extra step loses customers, especially on phones."},
+  {k:"fresh",q:"Has your website been updated in the last 6 months (hours, prices, photos, services)?",svc:"care",label:"Website content is out of date",why:"Wrong hours or old prices send customers elsewhere and hurt trust."},
+  {k:"track",q:"Do you know roughly how many people visit your website each month?",svc:"care",label:"No visitor tracking",why:"Without numbers you can't tell what's working or what you're missing."},
+  {k:"proud",q:"Would you be proud to send a new customer to your website today?",svc:"launch",label:"You're not proud of your website",why:"If you hesitate to share it, customers probably hesitate to trust it."}
+];
+
+/* Plain-English explanations for scan findings. svc = package that fixes it. */
+const AUD={
+  "is-crawlable":{t:"Google is blocked from listing this page",d:"A setting on your site tells search engines not to show it. You may be invisible on Google.",svc:"seo"},
+  "http-status-code":{t:"Your page returns an error to Google",d:"Search engines may not list a page that reports an error.",svc:"launch"},
+  "document-title":{t:"Missing page title",d:"The title is the blue headline Google shows in search results. Without one, Google guesses.",svc:"seo"},
+  "meta-description":{t:"Missing search description",d:"The short summary under your link in Google. Without it, Google pulls random text from your page.",svc:"seo"},
+  "link-text":{t:"Vague link text (\"click here\")",d:"Descriptive links help Google and customers understand where a link goes.",svc:"seo"},
+  "crawlable-anchors":{t:"Some links Google can't follow",d:"Google may miss pages it can't reach through normal links.",svc:"seo"},
+  "robots-txt":{t:"Problem with your robots.txt file",d:"This file guides search engines. Errors in it can hide your site.",svc:"seo"},
+  "canonical":{t:"Conflicting page address signals",d:"Google may split your ranking across duplicate versions of your page.",svc:"seo"},
+  "hreflang":{t:"Language settings are invalid",d:"Search engines may show the wrong version of your page.",svc:"seo"},
+  "image-alt":{t:"Images missing descriptions",d:"Image descriptions help Google understand your photos and let people using screen readers know what's there.",svc:"seo"},
+  "viewport":{t:"Not set up for phones",d:"Your page may appear tiny or zoomed out on mobile. Google ranks mobile-friendly sites higher.",svc:"launch"},
+  "largest-contentful-paint":{t:"Main content loads slowly on phones",d:"Customers see a mostly blank page while it loads. Many leave before it finishes.",svc:"launch"},
+  "first-contentful-paint":{t:"Slow to show anything on phones",d:"The first few seconds decide whether a visitor stays.",svc:"launch"},
+  "speed-index":{t:"Page fills in slowly",d:"The page takes a while to look complete on a typical phone connection.",svc:"launch"},
+  "total-blocking-time":{t:"Page freezes while loading",d:"Taps and scrolls don't respond right away, which feels broken to visitors.",svc:"launch"},
+  "cumulative-layout-shift":{t:"Page jumps around while loading",d:"Buttons move as things load, so people tap the wrong thing.",svc:"launch"},
+  "is-on-https":{t:"Not fully secure (HTTPS)",d:"Browsers may warn visitors that your site is \"Not secure\".",svc:"launch"},
+  "errors-in-console":{t:"Behind-the-scenes errors",d:"Something on the page is broken in the code, which can break features for some visitors.",svc:"launch"},
+  "color-contrast":{t:"Hard-to-read text",d:"Some text doesn't stand out enough from the background, especially outdoors on a phone.",svc:"launch"},
+  "button-name":{t:"Buttons without labels",d:"Screen readers can't tell people what these buttons do.",svc:"launch"},
+  "link-name":{t:"Links without labels",d:"Some links have no readable text, so screen readers and Google can't describe them.",svc:"launch"},
+  "html-has-lang":{t:"Page language not set",d:"Helps browsers and screen readers read your page correctly.",svc:"launch"},
+  "heading-order":{t:"Headings out of order",d:"A clear heading structure helps both readers and Google scan your page.",svc:"seo"},
+  "target-size":{t:"Buttons too small to tap",d:"Small or crowded tap targets frustrate phone users.",svc:"launch"}
+};
+const CATS=[
+  {id:"seo",name:"Google visibility",w:.35,svc:"seo"},
+  {id:"performance",name:"Mobile speed",w:.35,svc:"launch"},
+  {id:"accessibility",name:"Ease of use",w:.15,svc:"launch"},
+  {id:"best-practices",name:"Security & health",w:.15,svc:"launch"}
+];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const clean=s=>String(s??"").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1").replace(/`/g,"");
+const tone=v=>v>=80?"good":v>=50?"warn":"bad";
+const gradeTxt=v=>v>=80?"Healthy":v>=50?"Needs work":"At risk";
+$("yr").textContent=new Date().getFullYear();
+
+let state={url:"",btype:"",city:"",scan:null,scanErr:"",scanDone:false,answers:{}};
+let scanPromise=null;
+
+/* prefill from ?url= so you can send prospects a ready-made link */
+const P=new URLSearchParams(location.search);
+if(P.get("url"))$("url").value=P.get("url");
+
+function normUrl(v){
+  v=v.trim();if(!v)return null;
+  if(!/^https?:\/\//i.test(v))v="https://"+v;
+  try{const u=new URL(v);if(!u.hostname.includes(".")||/\s/.test(u.hostname))return null;return u.href}catch{return null}
+}
+
+function startScan(url){
+  state.scan=null;state.scanErr="";state.scanDone=false;
+  const p=new URLSearchParams({url,strategy:"mobile"});
+  CATS.forEach(c=>p.append("category",c.id.toUpperCase().replace("-","_")));
+  if(SETTINGS.PSI_KEY)p.set("key",SETTINGS.PSI_KEY);
+  const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),100000);
+  scanPromise=fetch("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?"+p,{signal:ctl.signal})
+    .then(async r=>{
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok){
+        const m=(j.error&&j.error.message)||"";
+        if(r.status===429)throw new Error("Our free scanner is busy right now. Your answers are still scored below — try the scan again in a few minutes.");
+        if(/FAILED_DOCUMENT_REQUEST|ERRORED_DOCUMENT_REQUEST|DNS|NO_FCP|unable to resolve/i.test(m))throw new Error("We couldn't load that website. Double-check the address, or the site may be down or blocking scanners.");
+        throw new Error("The scan couldn't finish for this site. Your answers are still scored below.");
+      }
+      if(!j.lighthouseResult)throw new Error("The scan didn't return results for this site.");
+      state.scan=j.lighthouseResult;
+    })
+    .catch(e=>{state.scanErr=e.name==="AbortError"?"The scan took too long. Your site may be very slow, or the scanner is busy. Your answers are still scored below.":(e.message||"The scan couldn't finish.")})
+    .finally(()=>{clearTimeout(to);state.scanDone=true});
+}
+
+/* STEP 1 */
+$("f1").addEventListener("submit",e=>{
+  e.preventDefault();
+  const u=normUrl($("url").value);
+  if(!u){$("e1").textContent="Please enter a valid website address, like yourbusiness.com.";return}
+  $("e1").textContent="";
+  state.url=u;state.btype=$("btype").value;state.city=$("city").value.trim();
+  startScan(u);
+  show("s2");
+});
+
+/* STEP 2 */
+$("qs").innerHTML=QS.map((x,i)=>`<div class="q"><p>${i+1}. ${esc(x.q)}</p><div class="opts three" role="radiogroup" aria-label="${esc(x.q)}">
+  ${[["yes","Yes"],["unsure","Not sure"],["no","No"]].map(([v,l])=>`<label><input type="radio" name="${x.k}" value="${v}"><span>${l}</span></label>`).join("")}
+</div></div>`).join("");
+$("back2").onclick=()=>show("s1");
+$("f2").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const f=new FormData(e.target),miss=QS.filter(x=>!f.get(x.k));
+  if(miss.length){$("e2").textContent=`Please answer all questions (${miss.length} left).`;return}
+  $("e2").textContent="";
+  QS.forEach(x=>state.answers[x.k]=f.get(x.k));
+  if(!state.scanDone){
+    show("sl");
+    const lis=[...document.querySelectorAll("#ticks li")];let i=0;
+    const t=setInterval(()=>{if(i<lis.length-1)lis[i++].classList.add("done")},6000);
+    await scanPromise;clearInterval(t);lis.forEach(l=>l.classList.add("done"));
+  }
+  render();show("s3");
+});
+
+function show(id){["s1","s2","sl","s3"].forEach(x=>$(x).classList.toggle("hide",x!==id));scrollTo({top:document.querySelector("main").offsetTop-10,behavior:"smooth"})}
+
+/* RESULTS */
+function analyze(){
+  const L=state.scan,issues=[],cats=[],pts={launch:0,growth:0,brand:0,seo:0,care:0},trig={launch:[],growth:[],brand:[],seo:[],care:[]};
+  let tech=null,lcp=null;
+  if(L){
+    let ws=0,wt=0;
+    CATS.forEach(c=>{
+      const cat=L.categories&&L.categories[c.id];if(!cat||cat.score==null)return;
+      const v=Math.round(cat.score*100);cats.push({...c,v});ws+=v*c.w;wt+=c.w;
+      (cat.auditRefs||[]).forEach(r=>{
+        const a=L.audits[r.id];if(!a||a.score==null)return;
+        if(["notApplicable","manual","informative"].includes(a.scoreDisplayMode))return;
+        if(c.id==="performance"&&!(r.id in AUD))return;   // only the core speed metrics
+        if(a.score>=.9)return;
+        if(issues.some(x=>x.id===r.id))return;
+        const m=AUD[r.id],sev=a.score<.5?"bad":"warn";
+        issues.push({id:r.id,sev,t:m?m.t:clean(a.title),d:m?m.d:"",val:a.displayValue?clean(a.displayValue):"",svc:m?m.svc:c.svc,known:!!m,weight:r.weight||0});
+      });
+    });
+    tech=wt?Math.round(ws/wt):null;
+    const l=L.audits["largest-contentful-paint"];if(l&&l.numericValue)lcp=l.numericValue/1000;
+  }
+  issues.sort((a,b)=>(a.sev===b.sev?0:a.sev==="bad"?-1:1)||(b.known-a.known)||(b.weight-a.weight));
+  issues.forEach(x=>{pts[x.svc]+=x.sev==="bad"?3:1.5;if(trig[x.svc].length<3)trig[x.svc].push(x.t)});
+  /* answers */
+  let s=0;const gaps=[];
+  QS.forEach(x=>{const a=state.answers[x.k];s+=a==="yes"?1:a==="unsure"?.4:0;
+    if(a!=="yes"){gaps.push({...x,sev:a==="no"?"bad":"warn"});pts[x.svc]+=a==="no"?3:1.5;if(trig[x.svc].length<3)trig[x.svc].push(x.label)}});
+  const self=Math.round(s/QS.length*100);
+  /* a site that needs a rebuild + no way to convert → Growth instead of Launch */
+  if(pts.launch>0&&state.answers.convert!=="yes"){pts.growth+=pts.launch;trig.growth=[...trig.growth,...trig.launch].slice(0,3);pts.launch=0;trig.launch=[]}
+  else if(pts.growth>0&&pts.launch===0){/* only conversion issue: still Growth */}
+  const overall=tech==null?self:Math.round(tech*.65+self*.35);
+  let recs=Object.keys(pts).filter(k=>pts[k]>0).sort((a,b)=>pts[b]-pts[a]).slice(0,3).map(k=>({k,...PKG[k],why:trig[k]}));
+  if(!recs.length)recs=[{k:"care",...PKG.care,why:["Keep what's working in shape and keep climbing in search"]}];
+  return {issues,cats,tech,lcp,self,gaps,overall,recs};
+}
+
+function ring(v){
+  const C=2*Math.PI*64,col=`var(--${tone(v)==="good"?"good":tone(v)==="warn"?"warn":"bad"})`;
+  return `<div class="ring" role="img" aria-label="Overall score ${v} out of 100"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--soft)" stroke-width="14"/><circle cx="75" cy="75" r="64" fill="none" stroke="${col}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${C*(1-v/100)}" style="transition:stroke-dashoffset 1.2s ease"/></svg><div class="num"><div><b>${v}</b><small>out of 100</small></div></div></div>`;
+}
+function barRow(name,v){const c=tone(v);return `<div class="bar"><span>${esc(name)}</span><div class="track"><i style="width:0;background:var(--${c})" data-w="${v}%"></i></div><b>${v}</b></div>`}
+function needLink(n){return `index.html?need=${encodeURIComponent(n)}#contact`}
+
+let LAST=null;
+function render(){
+  const R=analyze();LAST=R;
+  const host=new URL(state.url).hostname.replace(/^www\./,"");
+  const where=state.city?` in ${esc(state.city)}`:"";
+  const bad=R.issues.filter(x=>x.sev==="bad").length+R.gaps.filter(x=>x.sev==="bad").length;
+  const total=R.issues.length+R.gaps.length;
+  let headline;
+  if(R.overall>=80)headline=`<b>${esc(host)}</b> is in good shape. A few tune-ups could help you win even more customers${where}.`;
+  else if(R.overall>=50)headline=`<b>${esc(host)}</b> has a solid start, but ${total} issue${total===1?"":"s"} may be sending customers${where} to competitors.`;
+  else headline=`<b>${esc(host)}</b> has ${bad} serious problem${bad===1?"":"s"} that are likely costing you customers${where} right now.`;
+
+  const lcpLine=R.lcp?`<div class="stat"><div><b>${R.lcp.toFixed(1)}s</b><span>Main content load time on a phone (goal: under 2.5s)</span></div><div><b>${R.cats.find(c=>c.id==="seo")?.v??"–"}</b><span>Google visibility score (goal: 90+)</span></div><div><b>${total}</b><span>Things to fix, ${bad} urgent</span></div></div>`:"";
+
+  const issueHtml=list=>list.map(x=>`<div class="issue"><span class="dot ${x.sev}"></span><div><b>${esc(x.t)}${x.val?` <span style="font-weight:600">· ${esc(x.val)}</span>`:""}</b>${x.d?`<span>${esc(x.d)}</span><br>`:""}<span class="tag">Fixed by: ${esc(PKG[x.svc].name)}</span></div></div>`).join("");
+  const gapHtml=R.gaps.map(x=>`<div class="issue"><span class="dot ${x.sev}"></span><div><b>${esc(x.label)}</b><span>${esc(x.why)}</span><br><span class="tag">Fixed by: ${esc(PKG[x.svc].name)}</span></div></div>`).join("");
+  const top=R.issues.slice(0,6),rest=R.issues.slice(6);
+
+  $("s3").innerHTML=`
+    <div class="stepper noprint"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <span class="steplabel">Your results · ${esc(host)}</span>
+    <div class="scorehead" style="margin-top:12px">
+      ${ring(R.overall)}
+      <div><span class="grade g-${tone(R.overall)}">${gradeTxt(R.overall)}</span>
+        <h2 style="margin-top:10px">Website Health Score</h2>
+        <p style="margin:6px 0 0;color:var(--mute)">${headline}</p></div>
+    </div>
+    <div class="bars">
+      ${R.cats.map(c=>barRow(c.name,c.v)).join("")}
+      ${barRow("Online presence",R.self)}
+    </div>
+    ${state.scanErr?`<p class="err" style="margin-top:16px">${esc(state.scanErr)}</p><div class="actions noprint" style="margin-top:6px"><button class="btn ghost" id="rescan">Try the scan again</button></div>`:""}
+    ${lcpLine?`<div class="sec">${lcpLine}</div>`:""}
+
+    ${R.issues.length?`<div class="sec"><h3>What we found on your site</h3><p>From a live scan of your homepage on a simulated phone, the way most customers see it.</p>${issueHtml(top)}${rest.length?`<details class="more"><summary>Show ${rest.length} more</summary>${issueHtml(rest)}</details>`:""}</div>`:(state.scan?`<div class="sec"><h3>What we found on your site</h3><div class="issue"><span class="dot good"></span><div><b>No major technical problems</b><span>Your site passed the core speed, Google and accessibility checks. Nice work.</span></div></div></div>`:"")}
+
+    ${R.gaps.length?`<div class="sec"><h3>What a scan can't see</h3><p>Based on your answers.</p>${gapHtml}</div>`:""}
+
+    <div class="sec"><h3>Recommended next steps</h3><p>In order of impact for your business.</p>
+      <div class="recs">${R.recs.map((r,i)=>`<div class="rec ${i===0?"top":""}">
+        <div>${i===0?`<span class="badge">Biggest impact</span>`:""}<h4>${esc(r.name)}</h4><p>${esc(r.desc)}</p></div>
+        <div class="price"><small>${esc(r.unit)}</small>${esc(r.price)}</div>
+        <div class="why"><em>Fixes:</em> ${r.why.map(esc).join(" · ")}</div>
+        <div class="acts noprint"><a class="btn ${i===0?"primary":"dark"}" href="${needLink(r.need)}">Get started</a></div>
+      </div>`).join("")}</div>
+    </div>
+
+    <div class="cta noprint" id="cta">
+      <h3>Want a free walkthrough of your results?</h3>
+      <p>Send this report to Elevate and we'll reply within two business days with a free 30-minute call: what to fix first, what you can do yourself, and a fixed-price quote if you want help.</p>
+      <form id="lead">
+        <div class="two"><label class="f">Your name<input name="name" required autocomplete="name"></label>
+        <label class="f">Email<input name="email" type="email" required autocomplete="email"></label></div>
+        <div class="two"><label class="f">Business name<input name="biz" autocomplete="organization"></label>
+        <label class="f">Phone <small>(optional)</small><input name="phone" type="tel" autocomplete="tel"></label></div>
+        <label class="f">Anything else we should know? <small>(optional)</small><textarea name="note" rows="3"></textarea></label>
+        <div class="actions" style="margin-top:6px"><button class="btn primary" type="submit">Send my results &amp; book a free call</button><button class="btn ghost" type="button" id="print" style="color:#fff;border-color:rgba(255,255,255,.4)">Save as PDF</button></div>
+        <div class="msg" id="lmsg"></div>
+      </form>
+    </div>
+    <p class="fine">Scan powered by Google PageSpeed Insights (mobile test) at ${new Date().toLocaleString()}. Scores can vary a few points between runs. This is an automated check, not a full audit. <a href="website-check.html" class="noprint">Check another site</a> · <a href="training-check.html" class="noprint">Free training needs assessment</a></p>`;
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll("#s3 [data-off]").forEach(c=>c.style.strokeDashoffset=c.dataset.off);
+    document.querySelectorAll("#s3 [data-w]").forEach(b=>b.style.width=b.dataset.w);
+  },60));
+  $("print").onclick=()=>window.print();
+  if($("rescan"))$("rescan").onclick=async()=>{startScan(state.url);show("sl");await scanPromise;render();show("s3")};
+  $("lead").addEventListener("submit",e=>{
+    e.preventDefault();const f=new FormData(e.target);
+    const lines=[
+      `Website Health Check results`,`Site: ${state.url}`,`Business type: ${state.btype||"-"}`,`Location: ${state.city||"-"}`,``,
+      `Overall score: ${R.overall}/100 (${gradeTxt(R.overall)})`,
+      ...R.cats.map(c=>`  ${c.name}: ${c.v}`),`  Online presence (answers): ${R.self}`,
+      R.lcp?`  Mobile load time: ${R.lcp.toFixed(1)}s`:"",state.scanErr?`  Scan note: ${state.scanErr}`:"",``,
+      `Top findings:`,...R.issues.slice(0,8).map(x=>`  - [${x.sev==="bad"?"Urgent":"Fix"}] ${x.t}${x.val?" ("+x.val+")":""}`),
+      ...R.gaps.map(x=>`  - [${x.sev==="bad"?"Urgent":"Fix"}] ${x.label}`),``,
+      `Recommended: ${R.recs.map(r=>r.name).join(", ")}`,``,
+      `Name: ${f.get("name")}`,`Email: ${f.get("email")}`,`Business: ${f.get("biz")||"-"}`,`Phone: ${f.get("phone")||"-"}`,``,f.get("note")||""
+    ].filter(l=>l!==null);
+    location.href=`mailto:${SETTINGS.EMAIL}?subject=${encodeURIComponent("Website Health Check: "+host+" ("+R.overall+"/100)")}&body=${encodeURIComponent(lines.join("\n"))}`;
+    $("lmsg").textContent="Your email app should open with your results ready to send. Just hit Send.";
+  });
+}
+</script>
+</body>
+</html>
