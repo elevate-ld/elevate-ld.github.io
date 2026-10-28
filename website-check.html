@@ -20,7 +20,7 @@
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#142a4a"/><path d="M8 21l8-8 8 8" fill="none" stroke="#f2a93b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>Elevate<small>L&amp;D Consulting</small></span>
     </a>
-    <a class="back" href="index.html#digital">← Web &amp; Brand services</a>
+    <a class="back" href="index.html#digital">← Brand &amp; SEO services</a>
   </div>
 </header>
 
@@ -112,11 +112,9 @@ const SETTINGS={EMAIL:"elevateldc@gmail.com",PSI_KEY:""};
 
 /* Packages — keep in sync with index.html#digital */
 const PKG={
-  launch:{name:"Launch Website",price:"$1,500",unit:"starting at",need:"Website design",desc:"A clean, fast, mobile-friendly site that tells people who you are and how to reach you."},
-  growth:{name:"Growth Website",price:"$3,000",unit:"starting at",need:"Website design",desc:"A custom site built to bring in leads, with booking or payment links and full SEO setup."},
   brand:{name:"Brand Kit",price:"$600",unit:"starting at",need:"Branding or logo",desc:"Logo, colors and fonts so you look consistent everywhere customers see you."},
   seo:{name:"Local SEO Setup",price:"$500",unit:"one-time",need:"Local SEO",desc:"Google Business Profile, local keywords and on-page fixes so nearby customers find you."},
-  care:{name:"Care & Grow Plan",price:"$250/mo",unit:"starting at",need:"Local SEO",desc:"Monthly updates, ongoing local SEO and a simple report on traffic, rankings and calls."}
+  care:{name:"Care & Grow Plan",price:"$250/mo",unit:"starting at",need:"Local SEO",desc:"Monthly fixes and updates to your existing site, ongoing local SEO and a simple report on traffic, rankings and calls."}
 };
 
 /* Self-check questions: k=id, svc=package it points to, label=short finding name */
@@ -125,16 +123,16 @@ const QS=[
   {k:"found",q:"Do new customers find you through Google search most months?",svc:"seo",label:"Not getting customers from Google",why:"If people searching for what you do can't find you, they find a competitor."},
   {k:"reviews",q:"Have you gotten new Google reviews in the last 3 months?",svc:"seo",label:"Few recent reviews",why:"Recent reviews are one of the strongest local ranking and trust signals."},
   {k:"brand",q:"Do you have a professional logo and the same colors and look across your site, signage and social media?",svc:"brand",label:"Inconsistent or missing branding",why:"A consistent look makes a small business seem established and trustworthy."},
-  {k:"convert",q:"Can a visitor call, book, order or request a quote from your homepage in one tap?",svc:"growth",label:"No one-tap way to call, book or order",why:"Every extra step loses customers, especially on phones."},
+  {k:"convert",q:"Can a visitor call, book, order or request a quote from your homepage in one tap?",svc:"care",label:"No one-tap way to call, book or order",why:"Every extra step loses customers, especially on phones."},
   {k:"fresh",q:"Has your website been updated in the last 6 months (hours, prices, photos, services)?",svc:"care",label:"Website content is out of date",why:"Wrong hours or old prices send customers elsewhere and hurt trust."},
   {k:"track",q:"Do you know roughly how many people visit your website each month?",svc:"care",label:"No visitor tracking",why:"Without numbers you can't tell what's working or what you're missing."},
-  {k:"proud",q:"Would you be proud to send a new customer to your website today?",svc:"launch",label:"You're not proud of your website",why:"If you hesitate to share it, customers probably hesitate to trust it."}
+  {k:"proud",q:"Would you be proud to send a new customer to your website today?",svc:"brand",label:"You're not proud of your website",why:"If you hesitate to share it, customers probably hesitate to trust it."}
 ];
 
 /* Plain-English explanations for scan findings. svc = package that fixes it. */
 const AUD={
   "is-crawlable":{t:"Google is blocked from listing this page",d:"A setting on your site tells search engines not to show it. You may be invisible on Google.",svc:"seo"},
-  "http-status-code":{t:"Your page returns an error to Google",d:"Search engines may not list a page that reports an error.",svc:"launch"},
+  "http-status-code":{t:"Your page returns an error to Google",d:"Search engines may not list a page that reports an error.",svc:"seo"},
   "document-title":{t:"Missing page title",d:"The title is the blue headline Google shows in search results. Without one, Google guesses.",svc:"seo"},
   "meta-description":{t:"Missing search description",d:"The short summary under your link in Google. Without it, Google pulls random text from your page.",svc:"seo"},
   "link-text":{t:"Vague link text (\"click here\")",d:"Descriptive links help Google and customers understand where a link goes.",svc:"seo"},
@@ -143,26 +141,26 @@ const AUD={
   "canonical":{t:"Conflicting page address signals",d:"Google may split your ranking across duplicate versions of your page.",svc:"seo"},
   "hreflang":{t:"Language settings are invalid",d:"Search engines may show the wrong version of your page.",svc:"seo"},
   "image-alt":{t:"Images missing descriptions",d:"Image descriptions help Google understand your photos and let people using screen readers know what's there.",svc:"seo"},
-  "viewport":{t:"Not set up for phones",d:"Your page may appear tiny or zoomed out on mobile. Google ranks mobile-friendly sites higher.",svc:"launch"},
-  "largest-contentful-paint":{t:"Main content loads slowly on phones",d:"Customers see a mostly blank page while it loads. Many leave before it finishes.",svc:"launch"},
-  "first-contentful-paint":{t:"Slow to show anything on phones",d:"The first few seconds decide whether a visitor stays.",svc:"launch"},
-  "speed-index":{t:"Page fills in slowly",d:"The page takes a while to look complete on a typical phone connection.",svc:"launch"},
-  "total-blocking-time":{t:"Page freezes while loading",d:"Taps and scrolls don't respond right away, which feels broken to visitors.",svc:"launch"},
-  "cumulative-layout-shift":{t:"Page jumps around while loading",d:"Buttons move as things load, so people tap the wrong thing.",svc:"launch"},
-  "is-on-https":{t:"Not fully secure (HTTPS)",d:"Browsers may warn visitors that your site is \"Not secure\".",svc:"launch"},
-  "errors-in-console":{t:"Behind-the-scenes errors",d:"Something on the page is broken in the code, which can break features for some visitors.",svc:"launch"},
-  "color-contrast":{t:"Hard-to-read text",d:"Some text doesn't stand out enough from the background, especially outdoors on a phone.",svc:"launch"},
-  "button-name":{t:"Buttons without labels",d:"Screen readers can't tell people what these buttons do.",svc:"launch"},
-  "link-name":{t:"Links without labels",d:"Some links have no readable text, so screen readers and Google can't describe them.",svc:"launch"},
-  "html-has-lang":{t:"Page language not set",d:"Helps browsers and screen readers read your page correctly.",svc:"launch"},
+  "viewport":{t:"Not set up for phones",d:"Your page may appear tiny or zoomed out on mobile. Google ranks mobile-friendly sites higher.",svc:"care"},
+  "largest-contentful-paint":{t:"Main content loads slowly on phones",d:"Customers see a mostly blank page while it loads. Many leave before it finishes.",svc:"care"},
+  "first-contentful-paint":{t:"Slow to show anything on phones",d:"The first few seconds decide whether a visitor stays.",svc:"care"},
+  "speed-index":{t:"Page fills in slowly",d:"The page takes a while to look complete on a typical phone connection.",svc:"care"},
+  "total-blocking-time":{t:"Page freezes while loading",d:"Taps and scrolls don't respond right away, which feels broken to visitors.",svc:"care"},
+  "cumulative-layout-shift":{t:"Page jumps around while loading",d:"Buttons move as things load, so people tap the wrong thing.",svc:"care"},
+  "is-on-https":{t:"Not fully secure (HTTPS)",d:"Browsers may warn visitors that your site is \"Not secure\".",svc:"care"},
+  "errors-in-console":{t:"Behind-the-scenes errors",d:"Something on the page is broken in the code, which can break features for some visitors.",svc:"care"},
+  "color-contrast":{t:"Hard-to-read text",d:"Some text doesn't stand out enough from the background, especially outdoors on a phone.",svc:"care"},
+  "button-name":{t:"Buttons without labels",d:"Screen readers can't tell people what these buttons do.",svc:"care"},
+  "link-name":{t:"Links without labels",d:"Some links have no readable text, so screen readers and Google can't describe them.",svc:"care"},
+  "html-has-lang":{t:"Page language not set",d:"Helps browsers and screen readers read your page correctly.",svc:"care"},
   "heading-order":{t:"Headings out of order",d:"A clear heading structure helps both readers and Google scan your page.",svc:"seo"},
-  "target-size":{t:"Buttons too small to tap",d:"Small or crowded tap targets frustrate phone users.",svc:"launch"}
+  "target-size":{t:"Buttons too small to tap",d:"Small or crowded tap targets frustrate phone users.",svc:"care"}
 };
 const CATS=[
   {id:"seo",name:"Google visibility",w:.35,svc:"seo"},
-  {id:"performance",name:"Mobile speed",w:.35,svc:"launch"},
-  {id:"accessibility",name:"Ease of use",w:.15,svc:"launch"},
-  {id:"best-practices",name:"Security & health",w:.15,svc:"launch"}
+  {id:"performance",name:"Mobile speed",w:.35,svc:"care"},
+  {id:"accessibility",name:"Ease of use",w:.15,svc:"care"},
+  {id:"best-practices",name:"Security & health",w:.15,svc:"care"}
 ];
 
 const $=id=>document.getElementById(id);
@@ -242,7 +240,7 @@ function show(id){["s1","s2","sl","s3"].forEach(x=>$(x).classList.toggle("hide",
 
 /* RESULTS */
 function analyze(){
-  const L=state.scan,issues=[],cats=[],pts={launch:0,growth:0,brand:0,seo:0,care:0},trig={launch:[],growth:[],brand:[],seo:[],care:[]};
+  const L=state.scan,issues=[],cats=[],pts={brand:0,seo:0,care:0},trig={brand:[],seo:[],care:[]};
   let tech=null,lcp=null;
   if(L){
     let ws=0,wt=0;
@@ -269,9 +267,6 @@ function analyze(){
   QS.forEach(x=>{const a=state.answers[x.k];s+=a==="yes"?1:a==="unsure"?.4:0;
     if(a!=="yes"){gaps.push({...x,sev:a==="no"?"bad":"warn"});pts[x.svc]+=a==="no"?3:1.5;if(trig[x.svc].length<3)trig[x.svc].push(x.label)}});
   const self=Math.round(s/QS.length*100);
-  /* a site that needs a rebuild + no way to convert → Growth instead of Launch */
-  if(pts.launch>0&&state.answers.convert!=="yes"){pts.growth+=pts.launch;trig.growth=[...trig.growth,...trig.launch].slice(0,3);pts.launch=0;trig.launch=[]}
-  else if(pts.growth>0&&pts.launch===0){/* only conversion issue: still Growth */}
   const overall=tech==null?self:Math.round(tech*.65+self*.35);
   let recs=Object.keys(pts).filter(k=>pts[k]>0).sort((a,b)=>pts[b]-pts[a]).slice(0,3).map(k=>({k,...PKG[k],why:trig[k]}));
   if(!recs.length)recs=[{k:"care",...PKG.care,why:["Keep what's working in shape and keep climbing in search"]}];
